@@ -1,4 +1,7 @@
 package sk.tuke.kpi.oop.game;
 
-public class Switchable {
+public interface Switchable {
+    void turnOn();
+    void turnOff();
+    boolean isOn();
 }

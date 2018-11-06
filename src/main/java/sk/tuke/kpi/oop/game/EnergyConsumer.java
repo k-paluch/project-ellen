@@ -1,4 +1,5 @@
 package sk.tuke.kpi.oop.game;
 
-public class EnergyConsumer {
+public interface EnergyConsumer {
+    void setElectricityFlow(boolean isPowered);
 }

@@ -1,4 +1,5 @@
 package sk.tuke.kpi.oop.game;
 
-public class Repairable {
+public interface Repairable {
+    boolean repair();
 }
