@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package sk.tuke.kpi.oop.game.tools;
 
 
@@ -8,3 +9,10 @@ public class Mjolnir extends Hammer {
     }
 
 }
+=======
+package sk.tuke.kpi.oop.game.tools;
+
+public class Mjolnir extends Hammer {
+
+}
+>>>>>>> 653695e3498e9624882463b4c8919ee60c878e78

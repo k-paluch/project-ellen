@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package sk.tuke.kpi.oop.game.tools;
 
 import sk.tuke.kpi.gamelib.graphics.Animation;
@@ -9,3 +10,9 @@ public class Wrench extends BreakableTool {
         setAnimation(animation);
     }
 }
+=======
+package sk.tuke.kpi.oop.game.tools;
+
+public class Wrench {
+}
+>>>>>>> 653695e3498e9624882463b4c8919ee60c878e78
