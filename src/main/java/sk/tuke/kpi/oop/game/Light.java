@@ -1,10 +1,9 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Light extends Reactor implements Switchable, EnergyConsumer {
-    private boolean is_on,is_set;
+    private boolean is_set;
     private Animation light_on = new Animation("sprites/light_on.png", 16, 16, 10);
     private Animation light_off = new Animation("sprites/light_off.png", 16, 16, 10);
     private int turnedOn;
@@ -24,13 +23,13 @@ public class Light extends Reactor implements Switchable, EnergyConsumer {
     public void turnOn(){
         turnedOn = 1;
         if(is_set){
-            setAnimation(light_on);
+            this.setAnimation(light_on);
         }
     }
     @Override
     public void turnOff(){
         turnedOn =0;
-        setAnimation(light_off);
+        this.setAnimation(light_off);
     }
     @Override
     public boolean isOn(){

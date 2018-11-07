@@ -5,8 +5,8 @@ import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
+import sk.tuke.kpi.oop.game.tools.BreakableTool;
 import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
-import sk.tuke.kpi.oop.game.tools.Hammer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,15 +22,14 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     private Animation hotAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.05f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation offAnimation = new Animation("sprites/reactor.png", 80, 80, 0.0f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation extinguishedAnimation = new Animation("sprites/reactor_extinguished.png", 80, 80, 0.0f, Animation.PlayMode.LOOP_PINGPONG);
-    private Light light;
     public Reactor(){
         devices = new HashSet<>();
+        this.temperature =0;
+        this.damage=0;
+        turnOff();
+        setAnimation(offAnimation);
     }
 
-    public void setDamage(int newDamage) {
-
-        this.damage = newDamage;
-    }
     void updateAnimation(){
         if(!isOn()) {
             if (damage == 100) {
@@ -76,24 +75,26 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
             return;
         }
         if (damage > 50) {
-            decrement /= 2;
+            this.temperature = max(0,temperature-(int)(decrement)*2);
         }
         if (damage == 100) {
-            decrement = 0;
+            this.temperature = max(0,temperature-(int)(decrement)*0);
         }
         this.temperature = max(0,temperature-(int)decrement);
         updateAnimation();
     }
 
-    public void repairWith(Hammer hammer) {
+
+    @Override
+    public void repairWith(BreakableTool tool) {
         final int max_damage;
         final int min_damage;
         max_damage = 99;
         min_damage = 0;
-        if (hammer == null) return;
+        if (tool == null) return;
 
         if (damage >= min_damage && damage <= max_damage) {
-            hammer.use();
+            tool.use();
             damage = max(0, damage - 50);
         }
 
@@ -121,7 +122,17 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         if(zapnute == 1){
             return true;
         }
+        else if(zapnute == 0) {
+            return false;
+        }
         else return false;
+    }
+
+    public void setTemperature(int newTemp){
+        this.temperature = newTemp;
+    }
+    public void setDamage (int newDam){
+        this.damage = newDam;
     }
 
     public void addedToScene(Scene scene, Invoke invoke, Reactor coolReactor){
@@ -147,8 +158,4 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         setAnimation(extinguishedAnimation);
     }
 
-    @Override
-    public boolean repair() {
-        return false;
-    }
 }

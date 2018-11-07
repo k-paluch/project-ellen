@@ -21,6 +21,8 @@ public class PowerSwitch extends AbstractActor {
             tooglerer.turnOn();
     }
 
-    
+    public Switchable getDevice(){
+        return tooglerer;
+    }
 
 }

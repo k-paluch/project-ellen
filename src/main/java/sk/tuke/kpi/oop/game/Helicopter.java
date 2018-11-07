@@ -5,6 +5,7 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.Player;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.gamelib.actions.Invoke;
 
 public class Helicopter extends AbstractActor {
     private boolean follow;
@@ -19,9 +20,9 @@ public class Helicopter extends AbstractActor {
         follow  = true;
     }
 
+    /*
     @Override
     public void addedToScene(@NotNull Scene scene) {
-        super.addedToScene(scene);
         int energy = player.getEnergy();
         if(follow==true) {
             if(player.getPosY() > getPosY()){
@@ -45,8 +46,7 @@ public class Helicopter extends AbstractActor {
                 energy--;
                 player.setEnergy(energy);
             }
-
-
         }
-    }
+        super.addedToScene(scene);
+    }*/
 }

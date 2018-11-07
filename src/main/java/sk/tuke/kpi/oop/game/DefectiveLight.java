@@ -6,8 +6,6 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
-import sk.tuke.kpi.gamelib.graphics.Animation;
-
 public class DefectiveLight extends Light implements Repairable {
     private int random,zapnuty;
     private Animation light_off = new Animation("sprites/light_off.png", 16, 16, 10);
@@ -18,9 +16,10 @@ public class DefectiveLight extends Light implements Repairable {
     }
 
     public void addedToScene(Scene scene, Invoke invoke, Reactor defLight){
-        random =(int)(Math.random() * 20);
-        new Invoke(this::defLight).scheduleOn(this);
-        new Loop<>(new Invoke(this::defLight)).scheduleOn(this);
+        while(true) {
+            random = (int) (Math.random() * 20);
+            new Loop<>(new Invoke(this::defLight)).scheduleOn(this);
+        }
     }
 
 
@@ -50,9 +49,5 @@ public class DefectiveLight extends Light implements Repairable {
         else return false;
     }
 
-    @Override
-    public boolean repair() {
-        getScene().dispose();
-        return false;
-    }
+
 }

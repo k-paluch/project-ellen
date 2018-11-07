@@ -1,8 +1,10 @@
 package sk.tuke.kpi.oop.game;
 
+import sk.tuke.kpi.gamelib.Scene;
+import sk.tuke.kpi.gamelib.actions.Invoke;
+
 public class SmartCooler extends Cooler {
     private int zapnute;
-    private boolean is_on;
     public SmartCooler (Reactor reactor){
         super(reactor);
         if(super.getTemperature()>2500){
@@ -11,6 +13,17 @@ public class SmartCooler extends Cooler {
         if(super.getTemperature()<1500){
             turnOff();
         }
+    }
+
+    @Override
+    public void addedToScene(Scene scene, Invoke invoke, Reactor coolReactor) {
+        if(super.getTemperature()>2500){
+            turnOn();
+        }
+        if(super.getTemperature()<1500){
+            turnOff();
+        }
+        super.addedToScene(scene, invoke, coolReactor);
     }
 
     @Override

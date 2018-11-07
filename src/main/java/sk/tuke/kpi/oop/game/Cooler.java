@@ -8,12 +8,9 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Cooler extends Reactor implements Switchable{
     private int zapnuty;
-    private Reactor reactor;
     private Animation on = new Animation("sprites/fan.png", 32, 32, 200);
     private Animation off = new Animation("sprites/fan.png", 32, 32, 0);
     public Cooler(Reactor reactor){
-        if(reactor != null)
-            this.reactor = reactor;
         zapnuty = 0;
         setAnimation(off);
     }
