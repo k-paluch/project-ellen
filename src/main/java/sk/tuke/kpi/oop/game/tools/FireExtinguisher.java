@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package sk.tuke.kpi.oop.game.tools;
 
 import sk.tuke.kpi.gamelib.graphics.Animation;
@@ -11,12 +11,3 @@ public class FireExtinguisher extends BreakableTool {
     }
 
 }
-=======
-package sk.tuke.kpi.oop.game.tools;
-
-import sk.tuke.kpi.gamelib.framework.AbstractActor;
-
-public class FireExtinguisher extends AbstractActor {
-    
-}
->>>>>>> 653695e3498e9624882463b4c8919ee60c878e78
