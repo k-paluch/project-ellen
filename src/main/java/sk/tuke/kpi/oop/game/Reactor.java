@@ -30,7 +30,7 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         setAnimation(offAnimation);
     }
 
-    void updateAnimation(){
+    public void updateAnimation(){
         if(!isOn()) {
             if (damage == 100) {
                 setAnimation(brokenAnimation);
@@ -38,7 +38,6 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
             else{
                 setAnimation(offAnimation);
             }
-            return;
         }
         else{
             if (damage == 100) {
