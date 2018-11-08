@@ -8,4 +8,9 @@ public class FireExtinguisher extends BreakableTool {
         super.setRemainingUses(1);
         setAnimation(animation);
     }
+
+    @Override
+    public void useWith(Object actor) {
+        super.useWith(actor);
+    }
 }
