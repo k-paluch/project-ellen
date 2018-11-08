@@ -9,4 +9,9 @@ public class Wrench extends BreakableTool {
         super.setRemainingUses(2);
         setAnimation(animation);
     }
+
+    @Override
+    public void useWith(Object actor) {
+        super.useWith(actor);
+    }
 }

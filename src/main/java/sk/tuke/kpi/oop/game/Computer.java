@@ -44,7 +44,7 @@ public class Computer extends AbstractActor implements EnergyConsumer,Switchable
     }
 
     @Override
-    public void setElectricityFlow(boolean isPowered) {
+    public void setPowered(boolean isPowered) {
         if(isPowered){
             setAnimation(computer_on);
         }
@@ -52,4 +52,6 @@ public class Computer extends AbstractActor implements EnergyConsumer,Switchable
             setAnimation(computer_off);
         }
     }
+
+
 }

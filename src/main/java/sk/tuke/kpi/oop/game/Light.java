@@ -52,7 +52,7 @@ public class Light extends Reactor implements Switchable, EnergyConsumer {
     }*/
 
     @Override
-    public void setElectricityFlow(boolean isPowered) {
+    public void setPowered(boolean isPowered) {
         is_set = isPowered;
         if(is_set&&isOn()){
             setAnimation(light_on);
