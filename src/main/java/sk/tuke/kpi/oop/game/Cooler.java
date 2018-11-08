@@ -47,4 +47,5 @@ public class Cooler extends Reactor implements Switchable{
     }
 
 
+
 }

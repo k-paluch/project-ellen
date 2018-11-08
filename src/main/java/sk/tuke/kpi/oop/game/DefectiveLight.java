@@ -46,5 +46,8 @@ public class DefectiveLight extends Light implements Repairable {
         else return false;
     }
 
-
+    @Override
+    public void setPowered(boolean isPowered) {
+        super.setPowered(isPowered);
+    }
 }
