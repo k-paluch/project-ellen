@@ -11,7 +11,7 @@ public class Light extends Reactor implements Switchable, EnergyConsumer {
         turnOff();
     }
 
-    public void toogle() {
+    public void toggle() {
         if (!isOn()){
             turnOn();
         }

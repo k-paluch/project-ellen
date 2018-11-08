@@ -37,7 +37,6 @@ public class Cooler extends Reactor implements Switchable{
     }
 
     public void addedToScene(Scene scene, Invoke invoke, Reactor coolReactor){
-        new Invoke(this::coolReactor).scheduleOn(this);
         new Loop<>(new Invoke(this::coolReactor)).scheduleOn(this);
     }
 
