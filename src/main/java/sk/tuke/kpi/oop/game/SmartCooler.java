@@ -17,10 +17,10 @@ public class SmartCooler extends Cooler {
     }
 
     public void smartCool(){
-        if(super.getTemperature()>2500){
+        if(super.getTemperature()>=2500){
             turnOn();
         }
-        if(super.getTemperature()<1500){
+        if(super.getTemperature()<=1500){
             turnOff();
         }
     }
