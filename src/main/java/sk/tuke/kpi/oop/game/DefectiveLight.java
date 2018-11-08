@@ -12,18 +12,15 @@ public class DefectiveLight extends Light implements Repairable {
     private Animation light_on = new Animation("sprites/light_on.png", 16, 16, 10);
     public DefectiveLight(){
         super();
-        random =(int)(Math.random() * 20);
     }
 
     public void addedToScene(Scene scene, Invoke invoke, Reactor defLight){
-        while(true) {
-            random = (int) (Math.random() * 20);
             new Loop<>(new Invoke(this::defLight)).scheduleOn(this);
-        }
     }
 
 
     private void defLight(){
+        random = (int) (Math.random() * 20);
         if(random ==1) {
             setAnimation(light_on);
         }
