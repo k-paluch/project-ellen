@@ -4,7 +4,7 @@ import sk.tuke.kpi.oop.game.Reactor;
 
 public class PerpetualReactorHeating extends AbstractAction<Reactor> {
     Reactor reactor;
-    public PerpetualReactorHeating(int i){
+    public PerpetualReactorHeating(){
         execute(1);
     }
 
