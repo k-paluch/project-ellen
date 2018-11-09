@@ -97,6 +97,7 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     public boolean repair(BreakableTool tool) {
         if(tool instanceof Hammer && damage < 100 && damage > 0){
             tool.useWith(this);
+            tool.use();
             temperature = (damage - 50) * 40 + 2000  > temperature ? temperature : (damage - 50) * 40 + 2000;
             damage = damage - 50 < 0 ? 0 : damage - 50;
             updateAnimation();
@@ -169,6 +170,7 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
             this.temperature = 4000;
             setAnimation(extinguishedAnimation);
             fireExtinguisher.useWith(this);
+            fireExtinguisher.use();
             return true;
         }
         else return false;
