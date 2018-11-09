@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class DefectiveLight extends Light implements Repairable {
     private Random random = new Random();
+    private int cooldown =0;
     private boolean is_Powered;
     private boolean oprava= false ;
     public DefectiveLight(){
@@ -32,6 +33,13 @@ public class DefectiveLight extends Light implements Repairable {
             int number = random.nextInt(20);
             if (number == 1) {
                 super.toggle();
+            }
+        }
+        if(oprava){
+            cooldown++;
+            if(cooldown==10){
+                oprava = false;
+                cooldown = 0;
             }
         }
     }
