@@ -9,7 +9,7 @@ import java.util.Random;
 public class DefectiveLight extends Light implements Repairable {
     private Random random = new Random();
     private boolean is_Powered;
-    private int time = 600;
+    private int time = 100000;
     private boolean oprava = false;
 
     public DefectiveLight() {
@@ -35,22 +35,18 @@ public class DefectiveLight extends Light implements Repairable {
                 super.toggle();
             }
         }
-        if (oprava) {
-            if (is_Powered) {
-
+        if (oprava&&is_Powered) {
                 this.time--;
                 if (this.time <= 0) {
                     this.oprava = false;
-                    this.time = 600;
+                    this.time = 100000;
                 } else super.turnOff();
-            }
         }
 
 
     }
-    @Override
     public boolean repair() {
-        if (this.oprava == true) {
+        if (this.oprava) {
             return false;
         } else {
             this.oprava = true;

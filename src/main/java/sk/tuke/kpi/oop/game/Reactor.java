@@ -72,9 +72,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
         if (getTemperature() < 0) {
             temperature = 0;
         }
-        if(getDamage()>=100){
-            turnOff();
-        }
+
 
         updateAnimation();
 
@@ -173,7 +171,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
 
     public boolean extinguish(FireExtinguisher fireExtinguisher) {
         if (fireExtinguisher == null) return false;
-        if (temperature > 4000) {
+        if (damage == 100 && temperature > 4000) {
             this.temperature = 4000;
             setAnimation(extinguishedAnimation);
             fireExtinguisher.useWith(this);
@@ -196,53 +194,25 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
         }
     }
 
-    public boolean repair(){
-        int tempDamage = damage;
-        if (damage > 0 && damage < 100) {
-            if (this.damage > 50) {
-                this.damage -= 50;
-            } else {
-                this.damage = 0;
-            }
-
-            int temp = (damage * 40) + 2000;
-
-            if(temp == 2000) {
-                setTemperature(2000 - (Math.abs(tempDamage - 50) * 40));
-            }else if(getTemperature() > temp){
-                setTemperature(temp);
-            }
-
-            updateAnimation();
-            return true;
-        }
+    /*public boolean repair(){
         return false;
-
     }
-
+*/
     @Override
     public boolean repair(BreakableTool hammer) {
-        if (hammer != null && damage > 0 && damage < 100 && hammer instanceof Hammer) {
-            int tempDamage = damage;
-            if (this.damage > 50) {
-                this.damage -= 50;
-            } else {
-                this.damage = 0;
+        if (hammer == null) {
+            return false;
+        }
+        if (hammer instanceof Hammer && damage < 100 && damage > 0) {
+            int tempDamage = damage-50;
+            if(this.damage>50){
+                tempDamage -=50;
             }
-
-
-            int temp = (damage * 40) + 2000;
-
-            if(temp == 2000) {
-                setTemperature(2000 - (Math.abs(tempDamage - 50) * 40));
-            }else if(getTemperature() > temp){
-                setTemperature(temp);
-            }
-
+            else{tempDamage = 0;}
+            setDamage(tempDamage);
             updateAnimation();
             return true;
         }
         return false;
-
     }
 }

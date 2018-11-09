@@ -18,6 +18,7 @@ public class Wrench extends BreakableTool<DefectiveLight> {
         }
         if (actor instanceof DefectiveLight) {
             super.useWith(actor);
+            actor.repair();
         }
     }
 }
