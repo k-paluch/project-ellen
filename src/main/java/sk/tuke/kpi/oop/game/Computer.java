@@ -35,7 +35,7 @@ public class Computer extends AbstractActor implements EnergyConsumer, Switchabl
 
     public float sub(float first, float second) {
         if(isOn()){
-            return first + second;
+            return first - second;
         }
         else{
             return 0;
@@ -45,7 +45,7 @@ public class Computer extends AbstractActor implements EnergyConsumer, Switchabl
 
     public int sub(int first, int second) {
         if(isOn()){
-            return first + second;
+            return first - second;
         }
         else{
             return 0;

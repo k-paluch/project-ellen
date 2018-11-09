@@ -50,5 +50,4 @@ public class Cooler extends Reactor implements Switchable {
     public Reactor getCoolerReactor() {
         return reactor;
     }
-
 }
