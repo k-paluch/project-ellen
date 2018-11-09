@@ -16,8 +16,8 @@ public class Teleport extends AbstractActor {
         setAnimation(tele);
 
     }
-
-    public void addedToScene(Scene scene, Invoke invoke, Reactor defLight){
+    @Override
+    public void addedToScene(Scene scene){
         new Loop<>(new Invoke(this::blink)).scheduleOn(this);
     }
 

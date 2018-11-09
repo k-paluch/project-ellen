@@ -1,10 +1,11 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.Scene;
-import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
-import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+
 
 public class TimeBomb extends AbstractActor {
     private boolean activated;
@@ -16,37 +17,37 @@ public class TimeBomb extends AbstractActor {
     public TimeBomb(float sec){
         setAnimation(nonActiv);
         activated = false;
-        cas = sec;
+        this.cas=sec;
     }
     public void activate(){
         activated = true;
         setAnimation(Activ);
+        long sec = (long) cas;
+
+        try {
+            TimeUnit.SECONDS.sleep(sec);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        reaction();
+
     }
 
     public boolean isActivated(){
-        if(activated){
-            return true;
-        }
-        else return  false;
-    }
-    public void addedToScene(Scene scene){
-        super.addedToScene(scene);
-        new Loop<>(new Invoke(this::detonate)).scheduleOn(this);
+        return activated;
     }
 
-    private void detonate(){
-        if(activated&& getTime()>50){
-            setAnimation(Activ);
-            cas--;
+    public void reaction(){
+        try{
+            TimeUnit.SECONDS.sleep(1);
         }
-        else if(cas<=50){
-            setAnimation(expl);
-            cas--;
-            if(cas==0){
-                getScene().removeActor(this);
-            }
+        catch(InterruptedException e){
+            e.printStackTrace();
         }
+        Objects.requireNonNull(getScene()).removeActor(this);
     }
+
+
 
     public float getTime(){
         return cas;

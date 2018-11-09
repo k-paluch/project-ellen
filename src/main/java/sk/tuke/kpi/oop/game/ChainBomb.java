@@ -1,12 +1,8 @@
 package sk.tuke.kpi.oop.game;
 
 import sk.tuke.kpi.gamelib.Actor;
-import sk.tuke.kpi.gamelib.Scene;
-import sk.tuke.kpi.gamelib.actions.Invoke;
-import sk.tuke.kpi.gamelib.framework.actions.Loop;
 
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
+import static java.lang.Math.abs;
 
 public class ChainBomb extends TimeBomb {
 
@@ -15,18 +11,15 @@ public class ChainBomb extends TimeBomb {
 
     }
 
-    public void addedToScene(Scene scene){
-        super.addedToScene(scene);
-        new Loop<>(new Invoke(this::detonate)).scheduleOn(this);
-    }
-
-    private void detonate(){
-        if(getTime()==50)
-            for (Actor actor : getScene()) {
-                if (new Ellipse2D.Float(getPosX()+8, getPosY()+8, 50,50).intersects(
-                    new Rectangle2D.Float(actor.getPosX(), actor.getPosY(), actor.getAnimation().getWidth(), actor.getAnimation().getHeight())))
+    private void chainreaction(){
+        super.reaction();
+            for (Actor actor : getScene().getActors()) {
+                //if (new Ellipse2D.Float(getPosX()+8, getPosY()+8, 50,50).intersects(
+                    //new Rectangle2D.Float(actor.getPosX(), actor.getPosY(), actor.getAnimation().getWidth(), actor.getAnimation().getHeight())))
                     if (actor instanceof ChainBomb) {
-                        ((ChainBomb) actor).activate();
+                        if(abs(actor.getPosX()-this.getPosX())<= 50 && (abs(actor.getPosY()-this.getPosY())<=50)) {
+                            ((ChainBomb) actor).activate();
+                        }
                     }
             }
     }

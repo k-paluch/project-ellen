@@ -1,8 +1,6 @@
 package sk.tuke.kpi.oop.game;
 
 import sk.tuke.kpi.gamelib.Scene;
-import sk.tuke.kpi.gamelib.actions.Invoke;
-import sk.tuke.kpi.gamelib.framework.actions.Loop;
 
 public class SmartCooler extends Cooler {
     private int zapnute;
@@ -12,33 +10,13 @@ public class SmartCooler extends Cooler {
 
     @Override
     public void addedToScene(Scene scene) {
-        new Loop<>(new Invoke(this::smartCool)).scheduleOn(this);
+        if(getCoolerReactor() !=null){
+            if (getCoolerReactor().getTemperature() < 1500)
+                turnOff();
+            if (getCoolerReactor().getTemperature() > 2500)
+                turnOn();
+        }
         super.addedToScene(scene);
     }
 
-    public void smartCool(){
-        if(getCoolerReactor() == null)  return;
-        if(getCoolerReactor().getTemperature() < 1500)
-            turnOff();
-        if(getCoolerReactor().getTemperature() > 2500)
-            turnOn();
-    }
-
-    @Override
-    public void turnOn(){
-        zapnute = 1;
-    }
-    @Override
-    public void turnOff(){
-        zapnute = 0;
-    }
-    @Override
-    public boolean isOn(){
-        if(zapnute==1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 }

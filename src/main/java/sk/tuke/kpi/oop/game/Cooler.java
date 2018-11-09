@@ -10,12 +10,11 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 public class Cooler extends Reactor implements Switchable{
     private int zapnuty;
     private Reactor reactor;
-    private Animation on = new Animation("sprites/fan.png", 32, 32, 200);
-    private Animation off = new Animation("sprites/fan.png", 32, 32, 0);
+    private Animation on = new Animation("sprites/fan.png", 32, 32, 0.2f,Animation.PlayMode.LOOP_PINGPONG);
     public Cooler(Reactor reactor){
         this.reactor = reactor;
-        zapnuty = 0;
-        setAnimation(off);
+        turnOn();
+        setAnimation(on);
     }
     @Override
     public void turnOn(){
@@ -25,7 +24,7 @@ public class Cooler extends Reactor implements Switchable{
     @Override
     public void turnOff(){
         zapnuty = 0;
-        setAnimation(off);
+        on.pause();
     }
     @Override
     public boolean isOn(){
@@ -35,18 +34,7 @@ public class Cooler extends Reactor implements Switchable{
         else return false;
     }
 
-    public void execute(float deltaTime) {
 
-    }
-
-    @Override
-    public void decreaseTemperature(double decrement) {
-        if(isOn()){
-        super.decreaseTemperature(decrement);
-        }
-        else
-            return ;
-    }
 
     @Override
     public void addedToScene(@NotNull Scene scene) {

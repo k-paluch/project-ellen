@@ -8,12 +8,14 @@ public class Wrench extends BreakableTool {
         super(2);
         setAnimation(animation);
     }
-
+    /*
     @Override
     public void useWith(Object actor) {
         if(actor==null){
             return;
         }
-        use();
-    }
+        if(actor instanceof DefectiveLight){
+            super.useWith(actor);
+        }
+    }*/
 }
