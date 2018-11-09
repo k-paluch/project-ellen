@@ -44,13 +44,36 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
     }
 
     public void increaseTemperature(int increment) {
-        if(getDamage() < 100 && increment > 0 && isOn()){
-            this.temperature += increment;
-            if(temperature > 2000){
-                setDamage((temperature - 2000)/40);
-            }
-            updateAnimation();
+        if(isOn() == false){
+            return;
         }
+
+        if (getDamage() >= 33 && getDamage() <= 66) {
+            temperature += increment * 1.5;
+        } else if (getDamage() > 66) {
+            temperature += increment * 2;
+        } else
+            temperature += increment;
+
+
+        if (getTemperature() <= 2000)
+            return;
+
+        if (getDamage() < (getTemperature() - 2000) / 40) {
+            damage = (getTemperature() - 2000) / 40;
+        }
+
+        if (getDamage() >= 100) {
+            damage = 100;
+        }
+
+        if (getTemperature() < 0) {
+            temperature = 0;
+        }
+
+
+        updateAnimation();
+
 
     }
 
@@ -80,16 +103,22 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
 
     public void turnOn() {
         zapnute = 1;
-        updateDevices();
+
         updateAnimation();
-        device.setPowered(true);
+        if(device!=null){
+            device.setPowered(true);
+            updateDevices();
+        }
     }
 
     public void turnOff() {
         zapnute = 0;
         updateDevices();
         updateAnimation();
-        device.setPowered(false);
+        if(device!=null){
+            device.setPowered(false);
+            updateDevices();
+        }
     }
 
     public boolean isOn() {
