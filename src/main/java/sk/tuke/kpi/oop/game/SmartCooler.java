@@ -11,16 +11,16 @@ public class SmartCooler extends Cooler {
     }
 
     @Override
-    public void addedToScene(Scene scene, Invoke invoke, Reactor coolReactor) {
+    public void addedToScene(Scene scene) {
         new Loop<>(new Invoke(this::smartCool)).scheduleOn(this);
-        //super.addedToScene(scene, invoke, coolReactor);
+        super.addedToScene(scene);
     }
 
     public void smartCool(){
         if(getCoolerReactor() == null)  return;
-        if(getCoolerReactor().getTemperature() <= 1500)
+        if(getCoolerReactor().getTemperature() < 1500)
             turnOff();
-        if(getCoolerReactor().getTemperature() >=2500)
+        if(getCoolerReactor().getTemperature() > 2500)
             turnOn();
     }
 

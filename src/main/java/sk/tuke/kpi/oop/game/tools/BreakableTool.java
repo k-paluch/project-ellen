@@ -4,8 +4,9 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 
 abstract public class BreakableTool extends AbstractActor implements Usable {
     private int remainingUses;
-    public BreakableTool(){
-        this.remainingUses = 0;
+    public BreakableTool(int remainingUses){
+
+        this.remainingUses = remainingUses;
     }
 
     public int getRemainingUses(){
@@ -21,8 +22,10 @@ abstract public class BreakableTool extends AbstractActor implements Usable {
     }
 
     public void use(){
-        remainingUses --;
-        if(remainingUses==0) {
+        if(getRemainingUses()>0) {
+            remainingUses--;
+        }
+        if (getRemainingUses() == 0) {
             getScene().removeActor(this);
         }
     }

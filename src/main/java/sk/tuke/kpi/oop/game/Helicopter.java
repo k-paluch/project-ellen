@@ -23,31 +23,34 @@ public class Helicopter extends AbstractActor {
     }
 
     public void addedToScene(Scene scene, Invoke invoke, Reactor defLight) {
+        super.addedToScene(scene);
         new Loop<>(new Invoke(this::kill)).scheduleOn(this);
     }
 
 
-    private void kill() {
-        int energy = player.getEnergy();
-        if (follow) {
-            if (player.getPosY() > getPosY()) {
-                int y = getPosY() + 1;
-                setPosition(getPosX(), y);
-            } else if (player.getPosY() < getPosY()) {
-                int y = getPosY() - 1;
-                setPosition(getPosX(), y);
-            }
+    public void kill()
+    {
+        Player player = (Player) getScene().getFirstActorByName("Player");
+        int x = this.getPosX(), y = this.getPosY();
 
-            if (player.getPosX() > getPosX()) {
-                int x = getPosX() + 1;
-                setPosition(x, getPosY());
-            } else if (player.getPosX() < getPosX()) {
-                int x = getPosX() - 1;
-                setPosition(x, getPosY());
+        if(follow){
+            if (player.getPosX() < this.getPosX()) {
+                x = x - 1;
             }
-            if (player.getPosX() == getPosX() && player.getPosY() == getPosY()) {
-                player.setEnergy(energy--);
+            else if (player.getPosX() > this.getPosX()) {
+                x = x + 1;
+            }
+            if (player.getPosY() < this.getPosY()) {
+                y = y - 1;
+            }
+            else if (player.getPosY() > this.getPosY()) {
+                y = y + 1;
+            }
+            setPosition(x, y);
+            if (player.intersects(this)) {
+                player.setEnergy(player.getEnergy()-1);
             }
         }
     }
+
 }

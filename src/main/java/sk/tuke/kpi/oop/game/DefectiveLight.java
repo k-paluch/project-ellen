@@ -23,22 +23,17 @@ public class DefectiveLight extends Light implements Repairable {
         oprava = false;
     }
 
-    public void addedToScene(Scene scene, Invoke invoke, Reactor defLight){
-            new Loop<>(new Invoke(this::defLight)).scheduleOn(this);
+    public void addedToScene(Scene scene){
+        super.addedToScene(scene);
+        new Loop<>(new Invoke(this::defLight)).scheduleOn(this);
     }
 
 
-    private void defLight(){
-        if(!oprava) {
-            int number = random.nextInt(2)+1;
+    private void defLight() {
+        if (!oprava) {
+            int number = random.nextInt(2) + 1;
             if (number == 1) {
                 toggle();
-            } else {
-                cas++;
-                if (cas == 1000){
-                    oprava = false;
-                    cas = 0;
-                }
             }
         }
     }
@@ -48,7 +43,8 @@ public class DefectiveLight extends Light implements Repairable {
         if(tool instanceof Wrench){
             tool.use();
             if(powered){
-            setAnimation(light_on);}
+            setAnimation(light_on);
+            }
             else setAnimation(light_off);
             oprava = true;
             return true;
