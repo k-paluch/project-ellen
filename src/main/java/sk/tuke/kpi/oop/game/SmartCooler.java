@@ -17,7 +17,6 @@ public class SmartCooler extends Cooler {
 
     public void smart() {
         if (
-
             getCoolerReactor() != null) {
             if (getCoolerReactor().getTemperature() < 1500)
                 turnOff();
