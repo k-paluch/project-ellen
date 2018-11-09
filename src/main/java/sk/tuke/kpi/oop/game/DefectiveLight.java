@@ -37,11 +37,19 @@ public class DefectiveLight extends Light implements Repairable {
             }
         }
         if (oprava) {
-            cooldown++;
-            if (cooldown == 10) {
-                oprava = false;
-                cooldown = 0;
-            }
+            super.turnOn();
+
+            new Thread(() -> {
+                long sec = 10;
+                long startTime = System.currentTimeMillis();
+                for (int count = 0; ; count++) {
+                    long now = System.currentTimeMillis();
+                    if (now - startTime >= sec * 1000) break;
+                    // prazdny cyklus
+                }
+                oprava= false;
+            }).start();
+
         }
     }
 
