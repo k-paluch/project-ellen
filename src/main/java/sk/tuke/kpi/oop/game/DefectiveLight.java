@@ -3,6 +3,7 @@ package sk.tuke.kpi.oop.game;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
+import sk.tuke.kpi.oop.game.tools.BreakableTool;
 import sk.tuke.kpi.oop.game.tools.Wrench;
 
 import java.util.Random;
@@ -34,8 +35,8 @@ public class DefectiveLight extends Light implements Repairable {
             }
         }
     }
-
-    public boolean repair(Wrench actor) {
+    @Override
+    public boolean repair(BreakableTool actor) {
         if(actor==null) return false;
         if(actor instanceof Wrench){
             actor.useWith(this);

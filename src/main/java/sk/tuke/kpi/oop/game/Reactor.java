@@ -158,7 +158,6 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         }
     }
 
-
     public boolean extinguish(FireExtinguisher fireExtinguisher) {
         if(fireExtinguisher==null) return false;
         if (damage == 100&&temperature>4000) {
@@ -184,14 +183,14 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         }
     }
 
-
-    public boolean repair(BreakableTool tool) {
-        if(tool == null){
+    @Override
+    public boolean repair(BreakableTool hammer) {
+        if(hammer == null){
             return false;
         }
-        if(tool instanceof Hammer && damage < 100 && damage > 0){
+        if(hammer instanceof Hammer && damage < 100 && damage > 0){
             this.damage = max(0,this.damage-50);
-            tool.useWith(this);
+            hammer.useWith(this);
             temperature = (damage - 50) * 40 + 2000  > temperature ? temperature : (damage - 50) * 40 + 2000;
             damage = damage - 50 < 0 ? 0 : damage - 50;
             updateAnimation();
@@ -199,4 +198,5 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         }
         return false;
     }
+
 }

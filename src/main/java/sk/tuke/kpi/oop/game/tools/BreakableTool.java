@@ -27,7 +27,6 @@ abstract public class BreakableTool<Actor> extends AbstractActor implements Usab
                 this.getScene().removeActor(this);
             }
         }
-
         if(getRemainingUses() == 0) {
             getScene().removeActor(this);
         }
