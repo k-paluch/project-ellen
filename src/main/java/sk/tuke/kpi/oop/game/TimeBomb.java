@@ -26,6 +26,7 @@ public class TimeBomb extends AbstractActor {
     public void activate() {
         activated = true;
         setAnimation(Activ);
+        timeOut(cas);
     }
 
     public boolean isActivated() {
