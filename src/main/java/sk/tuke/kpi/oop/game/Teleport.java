@@ -1,30 +1,57 @@
 package sk.tuke.kpi.oop.game;
 
+import sk.tuke.kpi.gamelib.Actor;
+import sk.tuke.kpi.gamelib.Scene;
+import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.Player;
+import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Teleport extends AbstractActor {
-    private int destination;
-    private Teleport teleport;
+    private Teleport blink;
+    private boolean mozno;
+    private Player ppl;
     private Animation tele = new Animation("sprites/lift.png",48,48,0);
     public Teleport(){
         setAnimation(tele);
 
     }
 
-    public int getDestination(){
-        return destination;
+    public void addedToScene(Scene scene, Invoke invoke, Reactor defLight){
+        new Loop<>(new Invoke(this::blink)).scheduleOn(this);
+    }
+
+    private void blink(){
+        int x = getPosX();
+
+        int y = getPosY();
+
+        int w = getWidth();
+
+        int h = getHeight();
+
+        int playerY = ppl.getPosY() + ppl.getHeight()/2;
+
+        int playerX = ppl.getPosX() + ppl.getWidth()/2;
+
+        if(!(x < playerX && x+w > playerX) || !(y < playerY && y+h > playerY))
+            mozno = true;
+        else if(mozno && blink != null){
+            teleportPlayer(ppl);
+            blink.mozno = false;
+        }
+    }
+
+    public Teleport getDestination( ){
+        return blink ;
     }
 
     public void setDestination(Teleport destinationTeleport){
+        blink = destinationTeleport;
     }
 
-    public void teleportPLayer(Player player){
-        if(player.getPosY()==teleport.getPosY()){
-            if(player.getPosX()==teleport.getPosX()){
-                player.setPosition(teleport.getPosX(),teleport.getPosY());
-            }
-        }
+    public void teleportPlayer(Player player){
+        ppl.setPosition(blink.getPosX()+8, blink.getPosY()+8);
     }
 }

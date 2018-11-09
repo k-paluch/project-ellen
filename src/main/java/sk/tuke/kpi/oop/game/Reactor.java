@@ -1,10 +1,7 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.Scene;
-import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
-import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 import sk.tuke.kpi.oop.game.tools.BreakableTool;
 import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
 import sk.tuke.kpi.oop.game.tools.Hammer;
@@ -23,13 +20,15 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     private Animation hotAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.05f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation offAnimation = new Animation("sprites/reactor.png", 80, 80, 0.0f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation extinguishedAnimation = new Animation("sprites/reactor_extinguished.png", 80, 80, 0.0f, Animation.PlayMode.LOOP_PINGPONG);
-    public Reactor(Reactor reactor){
+    public Reactor(){
         devices = new HashSet<>();
         this.temperature =0;
         this.damage=0;
         turnOff();
         setAnimation(offAnimation);
     }
+
+
 
     public void updateAnimation(){
         if(!isOn()) {
@@ -140,9 +139,6 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         this.damage = newDam;
     }
 
-    public void addedToScene(Scene scene, Invoke invoke, Reactor coolReactor){
-        new PerpetualReactorHeating(1).scheduleOn(this);
-    }
 
     public void addDevice(EnergyConsumer device) {
         if(device == null)
@@ -153,12 +149,14 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
 
 
     public void removeDevice(EnergyConsumer device){
+        if(device==null) return;
         if(devices.contains(device))
             devices.remove(device);
     }
 
 
     public boolean extinguish(FireExtinguisher fireExtinguisher) {
+        if(fireExtinguisher==null) return false;
         if (damage == 100) {
             this.temperature = 4000;
             setAnimation(extinguishedAnimation);

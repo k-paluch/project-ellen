@@ -8,7 +8,7 @@ public class Light extends Reactor implements Switchable, EnergyConsumer {
     private Animation light_off = new Animation("sprites/light_off.png", 16, 16, 10);
     private int turnedOn;
     public Light() {
-        super(reactor);
+        turnedOn =0;
         turnOff();
     }
 
@@ -41,16 +41,6 @@ public class Light extends Reactor implements Switchable, EnergyConsumer {
             return false;
         }
     }
-
-    /*public void setElectricityFlow(boolean is_plugged) {
-        is_set = is_plugged;
-        if(is_set&&isOn()){
-            setAnimation(light_on);
-        }
-        else{
-            setAnimation(light_off);
-        }
-    }*/
 
     @Override
     public void setPowered(boolean isPowered) {

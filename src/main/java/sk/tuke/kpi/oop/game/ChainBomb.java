@@ -26,7 +26,6 @@ public class ChainBomb extends TimeBomb {
                     new Rectangle2D.Float(actor.getPosX(), actor.getPosY(), actor.getAnimation().getWidth(), actor.getAnimation().getHeight())))
                     if (actor instanceof ChainBomb) {
                         ((ChainBomb) actor).activate();
-
                     }
             }
     }
