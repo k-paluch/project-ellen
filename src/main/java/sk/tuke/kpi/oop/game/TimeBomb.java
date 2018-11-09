@@ -1,6 +1,5 @@
 package sk.tuke.kpi.oop.game;
 
-import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
@@ -30,7 +29,8 @@ public class TimeBomb extends AbstractActor {
         }
         else return  false;
     }
-    public void addedToScene(Scene scene, Invoke invoke, Reactor defLight){
+    public void addedToScene(Scene scene){
+        super.addedToScene(scene);
         new Loop<>(new Invoke(this::detonate)).scheduleOn(this);
     }
 

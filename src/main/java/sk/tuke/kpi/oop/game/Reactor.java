@@ -1,7 +1,10 @@
 package sk.tuke.kpi.oop.game;
 
+import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
+import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 import sk.tuke.kpi.oop.game.tools.BreakableTool;
 import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
 import sk.tuke.kpi.oop.game.tools.Hammer;
@@ -14,7 +17,7 @@ import static java.lang.Math.max;
 public class Reactor extends AbstractActor implements Switchable,Repairable {
     private int temperature, damage,zapnute;
     private Set<EnergyConsumer> devices;
-
+    private EnergyConsumer device;
     private Animation normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation brokenAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation hotAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.05f, Animation.PlayMode.LOOP_PINGPONG);
@@ -116,10 +119,14 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
 
     public void turnOn(){
         zapnute = 1;
+        updateAnimation();
+        device.setPowered(true);
     }
 
     public void turnOff() {
         zapnute = 0;
+        updateAnimation();
+        device.setPowered(true);
     }
 
     public boolean isOn(){
@@ -131,6 +138,7 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         }
         else return false;
     }
+
 
     public void setTemperature(int newTemp){
         this.temperature = newTemp;
@@ -157,11 +165,18 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
 
     public boolean extinguish(FireExtinguisher fireExtinguisher) {
         if(fireExtinguisher==null) return false;
-        if (damage == 100) {
+        if (damage == 100&&temperature>4000) {
             this.temperature = 4000;
             setAnimation(extinguishedAnimation);
             return true;
         }
         else return false;
     }
+    @Override
+    public void addedToScene(@NotNull Scene scene) {
+        super.addedToScene(scene);
+        new PerpetualReactorHeating(1).scheduleOn(this);
+    }
+
+
 }

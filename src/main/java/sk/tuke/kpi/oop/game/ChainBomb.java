@@ -15,7 +15,8 @@ public class ChainBomb extends TimeBomb {
 
     }
 
-    public void addedToScene(Scene scene, Invoke invoke, Reactor defLight){
+    public void addedToScene(Scene scene){
+        super.addedToScene(scene);
         new Loop<>(new Invoke(this::detonate)).scheduleOn(this);
     }
 

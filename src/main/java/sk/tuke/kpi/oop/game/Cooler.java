@@ -47,10 +47,7 @@ public class Cooler extends Reactor implements Switchable{
         else
             return ;
     }
-    /*@Override
-    public void addedToScene(Scene scene, Invoke invoke, Reactor coolReactor){
-        new Loop<>(new Invoke(this::coolReactor)).scheduleOn(this);
-    }*/
+
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
