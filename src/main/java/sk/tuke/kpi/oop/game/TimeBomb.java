@@ -45,4 +45,8 @@ public class TimeBomb extends AbstractActor {
         }
     }
 
+    public float getTime(){
+        return cas;
+    }
+
 }
