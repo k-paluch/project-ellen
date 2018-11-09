@@ -4,7 +4,6 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Light extends Reactor implements Switchable, EnergyConsumer {
     private boolean is_set;
-    private Reactor reactor;
     private Animation light_on = new Animation("sprites/light_on.png", 16, 16, 10);
     private Animation light_off = new Animation("sprites/light_off.png", 16, 16, 10);
     private int turnedOn;
@@ -45,9 +44,6 @@ public class Light extends Reactor implements Switchable, EnergyConsumer {
 
     @Override
     public void setPowered(boolean isPowered) {
-        if(!reactor.isOn()){
-            return;
-        }
         is_set = isPowered;
         if(is_set&&isOn()){
             setAnimation(light_on);
