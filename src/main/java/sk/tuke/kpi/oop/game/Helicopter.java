@@ -9,7 +9,7 @@ import sk.tuke.kpi.gamelib.actions.Invoke;
 
 public class Helicopter extends AbstractActor {
     private boolean follow = false;
-    private Animation helicopter = new Animation("sprites/heli.png", 64, 64, 10);
+    private Animation helicopter = new Animation("sprites/heli.png", 64, 64, 0.1f,Animation.PlayMode.LOOP_PINGPONG);
 
     public Helicopter() {
         setAnimation(helicopter);
