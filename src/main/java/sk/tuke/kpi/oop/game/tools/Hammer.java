@@ -14,6 +14,6 @@ public class Hammer extends BreakableTool{
         if(actor == null){
             return;
         }
-        useWith(actor);
+        use();
     }
 }

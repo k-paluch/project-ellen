@@ -13,7 +13,7 @@ import java.util.Random;
 public class DefectiveLight extends Light implements Repairable {
     private Random random;
     private int cas;
-    private boolean oprava;
+    private boolean oprava,powered ;
     private Animation light_off = new Animation("sprites/light_off.png", 16, 16, 10);
     private Animation light_on = new Animation("sprites/light_on.png", 16, 16, 10);
     public DefectiveLight(){
@@ -47,7 +47,9 @@ public class DefectiveLight extends Light implements Repairable {
     public boolean repair(BreakableTool tool) {
         if(tool instanceof Wrench){
             tool.use();
-            setAnimation(light_on);
+            if(powered){
+            setAnimation(light_on);}
+            else setAnimation(light_off);
             oprava = true;
             return true;
         }
@@ -56,6 +58,9 @@ public class DefectiveLight extends Light implements Repairable {
 
     @Override
     public void setPowered(boolean isPowered) {
-        setPowered(isPowered);
+        if (reactor.isOn()) {
+            powered= true;
+            setPowered(isPowered);
+        }
     }
 }

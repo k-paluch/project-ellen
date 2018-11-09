@@ -14,6 +14,6 @@ public class FireExtinguisher extends BreakableTool {
         if(actor==null){
             return;
         }
-        useWith(actor);
+        use();
     }
 }
