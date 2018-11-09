@@ -28,23 +28,32 @@ public class Helicopter extends AbstractActor {
 
     public void chase() {
         Player player = (Player) getScene().getFirstActorByName("Player");
-        int x = this.getPosX(), y = this.getPosY();
+        int energy = player.getEnergy();
+        int y,x;
+        if(follow==true) {
+            if(player.getPosY() > getPosY()){
+                y = getPosY()+1;
+                setPosition(getPosX() , y);
+            }
+            else if(player.getPosY() < getPosY()){
+                y = getPosY()-1;
+                setPosition(getPosX() , y);
+            }
 
-        if (follow) {
-            if (player.getPosX() < this.getPosX()) {
-                x = x - 1;
-            } else if (player.getPosX() > this.getPosX()) {
-                x = x + 1;
+            if(player.getPosX() > getPosX()){
+                x = getPosX()+1;
+                setPosition(x , getPosY());
             }
-            if (player.getPosY() < this.getPosY()) {
-                y = y - 1;
-            } else if (player.getPosY() > this.getPosY()) {
-                y = y + 1;
+            else if(player.getPosX() < getPosX()){
+                x = getPosX()-1;
+                setPosition(x , getPosY());
             }
-            setPosition(x, y);
-            if (player.intersects(this)) {
-                player.setEnergy(player.getEnergy() - 1);
+            if(player.getPosX() == getPosX() && player.getPosY() == getPosY() ){
+                energy--;
+                player.setEnergy(energy);
             }
+
+
         }
     }
 
