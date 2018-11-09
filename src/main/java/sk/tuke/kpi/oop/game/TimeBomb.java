@@ -35,13 +35,16 @@ public class TimeBomb extends AbstractActor {
     }
 
     private void detonate(){
-        if(activated){
+        if(activated&& getTime()>50){
             setAnimation(Activ);
             cas--;
         }
-        else if(cas==0){
+        else if(cas<=50){
             setAnimation(expl);
+            cas--;
+            if(cas==0){
                 getScene().removeActor(this);
+            }
         }
     }
 
