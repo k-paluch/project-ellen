@@ -10,7 +10,6 @@ import java.util.Random;
 
 public class DefectiveLight extends Light implements Repairable {
     private Random random = new Random();
-    private int cooldown = 0;
     private boolean is_Powered;
     private boolean oprava = false;
 
@@ -45,7 +44,6 @@ public class DefectiveLight extends Light implements Repairable {
                 for (int count = 0; ; count++) {
                     long now = System.currentTimeMillis();
                     if (now - startTime >= sec * 1000) break;
-                    // prazdny cyklus
                 }
                 oprava= false;
             }).start();
