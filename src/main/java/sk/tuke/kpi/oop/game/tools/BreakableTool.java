@@ -1,5 +1,6 @@
 package sk.tuke.kpi.oop.game.tools;
 
+import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 
 abstract public class BreakableTool<Actor> extends AbstractActor implements Usable<Actor> {
@@ -22,15 +23,9 @@ abstract public class BreakableTool<Actor> extends AbstractActor implements Usab
         if (actor == null) {
             return;
         }
-        if (getRemainingUses() > 0) {
-            this.remainingUses--;
-            if (getRemainingUses() == 0) {
-                this.getScene().removeActor(this);
-            }
-        }
+        remainingUses--;
         if (getRemainingUses() == 0) {
-            getScene().removeActor(this);
+            this.getScene().removeActor(this);
         }
     }
-
 }

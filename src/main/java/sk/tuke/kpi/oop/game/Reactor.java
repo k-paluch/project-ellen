@@ -11,12 +11,10 @@ import sk.tuke.kpi.oop.game.tools.Hammer;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.lang.Math.max;
-
 public class Reactor extends AbstractActor implements Switchable, Repairable {
     private int temperature, damage, zapnute;
     private Set<EnergyConsumer> devices;
-    private EnergyConsumer device;
+    private EnergyConsumer device = null;
     private Animation normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation brokenAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation hotAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.05f, Animation.PlayMode.LOOP_PINGPONG);
@@ -33,65 +31,41 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
 
 
     public void updateAnimation() {
-        if (!isOn()) {
-            if (damage == 100) {
-                setAnimation(brokenAnimation);
-            } else {
-                setAnimation(offAnimation);
-            }
+        if (!isOn() && getDamage() < 100){
+            setAnimation(offAnimation);
+        }
+        else if (temperature >= 6000) {
+            setAnimation(brokenAnimation);
+        } else if (temperature > 4000 && temperature < 6000) {
+            setAnimation(hotAnimation);
         } else {
-            if (damage == 100) {
-                setAnimation(brokenAnimation);
-            } else if (temperature > 4000) {
-                setAnimation(hotAnimation);
-            } else {
-                setAnimation(normalAnimation);
-            }
+            setAnimation(normalAnimation);
         }
     }
 
     public void increaseTemperature(int increment) {
-        if (getDamage() >= 6000 || getTemperature() >= 100) {
-            return;
-        }
-        if (!isOn()) {
-            return;
-        }
-        if (increment < 0) {
-            return;
-        }
-        this.temperature += increment;
-        if (getDamage() > 33 && getDamage() < 66) {
-            temperature = (int) max(6000, ((1.5 * increment) + temperature));
-            setDamage(max(100, ((this.temperature - 2000) / 4000) * 100));
-        } else if (this.damage > 66) {
-            temperature = max(6000, (2 * increment) + temperature);
-            this.damage = max(100, ((this.temperature - 2000) / 4000) * 100);
+        if(getDamage() < 100 && increment > 0 && isOn()){
+            this.temperature += increment;
+            if(temperature > 2000){
+                setDamage((temperature - 2000)/40);
+            }
+            updateAnimation();
         }
 
-        temperature = max(6000, increment + temperature);
-        this.damage = max(100, ((this.temperature - 2000) / 4000) * 100);
-        updateAnimation();
     }
 
     public void decreaseTemperature(int decrement) {
-        if (getDamage() >= 6000 || getTemperature() >= 100) {
-            return;
+        if(getDamage() < 100 && decrement > 0 && isOn()){
+            if(getDamage() >= 50){
+                this.temperature -= decrement/2;
+            }
+            else{ this.temperature -= decrement;}
+            updateAnimation();
+            if(this.temperature<0){
+                setTemperature(0);
+            }
         }
-        if (isOn()) {
-            return;
-        }
-        if (decrement < 0) {
-            return;
-        }
-        if (getDamage() > 50) {
-            this.temperature = max(0, temperature - (decrement) * 2);
-        }
-        if (damage == 100) {
-            this.temperature = max(0, temperature - (decrement) * 0);
-        }
-        this.temperature = max(0, temperature - decrement);
-        updateAnimation();
+
     }
 
     public int getTemperature() {
@@ -132,7 +106,18 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
     }
 
     public void setDamage(int newDam) {
-        this.damage = newDam;
+        if(newDam > 0 && newDam < 100)
+        {
+            this.damage = newDam;
+        }
+        else if(newDam >= 100){
+            this.damage = 100;
+            turnOff();
+        }
+        else if( newDam <= 0){
+            this.damage = 0;
+        }
+
     }
 
 
@@ -148,10 +133,8 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
 
     public void removeDevice(EnergyConsumer device) {
         if (device == null) return;
-        if (devices.contains(device)) {
             devices.remove(device);
             device.setPowered(false);
-        }
     }
 
     public boolean extinguish(FireExtinguisher fireExtinguisher) {
@@ -179,20 +162,21 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
         }
     }
 
+
     @Override
     public boolean repair(BreakableTool hammer) {
         if (hammer == null) {
             return false;
         }
         if (hammer instanceof Hammer && damage < 100 && damage > 0) {
-            this.damage = max(0, this.damage - 50);
-            hammer.useWith(this);
-            temperature = (damage - 50) * 40 + 2000 > temperature ? temperature : (damage - 50) * 40 + 2000;
-            damage = damage - 50 < 0 ? 0 : damage - 50;
+            int tempDamage = damage-50;
+            if(this.damage>50){
+                this.damage -=50;
+            }
+            else{this.damage = 0;}
             updateAnimation();
             return true;
         }
         return false;
     }
-
 }

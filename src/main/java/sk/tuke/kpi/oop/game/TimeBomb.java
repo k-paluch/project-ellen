@@ -1,10 +1,6 @@
 package sk.tuke.kpi.oop.game;
 
-//import org.jetbrains.annotations.NotNull;
-//import sk.tuke.kpi.gamelib.Scene;
-//import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
-//import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
 import java.util.Objects;
@@ -34,26 +30,12 @@ public class TimeBomb extends AbstractActor {
     }
 
     public void reaction() {
-        /*if (isActivated() && cas > 50) {
-            setAnimation(Activ);
-            cas--;
-        } else if (cas <= 50) {
-            setAnimation(expl);
-            cas--;
-            if (cas == 0)
-                getScene().removeActor(this);
-        }*/
         setAnimation(expl);
 
         Objects.requireNonNull(getScene()).removeActor(this);
 
     }
 
-    /*@Override
-    public void addedToScene(@NotNull Scene scene) {
-        new Loop<>(new Invoke(this::reaction)).scheduleOn(this);
-        super.addedToScene(scene);
-    }*/
 
     private void timeOut(float seconds) {
 

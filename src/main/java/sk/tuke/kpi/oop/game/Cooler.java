@@ -20,7 +20,7 @@ public class Cooler extends Reactor implements Switchable {
     @Override
     public void turnOn() {
         zapnuty = 1;
-        setAnimation(on);
+        on.play();
     }
 
     @Override

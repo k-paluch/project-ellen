@@ -14,29 +14,55 @@ public class Computer extends AbstractActor implements EnergyConsumer, Switchabl
     }
 
     public float add(float first, float second) {
-        return (isOn() ? (first + second) : 0);
+        if(isOn()){
+            return first + second;
+        }
+        else{
+            return 0;
+        }
+
     }
 
     public int add(int first, int second) {
-        return (isOn() ? (first + second) : 0);
+        if(isOn()){
+            return first + second;
+        }
+        else{
+            return 0;
+        }
+
     }
 
     public float sub(float first, float second) {
-        return (isOn() ? (first + second) : 0);
+        if(isOn()){
+            return first + second;
+        }
+        else{
+            return 0;
+        }
+
     }
 
     public int sub(int first, int second) {
-        return (isOn() ? (first + second) : 0);
+        if(isOn()){
+            return first + second;
+        }
+        else{
+            return 0;
+        }
+
     }
 
     @Override
     public void turnOn() {
         zapnute = true;
+        setAnimation(computer_on);
     }
 
     @Override
     public void turnOff() {
         zapnute = false;
+        setAnimation(computer_off);
     }
 
     @Override
@@ -46,15 +72,11 @@ public class Computer extends AbstractActor implements EnergyConsumer, Switchabl
 
     @Override
     public void setPowered(boolean isPowered) {
-        zapnute = isPowered;
+        zapnute=isPowered;
         if (isPowered) {
-            turnOn();
             setAnimation(computer_on);
         } else {
-            turnOff();
             setAnimation(computer_off);
         }
     }
-
-
 }

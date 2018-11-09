@@ -5,8 +5,7 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
+import static java.lang.Math.abs;
 
 public class ChainBomb extends TimeBomb {
 
@@ -23,11 +22,13 @@ public class ChainBomb extends TimeBomb {
 
     private void chainreaction() {
         super.reaction();
-        for (Actor actor : getScene().getActors()) {
-            if (actor instanceof ChainBomb && new Ellipse2D.Float(this.getPosX(), this.getPosY(), 50, 50).intersects(
-                new Rectangle2D.Float(actor.getPosX(), actor.getPosY(), actor.getAnimation().getWidth(), actor.getAnimation().getHeight()))) {
-                ((ChainBomb) actor).activate();
-
+        for (Actor actors : getScene().getActors()) {
+            if ((actors instanceof ChainBomb) && (abs(actors.getPosX() - getPosX()) <= 50 && (abs(actors.getPosY() - getPosY()) <= 50))) {
+                new Thread(() -> {
+                    if (((ChainBomb) actors).isActivated() == false) {
+                        ((ChainBomb) actors).activate();
+                    }
+                }).start();
             }
         }
     }

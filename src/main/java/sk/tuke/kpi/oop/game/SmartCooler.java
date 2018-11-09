@@ -6,15 +6,8 @@ public class SmartCooler extends Cooler {
     public SmartCooler(Reactor reactor) {
         super(reactor);
     }
-
     @Override
     public void addedToScene(Scene scene) {
-        if (getCoolerReactor() != null) {
-            if (getCoolerReactor().getTemperature() < 1500)
-                super.turnOff();
-            if (getCoolerReactor().getTemperature() > 2500)
-                super.turnOn();
-        }
         if (getCoolerReactor() != null) {
             if (getCoolerReactor().getTemperature() < 1500)
                 turnOff();
@@ -23,5 +16,4 @@ public class SmartCooler extends Cooler {
         }
         super.addedToScene(scene);
     }
-
 }

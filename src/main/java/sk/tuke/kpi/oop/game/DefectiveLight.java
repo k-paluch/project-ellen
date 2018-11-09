@@ -42,7 +42,9 @@ public class DefectiveLight extends Light implements Repairable {
                 long startTime = System.currentTimeMillis();
                 for (int count = 0; ; count++) {
                     long now = System.currentTimeMillis();
-                    if (now - startTime >= sec * 1000) break;
+                    if (now - startTime >= sec * 1000){
+                        break;
+                    }
                 }
                 oprava= false;
             }).start();
@@ -53,6 +55,9 @@ public class DefectiveLight extends Light implements Repairable {
     @Override
     public boolean repair(BreakableTool actor) {
         if (actor == null) return false;
+        if(oprava){
+            return false;
+        }
         if (actor instanceof Wrench) {
             actor.useWith(this);
             oprava = true;
