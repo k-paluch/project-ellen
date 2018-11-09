@@ -4,12 +4,12 @@ import sk.tuke.kpi.oop.game.Reactor;
 
 public class PerpetualReactorHeating extends AbstractAction<Reactor> {
     Reactor reactor;
-    public PerpetualReactorHeating(float deltaTime){
+    public PerpetualReactorHeating(){
         execute(1);
     }
 
     @Override
     public void execute(float deltaTime) {
-        this.reactor.increaseTemperature(1);
+        reactor.increaseTemperature(1);
     }
 }
