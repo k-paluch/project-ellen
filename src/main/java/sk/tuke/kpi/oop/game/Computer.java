@@ -11,17 +11,29 @@ public class Computer extends AbstractActor implements EnergyConsumer,Switchable
         setAnimation(computer_off);
     }
 
-    public double add(double first, double second){
-        return first+second;
+    public float add(float first, float second){
+        if(isOn()) {
+            return first + second;
+        }
+        else return 0;
     }
     public int add(int first, int second){
-        return first+second;
+        if(isOn()) {
+            return first + second;
+        }
+        else return 0;
     }
-    public double sub(double first, double second){
-        return first-second;
+    public float sub(float first, float second){
+        if(isOn()) {
+            return first + second;
+        }
+        else return 0;
     }
     public int sub(int first, int second){
-        return first-second;
+        if(isOn()) {
+            return first + second;
+        }
+        else return 0;
     }
 
     @Override

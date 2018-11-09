@@ -8,6 +8,7 @@ public class Light extends Reactor implements Switchable, EnergyConsumer {
     private Animation light_off = new Animation("sprites/light_off.png", 16, 16, 10);
     private int turnedOn;
     public Light() {
+        super(reactor);
         turnOff();
     }
 

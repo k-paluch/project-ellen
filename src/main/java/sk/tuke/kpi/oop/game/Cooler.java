@@ -11,6 +11,7 @@ public class Cooler extends Reactor implements Switchable{
     private Animation on = new Animation("sprites/fan.png", 32, 32, 200);
     private Animation off = new Animation("sprites/fan.png", 32, 32, 0);
     public Cooler(Reactor reactor){
+        super(reactor);
         zapnuty = 0;
         setAnimation(off);
     }
@@ -34,6 +35,15 @@ public class Cooler extends Reactor implements Switchable{
 
     public void execute(float deltaTime) {
 
+    }
+
+    @Override
+    public void decreaseTemperature(double decrement) {
+        if(isOn()){
+        super.decreaseTemperature(decrement);
+        }
+        else
+            return ;
     }
 
     public void addedToScene(Scene scene, Invoke invoke, Reactor coolReactor){

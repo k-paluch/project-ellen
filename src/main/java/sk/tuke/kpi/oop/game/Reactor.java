@@ -7,6 +7,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 import sk.tuke.kpi.oop.game.tools.BreakableTool;
 import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
+import sk.tuke.kpi.oop.game.tools.Hammer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     private Animation hotAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.05f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation offAnimation = new Animation("sprites/reactor.png", 80, 80, 0.0f, Animation.PlayMode.LOOP_PINGPONG);
     private Animation extinguishedAnimation = new Animation("sprites/reactor_extinguished.png", 80, 80, 0.0f, Animation.PlayMode.LOOP_PINGPONG);
-    public Reactor(){
+    public Reactor(Reactor reactor){
         devices = new HashSet<>();
         this.temperature =0;
         this.damage=0;
@@ -52,6 +53,9 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         }
     }
     public void increaseTemperature(double increment) {
+        if(!isOn()){
+            return;
+        }
         if (increment < 0) {
             return;
         }
@@ -70,6 +74,9 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     }
 
     public void decreaseTemperature(double decrement) {
+        if(isOn()){
+            return;
+        }
         if(decrement < 0) {
             return;
         }
@@ -85,19 +92,18 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
 
 
     @Override
-    public void repairWith(BreakableTool tool) {
-        final int max_damage;
-        final int min_damage;
-        max_damage = 99;
-        min_damage = 0;
-        if (tool == null) return;
-
-        if (damage >= min_damage && damage <= max_damage) {
+    public boolean repair(BreakableTool tool) {
+        if(tool instanceof Hammer && damage < 100 && damage > 0){
             tool.use();
-            damage = max(0, damage - 50);
+            temperature = (damage - 50) * 40 + 2000  > temperature ? temperature : (damage - 50) * 40 + 2000;
+            damage = damage - 50 < 0 ? 0 : damage - 50;
+            updateAnimation();
+            return true;
         }
-
+        return false;
     }
+
+
 
     public int getTemperature() {
 
@@ -152,9 +158,12 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     }
 
 
-    void extinguisheWith(FireExtinguisher fireExtinguisher) {
-        this.temperature=4000;
-        setAnimation(extinguishedAnimation);
+    public boolean extinguish(FireExtinguisher fireExtinguisher) {
+        if (damage == 100) {
+            this.temperature = 4000;
+            setAnimation(extinguishedAnimation);
+            return true;
+        }
+        else return false;
     }
-
 }

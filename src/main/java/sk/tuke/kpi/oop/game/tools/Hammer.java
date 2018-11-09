@@ -11,6 +11,9 @@ public class Hammer extends BreakableTool{
 
     @Override
     public void useWith(Object actor) {
+        if(actor == null){
+            return;
+        }
         useWith(actor);
     }
 }
