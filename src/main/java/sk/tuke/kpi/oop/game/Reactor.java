@@ -47,7 +47,9 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
         if(isOn() == false){
             return;
         }
-
+        if(increment<0){
+            return;
+        }
         if (getDamage() >= 33 && getDamage() <= 66) {
             temperature += increment * 1.5;
         } else if (getDamage() > 66) {
@@ -78,6 +80,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
     }
 
     public void decreaseTemperature(int decrement) {
+        if(decrement<0) return;
         if(getDamage() < 100 && decrement > 0 && isOn()){
             if(getDamage() >= 50){
                 this.temperature -= decrement/2;
@@ -191,6 +194,9 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
         }
     }
 
+    public boolean repair(){
+        return false;
+    }
 
     @Override
     public boolean repair(BreakableTool hammer) {

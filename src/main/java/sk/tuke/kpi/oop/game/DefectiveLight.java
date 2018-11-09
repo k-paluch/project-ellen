@@ -36,26 +36,28 @@ public class DefectiveLight extends Light implements Repairable {
             }
         }
         if (oprava) {
-            super.turnOn();
-            new Thread(() -> {
-                long sec = 10;
-                long startTime = System.currentTimeMillis();
-                for (int count = 0; ; count++) {
-                    long now = System.currentTimeMillis();
-                    if (now - startTime >= sec * 1000){
-                        break;
+            if (is_Powered) {
+                super.turnOn();
+                new Thread(() -> {
+                    long sec = 10;
+                    long startTime = System.currentTimeMillis();
+                    while(true){
+                        long now = System.currentTimeMillis();
+                        if (now - startTime >= sec * 1000) {
+                            break;
+                        }
                     }
-                }
-                oprava= false;
-            }).start();
-
+                    oprava = false;
+                }).start();
+            }
+            else super.turnOff();
         }
     }
 
     @Override
     public boolean repair(BreakableTool actor) {
         if (actor == null) return false;
-        if(oprava){
+        if (oprava) {
             return false;
         }
         if (actor instanceof Wrench) {

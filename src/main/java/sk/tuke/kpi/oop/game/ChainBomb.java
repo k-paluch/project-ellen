@@ -24,11 +24,8 @@ public class ChainBomb extends TimeBomb {
         super.reaction();
         for (Actor actors : getScene().getActors()) {
             if ((actors instanceof ChainBomb) && (abs(actors.getPosX() - getPosX()) <= 50 && (abs(actors.getPosY() - getPosY()) <= 50))) {
-                new Thread(() -> {
-                    if (((ChainBomb) actors).isActivated() == false) {
                         ((ChainBomb) actors).activate();
-                    }
-                }).start();
+                        chainreaction();
             }
         }
     }
