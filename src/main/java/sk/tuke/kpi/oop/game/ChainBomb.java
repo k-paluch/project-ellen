@@ -8,8 +8,6 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
-import static java.lang.Math.abs;
-
 public class ChainBomb extends TimeBomb {
 
     public ChainBomb(float sec) {
