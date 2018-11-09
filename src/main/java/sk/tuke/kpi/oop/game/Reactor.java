@@ -1,6 +1,5 @@
 package sk.tuke.kpi.oop.game;
 
-import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
@@ -98,25 +97,6 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
         updateAnimation();
     }
 
-
-    @Override
-    public boolean repair(BreakableTool tool) {
-        if(tool == null){
-            return false;
-        }
-        if(tool instanceof Hammer && damage < 100 && damage > 0){
-            this.damage = max(0,this.damage-50);
-            tool.useWith(tool);
-            temperature = (damage - 50) * 40 + 2000  > temperature ? temperature : (damage - 50) * 40 + 2000;
-            damage = damage - 50 < 0 ? 0 : damage - 50;
-            updateAnimation();
-            return true;
-        }
-        return false;
-    }
-
-
-
     public int getTemperature() {
 
         return temperature;
@@ -179,19 +159,18 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     }
 
 
-
     public boolean extinguish(FireExtinguisher fireExtinguisher) {
         if(fireExtinguisher==null) return false;
         if (damage == 100&&temperature>4000) {
             this.temperature = 4000;
             setAnimation(extinguishedAnimation);
-            fireExtinguisher.useWith(fireExtinguisher);
+            fireExtinguisher.useWith(this);
             return true;
         }
         else return false;
     }
     @Override
-    public void addedToScene(@NotNull Scene scene) {
+    public void addedToScene(Scene scene) {
         super.addedToScene(scene);
         new PerpetualReactorHeating(1).scheduleOn(this);
     }
@@ -206,4 +185,18 @@ public class Reactor extends AbstractActor implements Switchable,Repairable {
     }
 
 
+    public boolean repair(BreakableTool tool) {
+        if(tool == null){
+            return false;
+        }
+        if(tool instanceof Hammer && damage < 100 && damage > 0){
+            this.damage = max(0,this.damage-50);
+            tool.useWith(this);
+            temperature = (damage - 50) * 40 + 2000  > temperature ? temperature : (damage - 50) * 40 + 2000;
+            damage = damage - 50 < 0 ? 0 : damage - 50;
+            updateAnimation();
+            return true;
+        }
+        return false;
+    }
 }

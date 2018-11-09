@@ -2,7 +2,7 @@ package sk.tuke.kpi.oop.game.tools;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Reactor;
 
-public class Hammer extends BreakableTool{
+public class Hammer extends BreakableTool<Reactor>{
     private Animation animation = new Animation("hammer.png",16,16);
 
     public Hammer() {
@@ -11,7 +11,7 @@ public class Hammer extends BreakableTool{
     }
 
     @Override
-    public void useWith(Object actor) {
+    public void useWith(Reactor actor) {
         if(actor == null){
             return;
         }

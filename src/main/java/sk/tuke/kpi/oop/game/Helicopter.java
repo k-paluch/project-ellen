@@ -9,23 +9,24 @@ import sk.tuke.kpi.gamelib.actions.Invoke;
 
 public class Helicopter extends AbstractActor {
     private boolean follow=false;
-    private Animation heli = new Animation("sprites/heli.png", 64, 64, 10);
+    private Animation helicopter = new Animation("sprites/heli.png", 64, 64, 10);
 
     public Helicopter() {
-        setAnimation(heli);
+        setAnimation(helicopter);
     }
 
     public void searchAndDestroy() {
         follow = true;
     }
 
-    public void addedToScene(Scene scene, Invoke invoke, Reactor defLight) {
+    public void addedToScene(Scene scene) {
+        new Loop<>(new Invoke(this::chase)).scheduleOn(this);
         super.addedToScene(scene);
-        new Loop<>(new Invoke(this::kill)).scheduleOn(this);
+
     }
 
 
-    public void kill()
+    public void chase()
     {
         Player player = (Player) getScene().getFirstActorByName("Player");
         int x = this.getPosX(), y = this.getPosY();

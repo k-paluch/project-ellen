@@ -3,7 +3,7 @@ package sk.tuke.kpi.oop.game.tools;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Reactor;
 
-public class FireExtinguisher extends BreakableTool {
+public class FireExtinguisher extends BreakableTool<Reactor> {
     private Animation animation = new Animation("extinguisher.png",16,10);
     public FireExtinguisher(){
         super(1);
@@ -11,7 +11,7 @@ public class FireExtinguisher extends BreakableTool {
     }
 
     @Override
-    public void useWith(Object actor) {
+    public void useWith(Reactor actor) {
         if(actor instanceof Reactor){
             super.useWith(actor);
         }

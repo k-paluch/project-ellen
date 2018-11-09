@@ -1,6 +1,6 @@
 package sk.tuke.kpi.oop.game.tools;
 
 
-public interface Usable<T> {
-    void useWith(T actor);
+public interface Usable<Actor> {
+    void useWith(Actor actor);
 }
