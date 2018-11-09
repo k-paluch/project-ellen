@@ -3,14 +3,13 @@ package sk.tuke.kpi.oop.game;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
-import sk.tuke.kpi.oop.game.tools.BreakableTool;
-import sk.tuke.kpi.oop.game.tools.Wrench;
 
 import java.util.Random;
 
 public class DefectiveLight extends Light implements Repairable {
     private Random random = new Random();
     private boolean is_Powered;
+    private int time = 600;
     private boolean oprava = false;
 
     public DefectiveLight() {
@@ -28,6 +27,7 @@ public class DefectiveLight extends Light implements Repairable {
         super.setPowered(isPowered);
     }
 
+
     private void defLight() {
         if (!oprava && is_Powered) {
             int number = random.nextInt(20);
@@ -37,35 +37,26 @@ public class DefectiveLight extends Light implements Repairable {
         }
         if (oprava) {
             if (is_Powered) {
-                super.turnOn();
-                new Thread(() -> {
-                    long sec = 10;
-                    long startTime = System.currentTimeMillis();
-                    while(true){
-                        long now = System.currentTimeMillis();
-                        if (now - startTime >= sec * 1000) {
-                            break;
-                        }
-                    }
-                    oprava = false;
-                }).start();
-            }
-            else super.turnOff();
-        }
-    }
 
+                this.time--;
+                if (this.time <= 0) {
+                    this.oprava = false;
+                    this.time = 600;
+                } else super.turnOff();
+            }
+        }
+
+
+    }
     @Override
-    public boolean repair(BreakableTool actor) {
-        if (actor == null) return false;
-        if (oprava) {
+    public boolean repair() {
+        if (this.oprava == true) {
             return false;
+        } else {
+            this.oprava = true;
+            this.turnOn();
         }
-        if (actor instanceof Wrench) {
-            actor.useWith(this);
-            oprava = true;
-            return true;
-        }
-        return false;
+        return true;
     }
 
 }
