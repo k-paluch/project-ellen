@@ -46,10 +46,10 @@ public class DefectiveLight extends Light implements Repairable {
 
     }
     public boolean repair() {
-        if (this.oprava) {
+        if (oprava) {
             return false;
         } else {
-            this.oprava = true;
+            oprava = true;
             this.turnOn();
         }
         return true;
