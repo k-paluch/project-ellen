@@ -31,16 +31,20 @@ public class DefectiveLight extends Light implements Repairable {
                 toggle();
             }
         }
+        else{
+            if(powered){
+                setAnimation(light_on);
+            }
+            else setAnimation(light_off);
+
+        }
     }
 
     @Override
     public boolean repair(BreakableTool tool) {
         if(tool instanceof Wrench){
             tool.use();
-            if(powered){
-            setAnimation(light_on);
-            }
-            else setAnimation(light_off);
+
             oprava = true;
             return true;
         }
