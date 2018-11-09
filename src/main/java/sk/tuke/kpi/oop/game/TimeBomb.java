@@ -44,7 +44,6 @@ public class TimeBomb extends AbstractActor {
         }*/
         setAnimation(expl);
 
-        //1000ms na animaciu?
         Objects.requireNonNull(getScene()).removeActor(this);
 
     }
