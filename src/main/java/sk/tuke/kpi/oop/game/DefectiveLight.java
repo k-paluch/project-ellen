@@ -37,7 +37,6 @@ public class DefectiveLight extends Light implements Repairable {
         }
         if (oprava) {
             super.turnOn();
-
             new Thread(() -> {
                 long sec = 10;
                 long startTime = System.currentTimeMillis();

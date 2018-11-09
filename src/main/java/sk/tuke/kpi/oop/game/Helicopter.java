@@ -20,8 +20,9 @@ public class Helicopter extends AbstractActor {
     }
 
     public void addedToScene(Scene scene) {
-        new Loop<>(new Invoke(this::chase)).scheduleOn(this);
         super.addedToScene(scene);
+        new Loop<>(new Invoke(this::chase)).scheduleOn(this);
+
 
     }
 
