@@ -19,8 +19,8 @@ abstract public class BreakableTool extends AbstractActor implements Usable {
 
     @Override
     public void useWith(Object actor) {
-    }
 
+    }
     public void use(){
         if(getRemainingUses()>0) {
             remainingUses--;

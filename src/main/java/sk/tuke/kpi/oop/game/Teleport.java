@@ -9,7 +9,7 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Teleport extends AbstractActor {
     private Teleport blink;
-    private boolean mozno;
+    private boolean maybe;
     private Player ppl;
     private Animation tele = new Animation("sprites/lift.png",48,48,0);
     public Teleport(){
@@ -35,10 +35,10 @@ public class Teleport extends AbstractActor {
         int playerX = ppl.getPosX() + ppl.getWidth()/2;
 
         if(!(x < playerX && x+w > playerX) || !(y < playerY && y+h > playerY))
-            mozno = true;
-        else if(mozno && blink != null){
+            maybe = true;
+        else if(maybe && blink != null){
             teleportPlayer(ppl);
-            blink.mozno = false;
+            blink.maybe = false;
         }
     }
 

@@ -23,7 +23,7 @@ public class ChainBomb extends TimeBomb {
     private void detonate(){
         if(getTime()==50)
             for (Actor actor : getScene()) {
-                if (new Ellipse2D.Float(getPosX(), getPosY(), 50,50).intersects(
+                if (new Ellipse2D.Float(getPosX()+8, getPosY()+8, 50,50).intersects(
                     new Rectangle2D.Float(actor.getPosX(), actor.getPosY(), actor.getAnimation().getWidth(), actor.getAnimation().getHeight())))
                     if (actor instanceof ChainBomb) {
                         ((ChainBomb) actor).activate();

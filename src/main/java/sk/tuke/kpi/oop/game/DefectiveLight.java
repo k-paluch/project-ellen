@@ -12,15 +12,10 @@ import java.util.Random;
 
 public class DefectiveLight extends Light implements Repairable {
     private Random random;
-    private int cas;
     private boolean oprava,powered ;
     private Animation light_off = new Animation("sprites/light_off.png", 16, 16, 10);
     private Animation light_on = new Animation("sprites/light_on.png", 16, 16, 10);
     public DefectiveLight(){
-        super();
-        random = new Random();
-        cas = 0;
-        oprava = false;
     }
 
     public void addedToScene(Scene scene){
@@ -54,9 +49,7 @@ public class DefectiveLight extends Light implements Repairable {
 
     @Override
     public void setPowered(boolean isPowered) {
-        if (reactor.isOn()) {
             powered= true;
             setPowered(isPowered);
-        }
     }
 }
