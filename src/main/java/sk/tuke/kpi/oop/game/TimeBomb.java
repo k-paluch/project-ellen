@@ -11,33 +11,33 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 public class TimeBomb extends AbstractActor {
     private boolean activated;
     private float cas;
-    private Animation nonActiv =new Animation("sprites/bomb.png",16,16,16);
-    private Animation Activ =new Animation("sprites/bomb_activated.png",16,16,10);
-    private Animation expl =new Animation("sprites/small_explosion.png",16,16,50);
+    private Animation nonActiv = new Animation("sprites/bomb.png", 16, 16, 16);
+    private Animation Activ = new Animation("sprites/bomb_activated.png", 16, 16, 10);
+    private Animation expl = new Animation("sprites/small_explosion.png", 16, 16, 50);
 
-    public TimeBomb(float sec){
+    public TimeBomb(float sec) {
         setAnimation(nonActiv);
         activated = false;
-        this.cas=sec;
+        this.cas = sec;
     }
-    public void activate(){
+
+    public void activate() {
         activated = true;
         setAnimation(Activ);
     }
 
-    public boolean isActivated(){
+    public boolean isActivated() {
         return activated;
     }
 
-    public void reaction(){
-        if(isActivated() && cas > 50){
+    public void reaction() {
+        if (isActivated() && cas > 50) {
             setAnimation(Activ);
             cas--;
-        }
-        else if(cas <= 50){
+        } else if (cas <= 50) {
             setAnimation(expl);
             cas--;
-            if(cas == 0)
+            if (cas == 0)
                 getScene().removeActor(this);
         }
     }
@@ -48,7 +48,7 @@ public class TimeBomb extends AbstractActor {
         super.addedToScene(scene);
     }
 
-    public float getTime(){
+    public float getTime() {
         return cas;
     }
 

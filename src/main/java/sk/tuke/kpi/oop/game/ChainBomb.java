@@ -21,14 +21,14 @@ public class ChainBomb extends TimeBomb {
         super.addedToScene(scene);
     }
 
-    private void chainreaction(){
+    private void chainreaction() {
         super.reaction();
-            for (Actor actor : getScene().getActors()) {
-                if (actor instanceof ChainBomb &&  new Ellipse2D.Float(this.getPosX(), this.getPosY(), 50,50).intersects(
-                    new Rectangle2D.Float(actor.getPosX(), actor.getPosY(), actor.getAnimation().getWidth(), actor.getAnimation().getHeight()))) {
-                    ((ChainBomb) actor).activate();
+        for (Actor actor : getScene().getActors()) {
+            if (actor instanceof ChainBomb && new Ellipse2D.Float(this.getPosX(), this.getPosY(), 50, 50).intersects(
+                new Rectangle2D.Float(actor.getPosX(), actor.getPosY(), actor.getAnimation().getWidth(), actor.getAnimation().getHeight()))) {
+                ((ChainBomb) actor).activate();
 
-                }
             }
+        }
     }
 }

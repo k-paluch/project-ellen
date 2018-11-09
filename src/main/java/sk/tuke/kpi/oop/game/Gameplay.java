@@ -4,7 +4,7 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.Scenario;
 
 public class Gameplay extends Scenario {
-    public Gameplay(){
+    public Gameplay() {
 
     }
 
