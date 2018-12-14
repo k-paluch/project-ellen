@@ -48,7 +48,7 @@ public class MissionImpossible implements SceneListener {
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
 
-        Ripley ripley = (Ripley)scene.getFirstActorByName("Ellen");
+        /*Ripley ripley = (Ripley)scene.getFirstActorByName("Ellen");
         MovableController movableController = new MovableController(ripley);
         CollectorController collectorController = new CollectorController(ripley);
         ShooterController shooterController = new ShooterController(ripley);
@@ -58,7 +58,7 @@ public class MissionImpossible implements SceneListener {
         scene.getInput().registerListener(collectorController);
 
         scene.follow(ripley);
-
+*/
         /*
         scene.getMessageBus().subscribe(LockedDoor.opened_door, door -> {
 
@@ -90,7 +90,7 @@ public class MissionImpossible implements SceneListener {
 
     @Override
     public void sceneUpdating(@NotNull Scene scene) {
-        int windowHeight = scene.getGame().getWindowSetup().getHeight();
+       /* int windowHeight = scene.getGame().getWindowSetup().getHeight();
         int topOffset = GameApplication.STATUS_LINE_OFFSET;
         int yTextPos = windowHeight - topOffset;
 
@@ -98,6 +98,6 @@ public class MissionImpossible implements SceneListener {
 
         scene.getGame().pushActorContainer(ripley.getContainer());
         scene.getGame().getOverlay().drawText("| Energy : "+ ripley.getHealth().getValue(), 100, yTextPos);
-        scene.getGame().getOverlay().drawText("| Ammo : "+ ripley.getFirearm().getAmmo(), 260, yTextPos);
+        scene.getGame().getOverlay().drawText("| Ammo : "+ ripley.getFirearm().getAmmo(), 260, yTextPos);*/
     }
 }

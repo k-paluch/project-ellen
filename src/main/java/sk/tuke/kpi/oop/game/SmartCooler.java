@@ -25,6 +25,6 @@ public class SmartCooler extends Cooler {
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
 
-        new Loop<>(new Invoke(this::checkReactorTemp)).scheduleOn(this);
+        new Loop<>(new Invoke<>(this::checkReactorTemp)).scheduleOn(this);
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="38">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="500" columns="20">
+  <image source="tilesets/tileset01.png" width="320" height="400"/>
+ </tileset>
+ <tileset firstgid="501" name="tileset2" tilewidth="16" tileheight="16" tilecount="500" columns="20">
+  <image source="tilesets/tileset02.png" width="320" height="400"/>
+ </tileset>
+ <layer id="2" name="walls" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3VYQqAIAwFYMX7n6JTdYDAY0T0o7AZmz23WT14P+VTkZljCNmo2vHq9rpXjruka1vP+HX3rhbn3WLlojKSO6e9I7rlHjzOSWSmeJQ7R5/8YWevdKXhrqFMtFszerkSz4PbEsQ9o1wqGu9KYmu4lK3lUut/9/2uRVcQZugoEA4AAA==
+  </data>
+ </layer>
+ <layer id="4" name="background" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACr3XyU/UUACA8ddpmAECg7KYAEY2F5YgibKIyoA3VhXQG2pcwCNb4oJHvanc+SO8quiNIzCAcFBIAPUISMLmTfBrlFBrX9vplB5+6aTp60df+zrDbkCIMZ/tYQR5f9WrQjTginqw7zCMGLqd9G7gps9dozmP59Zp9w3e4h3eYxQfHF7TohBiCb3MXZ/651yxdMcxgUlEMeWwu0FzE89pvnDRXcIyvuIbvpscN6owD/ioHOxL4HMQISQq5l3ZPcng79xku4Vt7OCnSTfKeacwretm8zkHuTgu6baK/+0fE6QdQiKSkOzyWZd1E7QGQoF/u0bGNT7DsZ8wazHGqpvNNge5Nl3jGreaKyfdcrZnUWHS7aHxUDK/2rElKEWZrmucl1jvr2aIsc8sunWIoF431urdZ7eOnNA67ehAp8U8H0bX7v5+Zt8XzGNByNfv/vFO3rV2VuisYg0/sC7cX6/TMb9o7GIPgneHgoAi79qtSbMxKZwvFWGk4QiOIh0ZyEQWjll0zejXhX7MCe3diHwUoBBFOIlTOI0zKEYJSmPsyq73HOc5j0pUoRo1uIBaXMQlXEYdIor7Z9lsXCPna0IzWtCKNlzFNVxHOzo87pq5S+Me7uMButHj0TzbeUTnMZ7gKYbi7KbwrKcijDSbd9RLWq/wGsNxdvNpFaAQRZKu7DdxPN1KWlWoRo2k6/X3gjamkVYTmtHi4LvAq24XrVu4jTs+dvto9WMAgy666ar//5dpv1N/A1gVeswQDgAA
+  </data>
+ </layer>
+ <objectgroup id="3" name="actors">
+  <object id="1" name="ellen" type="ripley" x="19.3333" y="19.3333" width="32" height="32"/>
+  <object id="2" name="alien" type="waiting1" x="74" y="76" width="32" height="32"/>
+  <object id="3" name="front door" type="vertical" x="112" y="15.3333" width="16" height="32"/>
+  <object id="4" name="back door" type="horizontal" x="81.3333" y="239.333" width="32" height="16"/>
+  <object id="5" name="alien" type="running" x="432" y="108" width="32" height="32"/>
+  <object id="6" name="alien" type="waiting1" x="88" y="421.333" width="32" height="32"/>
+  <object id="7" name="alien" type="waiting1" x="162.667" y="300.667" width="32" height="32"/>
+  <object id="10" name="alien" type="waiting1" x="322" y="357.333" width="32" height="32"/>
+  <object id="11" name="alien" type="waiting1" x="237.333" y="15.3333" width="32" height="32"/>
+  <object id="12" name="alien" type="waiting1" x="40.6667" y="151.333" width="32" height="32"/>
+  <object id="13" name="ammo" x="203.333" y="238" width="16" height="16"/>
+  <object id="14" name="ammo" x="86" y="26" width="16" height="16"/>
+  <object id="15" name="energy" x="438" y="56.6667" width="16" height="16"/>
+  <object id="16" name="exit door" type="vertical" x="0" y="320" width="16" height="32"/>
+  <object id="17" name="alien mother" type="waiting2" x="63.3333" y="273.333" width="78" height="127"/>
+  <object id="18" name="alien" type="waiting2" x="304" y="416" width="32" height="32"/>
+  <object id="19" name="energy" x="345.333" y="443.333" width="16" height="16"/>
+  <object id="23" name="ammo" x="193.333" y="24" width="16" height="16"/>
+  <object id="24" name="ammo" x="440" y="156.667" width="16" height="16"/>
+  <object id="25" name="energy" x="297.333" y="27.3333" width="16" height="16"/>
+  <object id="26" name="front door" type="vertical" x="416.667" y="191.333" width="16" height="32"/>
+  <object id="27" name="access card" x="32" y="96" width="15.3333" height="14.6667"/>
+  <object id="29" name="access card" x="442.333" y="398.667" width="15.3333" height="14.6667"/>
+  <object id="30" name="alien" type="waiting2" x="216.667" y="72.6667" width="32" height="32"/>
+  <object id="31" name="alien" type="waiting2" x="338.667" y="188" width="32" height="32"/>
+  <object id="32" name="ammo" x="284.667" y="248.667" width="16" height="16"/>
+  <object id="33" name="ammo" x="162.667" y="408.667" width="16" height="16"/>
+  <object id="34" name="ammo" x="20" y="432.667" width="16" height="16"/>
+  <object id="35" name="ammo" x="113.333" y="136.667" width="16" height="16"/>
+  <object id="36" name="energy" x="306.667" y="71.3333" width="16" height="16"/>
+  <object id="37" name="energy" x="203.333" y="189.333" width="16" height="16"/>
+ </objectgroup>
+</map>

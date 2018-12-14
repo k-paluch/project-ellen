@@ -33,7 +33,7 @@ public class DefectiveLight extends Light implements Repairable {
     }
 
     private void startSimulate(){
-        this.lightBlick = new Loop<>(new Invoke(this::simulate)).scheduleOn(this);
+        this.lightBlick = new Loop<>(new Invoke<>(this::simulate)).scheduleOn(this);
     }
 
     @Override
@@ -55,9 +55,9 @@ public class DefectiveLight extends Light implements Repairable {
         }
 
         new ActionSequence<>(
-            new Invoke(this::stopSimulate),
-            new Wait(10),
-            new Invoke(this::startSimulate)
+            new Invoke<>(this::stopSimulate),
+            new Wait<>(10),
+            new Invoke<>(this::startSimulate)
         ).scheduleOn(this);
 
         return true;

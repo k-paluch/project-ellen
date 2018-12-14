@@ -16,17 +16,21 @@ public class Use<T extends AbstractActor> extends AbstractAction<T> {
         this.usable = usable;
     }
 
-    @NotNull
     @Override
-    public Disposable scheduleOn(@NotNull T actor) {
-        this.setActor(actor);
-        return super.scheduleOn(actor);
+    public void execute(float deltaTime) {
+
+        if (this.getActor() != null){
+            System.out.print("Executing Use action !");
+            this.usable.useWith(this.getActor());
+        }
+        this.setDone(true);
     }
 
     public Disposable scheduleOnIntersectingWith(Actor mediatingActor) {
         Scene scene = mediatingActor.getScene();
         if (scene == null) return null;
         Class<T> usingActorClass = usable.getUsingActorClass();
+
         for (Actor actor : scene) {
             if (mediatingActor.intersects(actor) && usingActorClass.isInstance(actor)) {
                 return this.scheduleOn(usingActorClass.cast(actor));
@@ -35,12 +39,11 @@ public class Use<T extends AbstractActor> extends AbstractAction<T> {
         return null;
     }
 
+    @NotNull
     @Override
-    public void execute(float deltaTime) {
-        if (this.getActor() != null){
-            System.out.print("Executing Use action !");
-            this.usable.useWith(this.getActor());
-        }
-        this.setDone(true);
+    public Disposable scheduleOn(@NotNull T actor) {
+
+        this.setActor(actor);
+        return super.scheduleOn(actor);
     }
 }

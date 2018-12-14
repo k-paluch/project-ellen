@@ -16,7 +16,7 @@ public class Shift extends AbstractAction<Keeper<?>> {
 
     @NotNull
     @Override
-    public Disposable scheduleOn(@NotNull Keeper actor) {
+    public Disposable scheduleOn(@NotNull Keeper<?> actor) {
         this.setActor(actor);
         return super.scheduleOn(actor);
     }

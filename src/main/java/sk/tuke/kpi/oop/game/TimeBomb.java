@@ -1,9 +1,6 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.actions.ActionSequence;
-import sk.tuke.kpi.gamelib.actions.Invoke;
-import sk.tuke.kpi.gamelib.actions.Wait;
-import sk.tuke.kpi.gamelib.actions.When;
+import sk.tuke.kpi.gamelib.actions.*;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
@@ -27,14 +24,13 @@ public class TimeBomb extends AbstractActor {
     public boolean isActivated() {
         return activated;
     }
-
     public void activate(){
         this.activated = true;
         setAnimation(this.activatedAnimation);
 
         new ActionSequence<>(
-            new Wait(this.detonationTime),
-            new Invoke(this::explode)
+            new Wait<>(this.detonationTime),
+            new Invoke<>(this::explode)
         ).scheduleOn(this);
 
 
@@ -47,7 +43,7 @@ public class TimeBomb extends AbstractActor {
 
         new When<>(
             (action) -> this.getAnimation().getFrameCount() == this.getAnimation().getCurrentFrameIndex() + 1,
-            new Invoke(() -> {
+            new Invoke<>(() -> {
                 this.getScene().removeActor(this);
             })
         ).scheduleOn(this);

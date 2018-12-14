@@ -12,8 +12,8 @@ public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
 
     private Class<T> takable;
 
-    public Take(Class<T> takableActorsClass) {
-        this.takable = takableActorsClass;
+    public Take(Class<T> takableActor) {
+        this.takable = takableActor;
     }
 
     @Override

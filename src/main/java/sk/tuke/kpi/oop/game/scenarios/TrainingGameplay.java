@@ -47,9 +47,9 @@ public class TrainingGameplay extends Scenario {
         t1.setDestination(t2);
         t2.setDestination(t1);
         new ActionSequence<>(
-            new Wait(5),
-            new Invoke(smartCooler2::turnOn),
-            new Invoke(smartCooler3::turnOn)
+            new Wait<>(5),
+            new Invoke<>(smartCooler2::turnOn),
+            new Invoke<>(smartCooler3::turnOn)
         ).scheduleOn(scene);
     }
 }

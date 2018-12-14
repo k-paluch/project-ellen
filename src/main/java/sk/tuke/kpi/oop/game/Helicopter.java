@@ -12,13 +12,7 @@ public class Helicopter extends AbstractActor {
 
     public Helicopter() {
 
-        setAnimation(new Animation(
-            "sprites/heli.png",
-            64,
-            64,
-            0.02F,
-            Animation.PlayMode.LOOP_PINGPONG
-        ));
+        setAnimation(new Animation("sprites/heli.png", 64, 64, 0.02F, Animation.PlayMode.LOOP_PINGPONG));
     }
 
     private Player getPlayer(){
@@ -40,7 +34,7 @@ public class Helicopter extends AbstractActor {
 
     public void searchAndDestroy(){
 
-        new Loop<>(new Invoke(this::run)).scheduleOn(this);
+        new Loop<>(new Invoke<>(this::run)).scheduleOn(this);
     }
 
     private void run() {

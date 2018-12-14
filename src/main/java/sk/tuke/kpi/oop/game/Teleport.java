@@ -48,7 +48,7 @@ public class Teleport extends AbstractActor {
                 Player player = this.getPlayer();
                 return (this.destination != null) && (!this.zamka) && (this.intersectsWithPlayer(player));
             },
-            new Invoke(() -> {
+            new Invoke<>(() -> {
                 this.destination.teleportPlayer(this.getPlayer());
             })
         )).scheduleOn(this);
@@ -67,7 +67,7 @@ public class Teleport extends AbstractActor {
         this.zamka = true;
         new When<>(
             action -> !this.intersectsWithPlayer(this.getPlayer()),
-            new Invoke(this::deactivateLock)
+            new Invoke<>(this::deactivateLock)
         ).scheduleOn(this);
     }
 
