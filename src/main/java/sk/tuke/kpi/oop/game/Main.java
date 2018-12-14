@@ -15,7 +15,7 @@ public class Main {
         WindowSetup windowSetup = new WindowSetup("Project Ellen", 800, 600);
 
         Game game = new GameApplication(windowSetup);
-        Scene scene = new World("world", "maps/custom-map/custom-map.tmx", new customMap.Factory());
+        Scene scene = new World("world", "maps/map.tmx", new customMap.Factory());
         EscapeRoom missionImpossible = new EscapeRoom();
         scene.addListener(missionImpossible);
         game.addScene(scene);
