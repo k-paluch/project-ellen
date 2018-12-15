@@ -72,8 +72,6 @@ public class map implements SceneListener {
                         return new AlienMother(new RandomlyMoving<>());
                     case "ammo":
                         return new Ammo();
-                    case "super ammo":
-                        return new SuperAmmo();
                     case "dog":
                                 return new Dog(
                                     new Observing<>(
