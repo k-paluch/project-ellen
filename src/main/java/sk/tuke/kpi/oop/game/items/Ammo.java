@@ -13,8 +13,8 @@ public class Ammo<T extends Armed> extends AbstractActor implements Usable<Riple
     }
 
     @Override
-    public Class<Ripley> getUsingActorClass() {
-        return Ripley.class;
+    public Class<Armed> getUsingActorClass() {
+        return Armed.class;
     }
 
     @Override
