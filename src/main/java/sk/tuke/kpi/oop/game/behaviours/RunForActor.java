@@ -22,6 +22,7 @@ public class RunForActor<T extends Movable> implements Behaviour<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void setUp(T actor) {
         if ((actor.getScene() != null)){
             this.runner = (T) actor.getScene().getFirstActorByName("Ellen");
