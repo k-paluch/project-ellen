@@ -1,9 +1,7 @@
 package sk.tuke.kpi.oop.game.controllers;
 
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
-import sk.tuke.kpi.gamelib.framework.actions.Translate;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.actions.Move;

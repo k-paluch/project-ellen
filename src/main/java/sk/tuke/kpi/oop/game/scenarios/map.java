@@ -10,6 +10,7 @@ import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.behaviours.RunForActor;
 import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.AlienMother;
+import sk.tuke.kpi.oop.game.characters.Dog;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.CollectorController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
@@ -17,10 +18,11 @@ import sk.tuke.kpi.oop.game.controllers.ShooterController;
 import sk.tuke.kpi.oop.game.items.AccessCard;
 import sk.tuke.kpi.oop.game.items.Ammo;
 import sk.tuke.kpi.oop.game.items.Energy;
+import sk.tuke.kpi.oop.game.items.SuperAmmo;
 import sk.tuke.kpi.oop.game.openables.Door;
 import sk.tuke.kpi.oop.game.openables.LockedDoor;
 
-public class customMap implements SceneListener {
+public class map implements SceneListener {
     public static class Factory implements ActorFactory {
 
         @Nullable
@@ -71,6 +73,28 @@ public class customMap implements SceneListener {
                         return new AlienMother(new RandomlyMoving<>());
                     case "ammo":
                         return new Ammo();
+                    case"super ammo":
+                        return new SuperAmmo();
+                    case"dog":
+                    case "running":
+                        return new Dog(
+                            new Observing<>(
+                                Alien.ALIEN_TOPIC,
+                                Alien::isEnemy,
+                                new RunForActor<>()
+                            )
+                        );
+                    case "waiting1":
+                    case "waiting2":
+                        return new Dog(
+                            new Observing<>(
+                                Alien.ALIEN_TOPIC,
+                                Alien::isEnemy,
+                                new RunForActor<>()
+                            )
+                        );
+                    default:
+                        return new Dog(new RandomlyMoving<>());
                 }
             }
             return null;
@@ -80,6 +104,7 @@ public class customMap implements SceneListener {
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
         Ripley ripley = (Ripley)scene.getFirstActorByName("Ellen");
+        Dog dogo = (Dog)scene.getFirstActorByName("dogo");
         MovableController movableController = new MovableController(ripley);
         CollectorController collectorController = new CollectorController(ripley);
         ShooterController shooterController = new ShooterController(ripley);

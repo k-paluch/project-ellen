@@ -10,39 +10,41 @@ import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.gamelib.messages.Topic;
-import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
-import sk.tuke.kpi.oop.game.openables.Door;
 
-public class Alien extends AbstractActor implements Movable, Alive, Enemy {
+public class Dog extends AbstractActor implements Movable, Alive,Ally{
 
-
+    private Behaviour<Dog> behaviour;
     private Health health;
     private Disposable drainLoop;
-    private Observing<Alien, ?> observing;
-    private Behaviour<Alien> behaviour;
-    public static final Topic<Alien> ALIEN_TOPIC = Topic.create("alientopic", Alien.class);
+    private Behaviour<Dog> observing;
 
-    public Alien(Behaviour<Alien> behaviour) {
+    public Dog(Behaviour<Dog> behaviour) {
+        super("dogo");
         this.behaviour = behaviour;
-        this.health = new Health(100);
-        setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
+        this.health = new Health(50);
+        setAnimation(new Animation("sprites/dogo.png", 16, 16, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
         this.getAnimation().stop();
     }
 
-    public boolean isEnemy() {
-        return true;
-    }
-
-    public Alien(Observing<Alien ,?> observing) {
-
+    public Dog(Observing<Dog ,Alien> observing) {
+        super("dogo");
         this.observing = observing;
         this.health = new Health(100);
-        setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
+        setAnimation(new Animation("sprites/dogo.png", 16, 16, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
         this.getAnimation().stop();
+    }
+
+    @Override
+    public int getSpeed() {
+        return 2;
+    }
+
+    @Override
+    public Health getHealth() {
+        return health;
     }
 
     @Override
@@ -61,8 +63,8 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
                 new Wait<>(0),
                 new Invoke<>(() ->{
                     for (Actor a : scene.getActors()){
-                        if (a instanceof Alive && !(a instanceof Enemy) && a.intersects(this)){
-                            ((Alive) a).getHealth().drain(1);
+                        if (a instanceof Alive && !(a instanceof Ally) && a.intersects(this)){
+                            ((Alive) a).getHealth().drain(-1);
                         }
                     }
                 })
@@ -77,23 +79,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
     }
 
     @Override
-    public int getSpeed() {
-        return 1;
-    }
-
-    @Override
-    public void startedMoving(Direction direction) {
-        this.getAnimation().play();
-        this.getAnimation().setRotation(direction.getAngle());
-    }
-
-    @Override
     public void stoppedMoving() {
         this.getAnimation().stop();
-    }
-
-    @Override
-    public Health getHealth() {
-        return this.health;
     }
 }

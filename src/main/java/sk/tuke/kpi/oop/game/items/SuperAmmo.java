@@ -4,14 +4,11 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 
-public class Ammo extends AbstractActor implements Usable<Ripley> {
-
-    public Ammo() {
-        super("ammo");
-        setAnimation(new Animation("sprites/ammo.png", 16, 16));
+public class SuperAmmo extends AbstractActor implements Usable<Ripley> {
+    public SuperAmmo() {
+        super("SuperAmmo");
+        setAnimation(new Animation("sprites/bombz.png", 16, 16));
     }
-
-
     @Override
     public Class<Ripley> getUsingActorClass() {
         return Ripley.class;
@@ -19,8 +16,8 @@ public class Ammo extends AbstractActor implements Usable<Ripley> {
 
     @Override
     public void useWith(Ripley actor) {
-        if ((this.getScene() != null) && (actor != null) && (actor.getAmmo() < 500)){
-            actor.setAmmo(actor.getAmmo() + 50);
+        if ((this.getScene() != null) && (actor != null) && (actor.getAmmo() < 1)){
+            actor.setAmmo(actor.getAmmo() + 1);
             this.getScene().removeActor(this);
         }
     }

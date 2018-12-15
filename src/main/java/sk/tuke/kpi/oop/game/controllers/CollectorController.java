@@ -1,7 +1,6 @@
 package sk.tuke.kpi.oop.game.controllers;
 
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.Sys;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
@@ -34,19 +33,15 @@ public class CollectorController implements KeyboardListener {
                 new Shift().scheduleOn(this.actor);
                 break;
             case U:
-
                 Usable<?> usable = this.findFirstUsableActor();
-
                 if (usable == null)
                     break;
                 else
                    new Use(usable).scheduleOnIntersectingWith(this.actor);
-
                 break;
             case B:
                 if (this.actor.getContainer().getSize() > 0){
                     Collectible peek = this.actor.getContainer().peek();
-
                     if (peek instanceof Usable){
                         if (new Use((Usable)peek).scheduleOnIntersectingWith(this.actor) != null){
                             this.actor.getContainer().remove(peek);
