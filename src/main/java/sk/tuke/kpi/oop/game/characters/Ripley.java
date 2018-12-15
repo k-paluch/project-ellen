@@ -14,7 +14,7 @@ import sk.tuke.kpi.oop.game.items.Collectible;
 import sk.tuke.kpi.oop.game.weapons.Firearm;
 import sk.tuke.kpi.oop.game.weapons.Gun;
 
-public class Ripley extends AbstractActor implements Movable, Keeper<Collectible>, Alive, Armed<Gun> {
+public class Ripley extends AbstractActor implements Movable, Keeper<Collectible>, Alive, Armed {
 
     private Backpack backpack;
     private Health health;
