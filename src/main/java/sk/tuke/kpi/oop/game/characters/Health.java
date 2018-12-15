@@ -22,7 +22,7 @@ public class Health {
 
     public Health(int maxLife, int life) {
         this.maxLife = maxLife;
-        this.life = life;
+        this.life = Math.max(maxLife,life);
         this.exhaustionEffects = new HashSet<>();
     }
 
@@ -41,10 +41,7 @@ public class Health {
     }
 
     public void refill(int amount){
-        this.life += (amount);
-        if (life > this.maxLife){
-            this.life = this.maxLife;
-        }
+        this.life = Math.max(this.maxLife,this.life+amount);
     }
 
     public void drain(int amount){

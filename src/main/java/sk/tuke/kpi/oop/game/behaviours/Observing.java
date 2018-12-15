@@ -1,5 +1,6 @@
 package sk.tuke.kpi.oop.game.behaviours;
 
+import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.messages.Topic;
 
@@ -19,7 +20,7 @@ public class Observing<A extends Actor, T> implements Behaviour<A> {
     }
 
     @Override
-    public void setUp(A actor) {
+    public void setUp(@NotNull A actor) {
         if (actor.getScene() == null) {
             return;
         }

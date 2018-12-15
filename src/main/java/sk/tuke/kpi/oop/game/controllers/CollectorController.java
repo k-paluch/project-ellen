@@ -23,7 +23,7 @@ public class CollectorController implements KeyboardListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void keyPressed(@NotNull Input.Key key) {
+    public void keyPressed(Input.Key key) {
 
         switch (key){
             case ENTER:
@@ -48,10 +48,8 @@ public class CollectorController implements KeyboardListener {
             case B:
                 if (this.actor.getContainer().getSize() > 0){
                     Collectible nahladnutie = this.actor.getContainer().peek();
-                    if (nahladnutie instanceof Usable){
-                        if (new Use<>((Usable<Ripley>)(nahladnutie)).scheduleOnIntersectingWith(this.actor) != null){
+                    if ((nahladnutie instanceof Usable)&& (new Use<>((Usable<Ripley>)(nahladnutie)).scheduleOnIntersectingWith(this.actor) != null)){
                             this.actor.getContainer().remove(nahladnutie);
-                        }
                     }
                 }
             default:
