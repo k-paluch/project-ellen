@@ -24,7 +24,7 @@ public class ShooterController implements KeyboardListener {
                 new SuperFire<>().scheduleOn(this.armed);
                 break;
             default:
-                return;
+                break;
         }
     }
 }
