@@ -20,8 +20,8 @@ public class Observing<A extends Actor, T> implements Behaviour<A> {
     }
 
     @Override
-    public void setUp(@NotNull A actor) {
-        if (actor.getScene() == null) {
+    public void setUp(A actor) {
+        if (actor == null) {
             return;
         }
         actor.getScene().getMessageBus().subscribe(this.topic, t -> {
