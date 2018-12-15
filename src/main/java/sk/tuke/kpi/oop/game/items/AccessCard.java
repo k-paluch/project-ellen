@@ -2,7 +2,6 @@ package sk.tuke.kpi.oop.game.items;
 
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.oop.game.openables.Door;
 import sk.tuke.kpi.oop.game.openables.LockedDoor;
 
 public class AccessCard extends AbstractActor implements Collectible, Usable<LockedDoor> {
@@ -20,7 +19,7 @@ public class AccessCard extends AbstractActor implements Collectible, Usable<Loc
 
     @Override
     public void useWith(LockedDoor door) {
-        if ((door.getScene() != null) && (door!=null)){
+        if (door.getScene() != null){
             door.unlock();
             door.open();
             door.getScene().removeActor(this);

@@ -69,17 +69,17 @@ public class Move<T extends Movable> extends AbstractAction<T> {
                     this.getActor().startedMoving(this.direction);
                     this.getActor().getAnimation().setRotation(this.direction.getAngle());
                 }
-                int x = this.getActor().getPosX();
-                int y = this.getActor().getPosY();
-                this.getActor().setPosition(this.getActor().getPosX() + (this.direction.getDx() * this.getActor().getSpeed()), y);
+                int Xpozicia = this.getActor().getPosX();
+                int Ypozicia = this.getActor().getPosY();
+                this.getActor().setPosition(this.getActor().getPosX() + (this.direction.getDx() * this.getActor().getSpeed()), Ypozicia);
                 if (Objects.requireNonNull(this.getActor().getScene()).getMap().intersectsWithWall(this.getActor())){
                     this.actor.collidedWithWall();
-                    this.getActor().setPosition(x, this.getActor().getPosY());
+                    this.getActor().setPosition(Xpozicia, this.getActor().getPosY());
                 }
                 this.getActor().setPosition(this.getActor().getPosX(), this.getActor().getPosY() + (this.direction.getDy() * this.getActor().getSpeed()));
                 if (Objects.requireNonNull(this.getActor().getScene()).getMap().intersectsWithWall(this.getActor())){
                     this.actor.collidedWithWall();
-                    this.getActor().setPosition(this.actor.getPosX(), y);
+                    this.getActor().setPosition(this.actor.getPosX(), Ypozicia);
                 }
                 if (Math.floor(Math.abs(this.trvanie -= deltaTime)) == 0) {
                     this.stop();

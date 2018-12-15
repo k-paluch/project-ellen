@@ -1,5 +1,6 @@
 package sk.tuke.kpi.oop.game.controllers;
 
+import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
 import sk.tuke.kpi.oop.game.Direction;
@@ -11,7 +12,7 @@ import java.util.*;
 public class MovableController implements KeyboardListener {
 
     private Movable movable;
-    private Move move;
+    private Move<Movable> move;
     private Set<Direction> currentDir;
     private Map<Input.Key, Direction> keyDirMap = new HashMap<>();
 
@@ -25,7 +26,7 @@ public class MovableController implements KeyboardListener {
     }
 
     @Override
-    public void keyPressed(Input.Key key) {
+    public void keyPressed(@NotNull Input.Key key) {
         if (this.keyDirMap.containsKey(key)){
             Direction keyDirection = this.keyDirMap.get(key);
             if (this.move != null){
@@ -36,10 +37,10 @@ public class MovableController implements KeyboardListener {
                 for (Direction d : this.currentDir) {
                     combinedDirection = keyDirection.combine(d);
                 }
-                this.move = new Move(combinedDirection, Float.MAX_VALUE);
+                this.move = new Move<>(combinedDirection, Float.MAX_VALUE);
             }
             else {
-                this.move = new Move(keyDirection, Float.MAX_VALUE);
+                this.move = new Move<>(keyDirection, Float.MAX_VALUE);
             }
             this.currentDir.add(keyDirection);
             if (this.movable.getScene() != null){
@@ -49,7 +50,7 @@ public class MovableController implements KeyboardListener {
     }
 
     @Override
-    public void keyReleased(Input.Key key) {
+    public void keyReleased(@NotNull Input.Key key) {
         if ((this.move != null) && (this.keyDirMap.containsKey(key))){
             this.currentDir.remove(this.keyDirMap.get(key));
             if (!this.currentDir.isEmpty()){
@@ -61,7 +62,7 @@ public class MovableController implements KeyboardListener {
                         resultDirection = resultDirection.combine(directions[i]);
                 }
                 this.move.stop();
-                this.move = new Move(resultDirection, Float.MAX_VALUE);
+                this.move = new Move<>(resultDirection, Float.MAX_VALUE);
                 if (this.movable.getScene() != null){
                     this.movable.getScene().scheduleAction(this.move, this.movable);
                 }

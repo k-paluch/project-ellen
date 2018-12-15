@@ -26,7 +26,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable {
         this.temperature = 0;
         this.damage = 0;
         this.isTurnedOn = false;
-        this.devices = new HashSet<EnergyConsumer>();
+        this.devices = new HashSet<>();
         this.offAnimation = new Animation("sprites/reactor.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
         this.normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
         this.hotAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.05f, Animation.PlayMode.LOOP_PINGPONG);

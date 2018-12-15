@@ -15,15 +15,12 @@ public abstract class Firearm {
     }
 
     public void reload(int newAmmo){
-        this.ammo += newAmmo;
-
-        if (this.ammo > this.maxAmmo){
-            this.ammo = this.maxAmmo;
-        }
-
         if (this.ammo < 0){
             this.ammo = 0;
         }
+        this.ammo = Math.max(this.maxAmmo,this.ammo+newAmmo);
+
+
     }
 
     protected abstract Bullet createBullet();
@@ -32,7 +29,6 @@ public abstract class Firearm {
             this.reload(-1);
             return this.createBullet();
         }
-
         return null;
     }
 

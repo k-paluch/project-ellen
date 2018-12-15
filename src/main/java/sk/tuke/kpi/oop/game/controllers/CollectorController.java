@@ -8,13 +8,15 @@ import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.actions.Drop;
 import sk.tuke.kpi.oop.game.actions.Shift;
 import sk.tuke.kpi.oop.game.actions.Take;
-import sk.tuke.kpi.oop.game.actions.Use;
+//import sk.tuke.kpi.oop.game.actions.Use;
+//import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.items.Collectible;
 import sk.tuke.kpi.oop.game.items.Usable;
 
 public class CollectorController implements KeyboardListener {
 
     private Keeper<Collectible> actor;
+
     public CollectorController(Keeper<Collectible> onActor) {
         this.actor = onActor;
     }
@@ -33,27 +35,30 @@ public class CollectorController implements KeyboardListener {
                 new Shift().scheduleOn(this.actor);
                 break;
             case U:
-
+                Collectible nahlad = this.actor.getContainer().peek();
                 Usable<?> usable = this.findFirstUsableActor();
                 if (usable == null)
                     break;
                 else
-                   new Use(usable).scheduleOnIntersectingWith(this.actor);
+                    if(nahlad!= null) {
+                        //new Use<>((Usable<Ripley>)(nahlad)).scheduleOnIntersectingWith(this.actor);
+                    }
                 break;
             case B:
-                if (this.actor.getContainer().getSize() > 0){
-                    Collectible peek = this.actor.getContainer().peek();
-                    if (peek instanceof Usable){
-                        if (new Use((Usable)peek).scheduleOnIntersectingWith(this.actor) != null){
-                            this.actor.getContainer().remove(peek);
+                /*if (this.actor.getContainer().getSize() > 0){
+                    Collectible nahladnutie = this.actor.getContainer().peek();
+                    if (nahladnutie instanceof Usable){
+                        if (new Use<>((Usable<Ripley>)(nahladnutie)).scheduleOnIntersectingWith(this.actor) != null){
+                            this.actor.getContainer().remove(nahladnutie);
                         }
                     }
-                }
+                }*/
             default:
                 break;
         }
     }
-    Usable<?> findFirstUsableActor(){
+
+    private Usable<?> findFirstUsableActor(){
         if (this.actor.getScene() == null) return null;
 
         Class<Usable> findingClass = Usable.class;
@@ -63,7 +68,6 @@ public class CollectorController implements KeyboardListener {
                 return findingClass.cast(a);
             }
         }
-
         return null;
     }
 }

@@ -21,13 +21,13 @@ public class Fire<T extends Actor & Armed> extends AbstractAction<T> {
 
     @Override
     public void execute(float deltaTime) {
-        Actor ammo = this.getActor();
-        if ((ammo != null) && (((Armed) ammo).getFirearm() != null)){
-            Bullet bullet = ((Armed) ammo).getFirearm().fire();
-            if ((ammo.getScene() != null) && (bullet != null)){
-                ammo.getScene().addActor(bullet, ammo.getPosX() - (int)(bullet.getWidth()*bullet.getAnimation().getScale()) / 2 + ammo.getWidth() / 2, ammo.getPosY() - (int)(bullet.getHeight() * (1 - (0.5 * bullet.getAnimation().getScale()))) + (ammo.getHeight() / 2));
-                ammo.getAnimation().setRotation(ammo.getAnimation().getRotation());
-                new Move<>(Direction.fromAngle(ammo.getAnimation().getRotation()), Float.MAX_VALUE).scheduleOn(bullet);
+        Actor municia = this.getActor();
+        if ((municia != null) && (((Armed) municia).getFirearm() != null)){
+            Bullet naboj = ((Armed) municia).getFirearm().fire();
+            if ((municia.getScene() != null) && (naboj != null)){
+                municia.getScene().addActor(naboj, municia.getPosX() - (int)(naboj.getWidth()*naboj.getAnimation().getScale()) / 2 + municia.getWidth() / 2, municia.getPosY() - (int)(naboj.getHeight() * (1 - (0.5 * naboj.getAnimation().getScale()))) + (municia.getHeight() / 2));
+                municia.getAnimation().setRotation(municia.getAnimation().getRotation());
+                new Move<>(Direction.fromAngle(municia.getAnimation().getRotation()), Float.MAX_VALUE).scheduleOn(naboj);
             }
         }
         this.setDone(true);

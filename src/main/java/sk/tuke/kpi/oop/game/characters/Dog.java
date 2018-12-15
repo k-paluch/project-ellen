@@ -61,9 +61,9 @@ public class Dog extends AbstractActor implements Movable, Alive,Ally{
             new ActionSequence<>(
                 new Wait<>(0),
                 new Invoke<>(() ->{
-                    for (Actor a : scene.getActors()){
-                        if (a instanceof Alive && !(a instanceof Ally) && a.intersects(this)){
-                            ((Alive) a).getHealth().drain(-1);
+                    for (Actor aktor : scene.getActors()){
+                        if (aktor instanceof Alive && !(aktor instanceof Ally) && aktor.intersects(this)){
+                            ((Alive) aktor).getHealth().refill(1);
                         }
                     }
                 })

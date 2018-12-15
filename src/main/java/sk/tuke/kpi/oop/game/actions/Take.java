@@ -10,19 +10,19 @@ import sk.tuke.kpi.oop.game.Keeper;
 public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
 
 
-    private Class<T> takable;
+    private Class<T> vzatelne;
 
-    public Take(Class<T> takableActor) {
-        this.takable = takableActor;
+    public Take(Class<T> vzatelnyactor) {
+        this.vzatelne = vzatelnyactor;
     }
 
     @Override
     public void execute(float deltaTime) {
          if ((this.getActor() != null) &&  (this.getActor().getScene() != null) && (this.getActor().getContainer() != null)){
              for (Actor a : this.getActor().getScene().getActors()){
-                 if (this.takable.isInstance(a) && a.intersects(this.getActor())){
+                 if (this.vzatelne.isInstance(a) && a.intersects(this.getActor())){
                      try {
-                         this.getActor().getContainer().add(this.takable.cast(a));
+                         this.getActor().getContainer().add(this.vzatelne.cast(a));
                          this.getActor().getScene().removeActor(a);
                      }
                      catch (IllegalStateException e){

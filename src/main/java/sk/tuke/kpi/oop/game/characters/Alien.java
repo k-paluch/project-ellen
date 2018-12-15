@@ -10,18 +10,16 @@ import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
-import sk.tuke.kpi.oop.game.openables.Door;
 
 public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 
 
     private Health health;
-    private Disposable drainLoop;
+    private Disposable disposable;
     private Observing<Alien, ?> observing;
     private Behaviour<Alien> behaviour;
 
@@ -51,7 +49,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
         this.getHealth().onExhaustion(() -> {
             scene.removeActor(this);
         });
-        this.drainLoop = new Loop<>(
+        this.disposable = new Loop<>(
             new ActionSequence<>(
                 new Wait<>(0),
                 new Invoke<>(() ->{
@@ -68,7 +66,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
     @Override
     public void removedFromScene(@NotNull Scene scene) {
         super.removedFromScene(scene);
-        this.drainLoop.dispose();
+        this.disposable.dispose();
     }
 
     @Override

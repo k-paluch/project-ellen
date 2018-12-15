@@ -13,12 +13,12 @@ import java.util.Random;
 
 public class RandomlyMoving<T extends Movable> implements Behaviour<T> {
 
-    private int[] directionAngles = new int[9];
-    private Disposable move;
+    private int[] uhol = new int[9];
+    private Disposable disposable;
 
     public RandomlyMoving() {
         for (int i = 0, a = 0; a < 360; i++, a += 45){
-            this.directionAngles[i] = a;
+            this.uhol[i] = a;
         }
     }
 
@@ -26,16 +26,13 @@ public class RandomlyMoving<T extends Movable> implements Behaviour<T> {
     public void setUp(T actor) {
 
         if (actor.getScene() != null) {
-            new Loop<T>(
-                new ActionSequence<T>(
-                    new Wait<T>(1),
-                    new Invoke<T>(() -> {
-                        if (this.move != null)
-                            this.move.dispose();
-                        this.move = new Move<T>(
-                            Direction.fromAngle(this.directionAngles[Math.abs(new Random().nextInt(this.directionAngles.length))]),
-                            Float.MAX_VALUE
-                        ).scheduleOn(actor);
+            new Loop<>(
+                new ActionSequence<>(
+                    new Wait<>(1),
+                    new Invoke<>(() -> {
+                        if (this.disposable != null)
+                            this.disposable.dispose();
+                        this.disposable = new Move<>(Direction.fromAngle(this.uhol[Math.abs(new Random().nextInt(this.uhol.length))]), Float.MAX_VALUE).scheduleOn(actor);
                     })
                 )
             ).scheduleOn(actor);

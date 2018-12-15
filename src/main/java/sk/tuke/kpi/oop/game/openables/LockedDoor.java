@@ -5,11 +5,11 @@ import sk.tuke.kpi.gamelib.Scene;
 
 public class LockedDoor extends Door {
 
-    private boolean locked;
+    private boolean zamknute;
 
     public LockedDoor(Orientation orientation) {
         super(orientation);
-        this.locked = false;
+        this.zamknute = false;
     }
 
     @Override
@@ -25,17 +25,17 @@ public class LockedDoor extends Door {
     }
 
     public void lock(){
-        this.locked = true;
+        this.zamknute = true;
         this.close();
     }
 
     public void unlock(){
-        this.locked = false;
+        this.zamknute = false;
         this.open();
     }
 
     public boolean isLocked() {
-        return locked;
+        return zamknute;
     }
 
     @Override

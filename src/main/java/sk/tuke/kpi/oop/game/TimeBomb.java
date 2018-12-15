@@ -4,6 +4,8 @@ import sk.tuke.kpi.gamelib.actions.*;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
+import java.util.Objects;
+
 public class TimeBomb extends AbstractActor {
 
     private boolean activated;
@@ -24,6 +26,7 @@ public class TimeBomb extends AbstractActor {
     public boolean isActivated() {
         return activated;
     }
+
     public void activate(){
         this.activated = true;
         setAnimation(this.activatedAnimation);
@@ -44,7 +47,7 @@ public class TimeBomb extends AbstractActor {
         new When<>(
             (action) -> this.getAnimation().getFrameCount() == this.getAnimation().getCurrentFrameIndex() + 1,
             new Invoke<>(() -> {
-                this.getScene().removeActor(this);
+                Objects.requireNonNull(this.getScene()).removeActor(this);
             })
         ).scheduleOn(this);
     }

@@ -15,11 +15,7 @@ public abstract class SuperFirearm {
     }
 
     public void reload(int newAmmo){
-        this.ammo += newAmmo;
-
-        if (this.ammo > this.maxAmmo){
-            this.ammo = this.maxAmmo;
-        }
+        this.ammo = Math.max(1,this.ammo + newAmmo);
 
         if (this.ammo < 0){
             this.ammo = 0;
@@ -32,7 +28,6 @@ public abstract class SuperFirearm {
             this.reload(-1);
             return this.createSuperBullet();
         }
-
         return null;
     }
 

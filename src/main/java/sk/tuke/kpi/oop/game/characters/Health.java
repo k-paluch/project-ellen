@@ -41,7 +41,7 @@ public class Health {
     }
 
     public void refill(int amount){
-        this.life += Math.abs(amount);
+        this.life += (amount);
         if (life > this.maxLife){
             this.life = this.maxLife;
         }

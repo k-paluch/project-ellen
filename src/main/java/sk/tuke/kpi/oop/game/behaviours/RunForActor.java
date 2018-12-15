@@ -29,10 +29,10 @@ public class RunForActor<T extends Movable> implements Behaviour<T> {
                 return;
             }
             Random r = new Random();
-            new Loop<T>(
+            new Loop<>(
                 new ActionSequence<>(
                     new Wait<>(0),
-                    new Invoke<T>(() -> {
+                    new Invoke<>(() -> {
                         if (r.nextInt() % 2 == 0){
                             return;
                         }

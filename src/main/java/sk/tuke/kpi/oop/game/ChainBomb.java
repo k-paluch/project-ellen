@@ -5,6 +5,7 @@ import sk.tuke.kpi.gamelib.Actor;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
+import java.util.Objects;
 
 public class ChainBomb extends TimeBomb {
 
@@ -18,7 +19,7 @@ public class ChainBomb extends TimeBomb {
         Ellipse2D.Float thisElipse = new Ellipse2D.Float(
             this.getPosX() + ((float)getWidth() / 2) - 50,
             this.getPosY() + ((float)getHeight() / 2) - 50, 50 * 2, 50 * 2);
-        List<Actor> actors = this.getScene().getActors();
+        List<Actor> actors = Objects.requireNonNull(this.getScene()).getActors();
         for (Actor actor: actors) {
            if (actor instanceof ChainBomb){
                Rectangle2D.Float anotherRectangle =

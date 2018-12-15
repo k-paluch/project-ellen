@@ -4,11 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.GameApplication;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
-import sk.tuke.kpi.oop.game.controllers.MovableController;
-import sk.tuke.kpi.oop.game.actions.Take;
 import sk.tuke.kpi.oop.game.characters.Ripley;
-import sk.tuke.kpi.oop.game.controllers.CollectorController;
-import sk.tuke.kpi.oop.game.items.*;
 
 public class FirstSteps implements SceneListener {
 
@@ -23,6 +19,7 @@ public class FirstSteps implements SceneListener {
         int topOffset = GameApplication.STATUS_LINE_OFFSET;
         int yTextPos = windowHeight - topOffset;
         Ripley ripley = (Ripley)scene.getFirstActorByName("Ellen");
+        assert ripley != null;
         scene.getGame().pushActorContainer(ripley.getContainer());
         scene.getGame().getOverlay().drawText("| Energy : "+ ripley.getHealth(), 100, yTextPos);
         scene.getGame().getOverlay().drawText("| Ammo : "+ ripley.getAmmo(), 280, yTextPos);

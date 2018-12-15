@@ -21,9 +21,9 @@ public class Drop extends AbstractAction<Keeper<Collectible>> {
             Collectible first = this.getActor().getContainer().peek();
             if (first != null) {
                 this.getActor().getContainer().remove(first);
-                int playerX = this.getActor().getPosX() + this.getActor().getWidth() / 2;
-                int playerY = this.getActor().getPosY() + this.getActor().getHeight() / 2;
-                this.getActor().getScene().addActor(first, playerX - (first.getWidth() / 2), playerY - (first.getHeight() / 2));
+                int PX = this.getActor().getPosX() + this.getActor().getWidth() / 2;
+                int PY = this.getActor().getPosY() + this.getActor().getHeight() / 2;
+                this.getActor().getScene().addActor(first, PX - (first.getWidth() / 2), PY - (first.getHeight() / 2));
                 this.setDone(true);
             }
         }

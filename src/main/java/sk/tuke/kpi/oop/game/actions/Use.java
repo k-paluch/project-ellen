@@ -26,14 +26,14 @@ public class Use<T extends AbstractActor> extends AbstractAction<T> {
         this.setDone(true);
     }
 
-    public Disposable scheduleOnIntersectingWith(Actor mediatingActor) {
-        Scene scene = mediatingActor.getScene();
+    public Disposable scheduleOnIntersectingWith(Actor pracujuciActor) {
+        Scene scene = pracujuciActor.getScene();
         if (scene == null) return null;
-        Class<T> usingActorClass = usable.getUsingActorClass();
+        Class<T> pouzivanyActor = usable.getUsingActorClass();
 
         for (Actor actor : scene) {
-            if (mediatingActor.intersects(actor) && usingActorClass.isInstance(actor)) {
-                return this.scheduleOn(usingActorClass.cast(actor));
+            if (pracujuciActor.intersects(actor) && pouzivanyActor.isInstance(actor)) {
+                return this.scheduleOn(pouzivanyActor.cast(actor));
             }
         }
         return null;

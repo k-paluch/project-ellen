@@ -99,6 +99,7 @@ public class EscapeRoom implements SceneListener {
         int topOffset = GameApplication.STATUS_LINE_OFFSET;
         int yTextPos = windowHeight - topOffset;
         Ripley ripley = (Ripley)scene.getFirstActorByName("Ellen");
+        assert ripley != null;
         scene.getGame().pushActorContainer(ripley.getContainer());
         scene.getGame().getOverlay().drawText("| Energy : "+ ripley.getHealth().getValue(), 100, yTextPos);
         scene.getGame().getOverlay().drawText("| Ammo : "+ ripley.getFirearm().getAmmo(), 260, yTextPos);
