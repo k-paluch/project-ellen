@@ -5,9 +5,11 @@ public class Gun extends Firearm {
     public Gun(int maxAmmo, int ammo) {
         super(maxAmmo, ammo);
     }
+
     @Override
     protected Bullet createBullet() {
-        return new Bullet();
+        Bullet bullet = new Bullet();
+        return bullet;
     }
 
 

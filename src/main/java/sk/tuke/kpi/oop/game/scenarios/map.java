@@ -61,7 +61,7 @@ public class map implements SceneListener {
                             case "waiting2":
                                 return new Alien(
                                     new Observing<>(
-                                        Door.opened_door,
+                                        Door.DOOR_OPENED,
                                         Door::isOpen,
                                         new RunForActor<>()
                                     )
@@ -78,7 +78,7 @@ public class map implements SceneListener {
                     case "dog":
                                 return new Dog(
                                     new Observing<>(
-                                        Door.opened_door,
+                                        Door.DOOR_OPENED,
                                         Door::isOpen,
                                         new RunForActor<>()
                                     )

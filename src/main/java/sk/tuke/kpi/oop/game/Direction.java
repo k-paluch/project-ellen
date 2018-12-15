@@ -32,7 +32,7 @@ public enum Direction {
                 return SOUTHEAST;
             case 180:
                 return SOUTH;
-            case 125:
+            case 135:
                 return SOUTHWEST;
             case 90:
                 return WEST;
@@ -45,17 +45,15 @@ public enum Direction {
 
 
     public Direction combine(Direction other){
-        int cX = this.getDx() + other.getDx();
-        int cY = this.getDy() + other.getDy();
+        float thisAngle = 0;
+        float otherAngle = 0;
 
-        if ((cX > -2) && (cX < 2) && (cY > -2) && (cY < 2)){
-            for (Direction direction : Direction.values()){
-                if ((direction.getDx() == cX) && (direction.getDy() == cY)){
-                    return direction;
-                }
-            }
+        thisAngle = this.getAngle();
+        otherAngle = other.getAngle();
+
+        if(((thisAngle - otherAngle)<=90 || (otherAngle - thisAngle)>=90)) {
+            return (fromAngle((thisAngle + otherAngle) / 2));
         }
-
         return Direction.NONE;
     }
 
@@ -81,7 +79,7 @@ public enum Direction {
             case SOUTH:
                 return 180;
             case SOUTHWEST:
-                return 125;
+                return 135;
             case WEST:
                 return 90;
             case NORTHWEST:

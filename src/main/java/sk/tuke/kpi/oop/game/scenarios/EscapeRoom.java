@@ -57,7 +57,7 @@ public class EscapeRoom implements SceneListener {
                             case "waiting2":
                                 return new Alien(
                                     new Observing<>(
-                                        Door.opened_door,
+                                        Door.DOOR_OPENED,
                                         Door::isOpen,
                                         new RunForActor<>()
                                     )

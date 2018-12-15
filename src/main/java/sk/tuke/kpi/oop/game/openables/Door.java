@@ -16,8 +16,8 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
     }
 
     private boolean open;
-    public static final Topic<Door> opened_door = Topic.create("door opened", Door.class);
-    public static final Topic<Door> closed_door = Topic.create("door closed", Door.class);
+    public static final Topic<Door> DOOR_OPENED = Topic.create("door opened", Door.class);
+    public static final Topic<Door> DOOR_CLOSED = Topic.create("door closed", Door.class);
 
     public Door(Orientation orientation) {
         super("door");
@@ -81,7 +81,7 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
                 this.getScene().getMap().getTile(doorX + 1, doorY).setType(MapTile.Type.CLEAR);
             }
             this.open = true;
-            this.getScene().getMessageBus().publish(opened_door, this);
+            this.getScene().getMessageBus().publish(DOOR_OPENED, this);
         }
     }
 
@@ -112,7 +112,7 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
                 this.getScene().getMap().getTile(doorX + 1, doorY).setType(MapTile.Type.WALL);
             }
             this.open = false;
-            this.getScene().getMessageBus().publish(closed_door, this);
+            this.getScene().getMessageBus().publish(DOOR_CLOSED, this);
         }
     }
 
