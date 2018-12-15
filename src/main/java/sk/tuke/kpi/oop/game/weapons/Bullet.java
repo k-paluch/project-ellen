@@ -10,7 +10,7 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.characters.Alive;
-import sk.tuke.kpi.oop.game.characters.Enemy;
+//import sk.tuke.kpi.oop.game.characters.Enemy;
 
 public class Bullet extends AbstractActor implements Fireable, Movable {
 
