@@ -1,6 +1,6 @@
 package sk.tuke.kpi.oop.game.controllers;
 
-import org.jetbrains.annotations.NotNull;
+
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
 import sk.tuke.kpi.oop.game.actions.Fire;
@@ -15,7 +15,7 @@ public class ShooterController implements KeyboardListener {
     }
 
     @Override
-    public void keyPressed(@NotNull Input.Key key) {
+    public void keyPressed(Input.Key key) {
         switch (key){
             case SPACE:
             new Fire<>().scheduleOn(this.armed);
@@ -24,7 +24,7 @@ public class ShooterController implements KeyboardListener {
                 new SuperFire<>().scheduleOn(this.armed);
                 break;
             default:
-                break;
+                return;
         }
     }
 }

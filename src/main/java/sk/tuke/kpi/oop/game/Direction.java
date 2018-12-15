@@ -45,15 +45,17 @@ public enum Direction {
 
 
     public Direction combine(Direction other){
-        float thisAngle = 0;
-        float otherAngle = 0;
+        int cX = this.getDx()+other.getDx();
+        int cY = this.getDy()+other.getDy();
 
-        thisAngle = this.getAngle();
-        otherAngle = other.getAngle();
-
-        if(((thisAngle - otherAngle)<=90 || (otherAngle - thisAngle)>=90)) {
-            return (fromAngle((thisAngle + otherAngle) / 2));
+        if ((cX > -2) && (cX < 2) && (cY > -2) && (cY < 2)){
+            for (Direction direction : Direction.values()){
+                if ((direction.getDx() == cX) && (direction.getDy() == cY)){
+                    return direction;
+                }
+            }
         }
+
         return Direction.NONE;
     }
 
