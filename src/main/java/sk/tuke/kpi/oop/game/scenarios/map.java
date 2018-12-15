@@ -48,7 +48,7 @@ public class map implements SceneListener {
                     case "locker":
                         return new Locker();
                     case "alien":
-                        switch (type){
+                        switch (type) {
                             case "running":
                                 return new Alien(
                                     new Observing<>(
@@ -73,28 +73,30 @@ public class map implements SceneListener {
                         return new AlienMother(new RandomlyMoving<>());
                     case "ammo":
                         return new Ammo();
-                    case"super ammo":
+                    case "super ammo":
                         return new SuperAmmo();
-                    case"dog":
-                    case "running":
-                        return new Dog(
-                            new Observing<>(
-                                Alien.ALIEN_TOPIC,
-                                Alien::isEnemy,
-                                new RunForActor<>()
-                            )
-                        );
-                    case "waiting1":
-                    case "waiting2":
-                        return new Dog(
-                            new Observing<>(
-                                Alien.ALIEN_TOPIC,
-                                Alien::isEnemy,
-                                new RunForActor<>()
-                            )
-                        );
-                    default:
-                        return new Dog(new RandomlyMoving<>());
+                    case "dog":
+                        switch (type) {
+                            case "running":
+                                return new Dog(
+                                    new Observing<>(
+                                        Alien.ALIEN_TOPIC,
+                                        Alien::isEnemy,
+                                        new RunForActor<>()
+                                    )
+                                );
+                            case "waiting1":
+                            case "waiting2":
+                                return new Dog(
+                                    new Observing<>(
+                                        Alien.ALIEN_TOPIC,
+                                        Alien::isEnemy,
+                                        new RunForActor<>()
+                                    )
+                                );
+                            default:
+                                return new Dog(new RandomlyMoving<>());
+                        }
                 }
             }
             return null;
