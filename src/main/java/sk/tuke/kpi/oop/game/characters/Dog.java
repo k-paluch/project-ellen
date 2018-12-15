@@ -13,6 +13,7 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
+import sk.tuke.kpi.oop.game.items.Energy;
 
 public class Dog extends AbstractActor implements Movable, Alive,Ally{
 
@@ -63,8 +64,8 @@ public class Dog extends AbstractActor implements Movable, Alive,Ally{
                 new Wait<>(0),
                 new Invoke<>(() ->{
                     for (Actor a : scene.getActors()){
-                        if (a instanceof Alive && !(a instanceof Ally) && a.intersects(this)){
-                            ((Alive) a).getHealth().drain(-1);
+                        if (a instanceof Alive && !(a instanceof Enemy) && a.intersects(this)){
+                            ((Alive) a).getHealth().drain(1);
                         }
                     }
                 })
