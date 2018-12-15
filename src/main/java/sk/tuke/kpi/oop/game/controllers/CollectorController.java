@@ -8,7 +8,6 @@ import sk.tuke.kpi.oop.game.actions.Drop;
 import sk.tuke.kpi.oop.game.actions.Shift;
 import sk.tuke.kpi.oop.game.actions.Take;
 import sk.tuke.kpi.oop.game.actions.Use;
-import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.items.Collectible;
 import sk.tuke.kpi.oop.game.items.Usable;
 
@@ -41,13 +40,13 @@ public class CollectorController implements KeyboardListener {
                     break;
                 else
                     if(nahlad!= null) {
-                        new Use<>((Usable<Ripley>)(nahlad)).scheduleOnIntersectingWith(this.actor);
+                        new Use<>((Usable)(nahlad)).scheduleOnIntersectingWith(this.actor);
                     }
                 break;
             case B:
                 if (this.actor.getContainer().getSize() > 0){
                     Collectible nahladnutie = this.actor.getContainer().peek();
-                    if ((nahladnutie instanceof Usable)&& (new Use<>((Usable<Ripley>)(nahladnutie)).scheduleOnIntersectingWith(this.actor) != null)){
+                    if ((nahladnutie instanceof Usable)&& (new Use<>((Usable)(nahladnutie)).scheduleOnIntersectingWith(this.actor) != null)){
                             this.actor.getContainer().remove(nahladnutie);
                     }
                 }

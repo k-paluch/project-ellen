@@ -11,7 +11,7 @@ public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
 
 
     private Class<T> vzatelne;
-
+    Keeper<T> actor ;
     public Take(Class<T> vzatelnyactor) {
         this.vzatelne = vzatelnyactor;
     }
@@ -42,7 +42,7 @@ public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
 
     @Override
     public void setActor(@Nullable Keeper<T> actor) {
-        super.setActor(actor);
+        this.actor = actor;
     }
 
     @NotNull

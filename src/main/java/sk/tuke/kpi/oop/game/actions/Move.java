@@ -39,10 +39,10 @@ public class Move<T extends Movable> extends AbstractAction<T> {
     }
 
     public void stop(){
-        this.setDone(true);
         if (this.getActor() != null){
             this.getActor().stoppedMoving();
         }
+        this.setDone(true);
     }
 
     @NotNull
@@ -81,10 +81,12 @@ public class Move<T extends Movable> extends AbstractAction<T> {
                     this.actor.collidedWithWall();
                     this.getActor().setPosition(this.actor.getPosX(), Ypozicia);
                 }
-                if (Math.floor(Math.abs(this.trvanie -= deltaTime)) == 0) {
+                double math = Math.floor(Math.abs(this.trvanie -= deltaTime));
+                if ( math == 0) {
                     this.stop();
                 }
             }
         }
+        setDone(true);
     }
 }

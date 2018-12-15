@@ -1,12 +1,13 @@
 package sk.tuke.kpi.oop.game.actions;
 
 import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.items.Collectible;
 
-public class Drop extends AbstractAction<Keeper<Collectible>> {
+public class Drop<T extends Actor> extends AbstractAction<Keeper<Collectible>> {
 
     @NotNull
     @Override
