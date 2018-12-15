@@ -19,10 +19,15 @@ public abstract class Firearm {
     }
 
     public void reload(int newAmmo){
+        this.ammo += newAmmo;
+
         if (this.ammo < 0){
             this.ammo = 0;
         }
-        this.ammo = Math.max(this.maxAmmo,this.ammo+newAmmo);
+
+        if(this.ammo>this.maxAmmo){
+            this.ammo = maxAmmo;
+        }
     }
 
     protected abstract Bullet createBullet();
