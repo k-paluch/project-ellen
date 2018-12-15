@@ -1,6 +1,5 @@
 package sk.tuke.kpi.oop.game.behaviours;
 
-import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.messages.Topic;
 
