@@ -13,7 +13,6 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
-import sk.tuke.kpi.oop.game.items.Energy;
 
 public class Dog extends AbstractActor implements Movable, Alive,Ally{
 

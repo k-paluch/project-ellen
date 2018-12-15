@@ -33,6 +33,7 @@ public class CollectorController implements KeyboardListener {
                 new Shift().scheduleOn(this.actor);
                 break;
             case U:
+
                 Usable<?> usable = this.findFirstUsableActor();
                 if (usable == null)
                     break;

@@ -15,46 +15,6 @@ public class FirstSteps implements SceneListener {
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
 
-
-        /*
-        Ripley ripley = new Ripley();
-        ripley.setEnergy(50);
-        scene.addActor(ripley, 0,0);
-
-        Energy energy = new Energy();
-        scene.addActor(energy, 40,40);
-
-        Ammo ammo = new Ammo();
-        scene.addActor(ammo, 0,40);
-
-        Wrench wrench = new Wrench();
-        scene.addActor(wrench, 30,80);
-
-        FireExtinguisher fireExtinguisher = new FireExtinguisher();
-        scene.addActor(fireExtinguisher, 30,200);
-
-        scene.scheduleAction(new Take<>(Collectible.class), ripley);
-        */
-        /*
-        new When<>(
-            action -> energy.intersects(ripley),
-            new Use<>(energy)
-        ).scheduleOn(ripley);
-
-
-        new When<>(
-            action -> ammo.intersects(ripley),
-            new Use<>(ammo)
-        ).scheduleOn(ripley);
-        */
-
-        /*
-        MovableController movableController = new MovableController(ripley);
-        CollectorController collectorController = new CollectorController(ripley);
-
-        scene.getInput().registerListener(movableController);
-        scene.getInput().registerListener(collectorController);
-        */
     }
 
     @Override
