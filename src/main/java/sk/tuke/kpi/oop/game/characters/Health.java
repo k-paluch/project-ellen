@@ -20,9 +20,9 @@ public class Health {
         this.exhaustionEffects = new HashSet<>();
     }
 
-    public Health(int maxLife, int life) {
+    public Health(int life, int maxLife) {
         this.maxLife = maxLife;
-        this.life = Math.max(maxLife,life);
+        this.life = life;
         this.exhaustionEffects = new HashSet<>();
     }
 
@@ -41,10 +41,16 @@ public class Health {
     }
 
     public void refill(int amount){
-        this.life = Math.max(this.maxLife,this.life+amount);
+        this.life +=amount;
+        if(this.life> this.maxLife){
+            this.life = this.maxLife;
+        }
     }
 
     public void drain(int amount){
+        if(this.life <=0){
+            return;
+        }
         this.life -= Math.abs(amount);
         if (this.life < 0){
             this.life = 0;

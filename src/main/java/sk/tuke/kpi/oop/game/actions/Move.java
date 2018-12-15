@@ -1,16 +1,13 @@
 package sk.tuke.kpi.oop.game.actions;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sk.tuke.kpi.gamelib.Disposable;
-import sk.tuke.kpi.gamelib.Scene;
-import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
+import sk.tuke.kpi.gamelib.actions.Action;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import java.util.Objects;
 
-public class Move<T extends Movable> extends AbstractAction<T> {
-
+public class Move<T extends Movable> implements Action<T> {
+    private boolean done;
     private T actor;
     private Direction direction;
     private float trvanie;
@@ -20,6 +17,7 @@ public class Move<T extends Movable> extends AbstractAction<T> {
         this.direction = direction;
         this.trvanie = trvanie;
         this.temp = true;
+        reset();
     }
 
     @Nullable
@@ -34,29 +32,23 @@ public class Move<T extends Movable> extends AbstractAction<T> {
     }
 
     @Override
+    public boolean isDone() {
+        return done;
+    }
+
+    @Override
     public void reset() {
-        this.setDone(false);
+        done = false;
+        this.temp = true;
     }
 
     public void stop(){
         if (this.getActor() != null){
             this.getActor().stoppedMoving();
         }
-        this.setDone(true);
+        done = true;
     }
 
-    @NotNull
-    @Override
-    public Disposable scheduleOn(@NotNull T actor) {
-        this.setActor(actor);
-        return super.scheduleOn(actor);
-    }
-
-    @NotNull
-    @Override
-    public Disposable scheduleOn(@NotNull Scene scene) {
-        return super.scheduleOn(scene);
-    }
 
     @Override
     public void execute(float deltaTime) {
@@ -67,8 +59,9 @@ public class Move<T extends Movable> extends AbstractAction<T> {
             else {
                 if (this.temp) {
                     this.getActor().startedMoving(this.direction);
-                    this.getActor().getAnimation().setRotation(this.direction.getAngle());
+                    this.temp = false;
                 }
+                this.getActor().getAnimation().setRotation(this.direction.getAngle());
                 int Xpozicia = this.getActor().getPosX();
                 int Ypozicia = this.getActor().getPosY();
                 this.getActor().setPosition(this.getActor().getPosX() + (this.direction.getDx() * this.getActor().getSpeed()), Ypozicia);
@@ -83,10 +76,9 @@ public class Move<T extends Movable> extends AbstractAction<T> {
                 }
                 double math = Math.floor(Math.abs(this.trvanie -= deltaTime));
                 if ( math == 0) {
-                    this.stop();
+                    done=true;
                 }
             }
         }
-        setDone(true);
     }
 }
