@@ -9,7 +9,7 @@ import sk.tuke.kpi.oop.game.characters.Armed;
 import sk.tuke.kpi.oop.game.weapons.Bullet;
 import sk.tuke.kpi.oop.game.weapons.Gun;
 
-public class Fire<T extends Actor & Armed<Gun>> extends AbstractAction<T> {
+public class Fire<T extends Actor & Armed> extends AbstractAction<T> {
     @NotNull
     @Override
     public Disposable scheduleOn(@NotNull T actor) {
