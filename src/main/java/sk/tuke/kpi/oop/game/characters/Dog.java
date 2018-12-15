@@ -22,15 +22,14 @@ public class Dog extends AbstractActor implements Movable, Alive,Ally{
     private Behaviour<Dog> observing;
 
     public Dog(Behaviour<Dog> behaviour) {
-        super("dogo");
         this.behaviour = behaviour;
-        this.health = new Health(50);
+        this.health = new Health(100);
         setAnimation(new Animation("sprites/dogo.png", 16, 16, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
         this.getAnimation().stop();
     }
 
-    public Dog(Observing<Dog ,Alien> observing) {
-        super("dogo");
+    public Dog(Observing<Dog ,?> observing) {
+
         this.observing = observing;
         this.health = new Health(100);
         setAnimation(new Animation("sprites/dogo.png", 16, 16, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
@@ -63,8 +62,8 @@ public class Dog extends AbstractActor implements Movable, Alive,Ally{
                 new Wait<>(0),
                 new Invoke<>(() ->{
                     for (Actor a : scene.getActors()){
-                        if (a instanceof Alive && !(a instanceof Enemy) && a.intersects(this)){
-                            ((Alive) a).getHealth().drain(1);
+                        if (a instanceof Alive && !(a instanceof Ally) && a.intersects(this)){
+                            ((Alive) a).getHealth().drain(-1);
                         }
                     }
                 })

@@ -76,27 +76,13 @@ public class map implements SceneListener {
                     case "super ammo":
                         return new SuperAmmo();
                     case "dog":
-                        switch (type) {
-                            case "running":
                                 return new Dog(
                                     new Observing<>(
-                                        Alien.ALIEN_TOPIC,
-                                        Alien::isEnemy,
+                                        Door.opened_door,
+                                        Door::isOpen,
                                         new RunForActor<>()
                                     )
                                 );
-                            case "waiting1":
-                            case "waiting2":
-                                return new Dog(
-                                    new Observing<>(
-                                        Alien.ALIEN_TOPIC,
-                                        Alien::isEnemy,
-                                        new RunForActor<>()
-                                    )
-                                );
-                            default:
-                                return new Dog(new RandomlyMoving<>());
-                        }
                 }
             }
             return null;
@@ -106,7 +92,6 @@ public class map implements SceneListener {
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
         Ripley ripley = (Ripley)scene.getFirstActorByName("Ellen");
-        Dog dogo = (Dog)scene.getFirstActorByName("dogo");
         MovableController movableController = new MovableController(ripley);
         CollectorController collectorController = new CollectorController(ripley);
         ShooterController shooterController = new ShooterController(ripley);

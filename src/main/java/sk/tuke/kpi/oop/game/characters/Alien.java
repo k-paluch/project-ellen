@@ -24,17 +24,12 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
     private Disposable drainLoop;
     private Observing<Alien, ?> observing;
     private Behaviour<Alien> behaviour;
-    public static final Topic<Alien> ALIEN_TOPIC = Topic.create("alientopic", Alien.class);
 
     public Alien(Behaviour<Alien> behaviour) {
         this.behaviour = behaviour;
         this.health = new Health(100);
         setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
         this.getAnimation().stop();
-    }
-
-    public boolean isEnemy() {
-        return true;
     }
 
     public Alien(Observing<Alien ,?> observing) {

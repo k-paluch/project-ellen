@@ -24,13 +24,14 @@ public class Ripley extends AbstractActor implements Movable, Keeper<Collectible
     private SuperFirearm supergun;
 
     public static final Topic<Ripley> RIPLEY_DIED = Topic.create("ripley died", Ripley.class);
+    public static final Topic<Ripley> RIPLAY_TOPIC = Topic.create("ripley topic", Ripley.class);
 
     public Ripley() {
         super("Ellen");
         this.gun = new Gun(100, 50);
         this.health = new Health(100);
         this.backpack = new Backpack("Ripley's backpack", 10);
-        this.supergun = new SuperGun(1,0);
+        this.supergun = new SuperGun(1,1);
         setAnimation(new Animation("sprites/player.png", 32, 32, 0.1f, Animation.PlayMode.LOOP_PINGPONG));
         this.getAnimation().setRotation(0);
         this.getAnimation().pause();
@@ -40,6 +41,10 @@ public class Ripley extends AbstractActor implements Movable, Keeper<Collectible
         this.setAnimation(new Animation("sprites/player_die.png", 32, 32, 0.1f, Animation.PlayMode.ONCE));
         this.getAnimation().resetToFirstFrame();
         this.getAnimation().play();
+    }
+
+    public boolean isAlly(){
+        return true;
     }
 
     @Override
@@ -55,7 +60,6 @@ public class Ripley extends AbstractActor implements Movable, Keeper<Collectible
         this.health = newHealth;
         return this.health;
     }
-
 
     public int getAmmo() {
         return this.getFirearm().getAmmo();

@@ -16,8 +16,8 @@ public class SuperAmmo extends AbstractActor implements Usable<Ripley> {
 
     @Override
     public void useWith(Ripley actor) {
-        if ((this.getScene() != null) && (actor != null) && (actor.getAmmo() < 1)){
-            actor.setAmmo(actor.getAmmo() + 1);
+        if ((this.getScene() != null) && (actor != null) && (actor.getSuperAmmo() < 1)){
+            actor.setSuperAmmo(actor.getSuperAmmo() + 1);
             this.getScene().removeActor(this);
         }
     }

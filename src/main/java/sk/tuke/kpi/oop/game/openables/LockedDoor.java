@@ -9,7 +9,7 @@ public class LockedDoor extends Door {
 
     public LockedDoor(Orientation orientation) {
         super(orientation);
-        this.locked = true;
+        this.locked = false;
     }
 
     @Override

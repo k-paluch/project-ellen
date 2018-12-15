@@ -20,8 +20,9 @@ public class AccessCard extends AbstractActor implements Collectible, Usable<Loc
 
     @Override
     public void useWith(LockedDoor door) {
-        if ((door.getScene() != null) && (door.isLocked())){
+        if ((door.getScene() != null) && (door!=null)){
             door.unlock();
+            door.open();
             door.getScene().removeActor(this);
         }
     }
