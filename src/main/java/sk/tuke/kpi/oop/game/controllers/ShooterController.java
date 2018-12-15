@@ -17,12 +17,14 @@ public class ShooterController implements KeyboardListener {
     @Override
     public void keyPressed(@NotNull Input.Key key) {
         switch (key){
+            case SPACE:
+            new Fire<>().scheduleOn(this.armed);
+                break;
             case P:
                 new SuperFire<>().scheduleOn(this.armed);
-
-                case SPACE:
-                new Fire<>().scheduleOn(this.armed);
+                break;
             default:
+                return;
         }
     }
 }
