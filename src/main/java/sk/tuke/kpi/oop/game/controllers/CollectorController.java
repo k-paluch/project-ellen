@@ -28,7 +28,7 @@ public class CollectorController implements KeyboardListener {
                 new Take<>(Collectible.class).scheduleOn(this.actor);
                 break;
             case BACKSPACE:
-                new Drop().scheduleOn(this.actor);
+                new Drop<>().scheduleOn(this.actor);
                 break;
             case S:
                 new Shift().scheduleOn(this.actor);

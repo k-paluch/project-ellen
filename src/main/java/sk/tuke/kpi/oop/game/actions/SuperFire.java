@@ -6,9 +6,10 @@ import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.characters.Armed;
+import sk.tuke.kpi.oop.game.weapons.Gun;
 import sk.tuke.kpi.oop.game.weapons.SuperBullet;
 
-public class SuperFire<T extends Actor & Armed> extends AbstractAction<T> {
+public class SuperFire<T extends Actor & Armed<Gun>> extends AbstractAction<T> {
     @NotNull
     @Override
     public Disposable scheduleOn(@NotNull T actor) {
