@@ -17,7 +17,6 @@ public class Move<T extends Movable> implements Action<T> {
         this.direction = direction;
         this.trvanie = trvanie;
         this.temp = true;
-        reset();
     }
 
     @Nullable
@@ -53,10 +52,9 @@ public class Move<T extends Movable> implements Action<T> {
     @Override
     public void execute(float deltaTime) {
         if ((this.getActor() != null)){
-            if (this.isDone()){
+            /*if (this.isDone()){
                 this.getActor().stoppedMoving();
-            }
-            else {
+            }*/
                 if (this.temp) {
                     this.getActor().startedMoving(this.direction);
                     this.temp = false;
@@ -65,20 +63,20 @@ public class Move<T extends Movable> implements Action<T> {
                 int Xpozicia = this.getActor().getPosX();
                 int Ypozicia = this.getActor().getPosY();
                 this.getActor().setPosition(this.getActor().getPosX() + (this.direction.getDx() * this.getActor().getSpeed()), Ypozicia);
-                if (Objects.requireNonNull(this.getActor().getScene()).getMap().intersectsWithWall(this.getActor())){
+                if (Objects.requireNonNull(this.getActor().getScene()).getMap().intersectsWithWall(this.getActor())) {
                     this.actor.collidedWithWall();
                     this.getActor().setPosition(Xpozicia, this.getActor().getPosY());
                 }
                 this.getActor().setPosition(this.getActor().getPosX(), this.getActor().getPosY() + (this.direction.getDy() * this.getActor().getSpeed()));
-                if (Objects.requireNonNull(this.getActor().getScene()).getMap().intersectsWithWall(this.getActor())){
+                if (Objects.requireNonNull(this.getActor().getScene()).getMap().intersectsWithWall(this.getActor())) {
                     this.actor.collidedWithWall();
                     this.getActor().setPosition(this.actor.getPosX(), Ypozicia);
                 }
                 double math = Math.floor(Math.abs(this.trvanie -= deltaTime));
-                if ( math == 0) {
-                    done=true;
+                if (math == 0) {
+                    done = true;
+                    stop();
                 }
-            }
         }
     }
 }
