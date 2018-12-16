@@ -72,10 +72,14 @@ public class Move<T extends Movable> implements Action<T> {
                     this.actor.collidedWithWall();
                     this.getActor().setPosition(this.actor.getPosX(), Ypozicia);
                 }
-                double math = Math.floor(Math.abs(this.trvanie -= deltaTime));
+                trvanie-=deltaTime;
+                if(trvanie <= 1e-5 && !done){
+                    stop();
+                }
+                /*double math = Math.floor(Math.abs(this.trvanie -= deltaTime));
                 if (math == 0) {
                     done = true;
-                }
+                }*/
         }
     }
 }
