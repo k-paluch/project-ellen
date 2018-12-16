@@ -1,5 +1,6 @@
 package sk.tuke.kpi.oop.game.weapons;
 
+
 public class Gun extends Firearm {
 
     public Gun(int ammo, int maxAmmo) {
@@ -7,7 +8,7 @@ public class Gun extends Firearm {
     }
 
     @Override
-    protected Bullet createBullet() {
+    protected Fireable createBullet() {
         return new Bullet();
     }
 

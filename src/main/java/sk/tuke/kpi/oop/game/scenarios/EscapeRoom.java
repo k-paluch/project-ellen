@@ -43,7 +43,7 @@ public class EscapeRoom implements SceneListener {
                         return new Ventilator();
                     case "locker":
                         return new Locker();
-                    case "alien":
+                    /*case "alien":
                         switch (type){
                             case "running":
                                 return new Alien(
@@ -66,7 +66,7 @@ public class EscapeRoom implements SceneListener {
                                 return new Alien(new RandomlyMoving<>());
                         }
                     case "alien mother":
-                        return new AlienMother(new RandomlyMoving<>());
+                        return new AlienMother(new RandomlyMoving<>());*/
                     case "ammo":
                         return new Ammo();
                 }

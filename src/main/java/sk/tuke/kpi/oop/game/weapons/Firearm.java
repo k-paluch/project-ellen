@@ -30,9 +30,9 @@ public abstract class Firearm {
         }
     }
 
-    protected abstract Bullet createBullet();
+    protected abstract Fireable createBullet();
 
-    public Bullet fire(){
+    public Fireable fire(){
         if (this.getAmmo() > 0){
             this.ammo --;
             return this.createBullet();
