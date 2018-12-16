@@ -21,7 +21,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
     private Health health;
     private Disposable disposable;
     private Observing<Alien, ?> observing;
-    private Behaviour<Alien> behaviour;
+    private Behaviour<? super Alien> behaviour;
 
     public Alien(Behaviour<Alien> behaviour) {
         this.behaviour = behaviour;
