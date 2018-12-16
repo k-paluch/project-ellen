@@ -6,10 +6,9 @@ import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.Locker;
 import sk.tuke.kpi.oop.game.Ventilator;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
-import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.behaviours.RunForActor;
-import sk.tuke.kpi.oop.game.behaviours.RunFromActor;
-import sk.tuke.kpi.oop.game.characters.*;
+import sk.tuke.kpi.oop.game.characters.Dog;
+import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.CollectorController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
 import sk.tuke.kpi.oop.game.controllers.ShooterController;
@@ -68,14 +67,6 @@ public class map implements SceneListener {
                         }
                     case "alien mother":
                         return new AlienMother(new RandomlyMoving());*/
-                    case"teacher":
-                        return new Teacher(
-                        new Observing<>(
-                            Door.DOOR_OPENED,
-                            Door::isOpen,
-                            new RunFromActor<>()
-                        )
-                    );
                     case "ammo":
                         return new Ammo();
                     case "dog":

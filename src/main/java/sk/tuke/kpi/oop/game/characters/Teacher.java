@@ -55,7 +55,6 @@ public class Teacher  extends AbstractActor implements Movable, Alive, Enemy {
 
         this.getHealth().onExhaustion(() -> {
             scene.removeActor(this);
-            new Zapocet();
         });
         this.drainLoop = new Loop<>(
             new ActionSequence<>(
