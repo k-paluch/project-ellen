@@ -33,9 +33,9 @@ public class map implements SceneListener {
                     case "energy":
                         return new Energy();
                     case "back door":
-                        return new Door(Door.Orientation.HORIZONTAL);
+                        return new Door(name,Door.Orientation.HORIZONTAL);
                     case "front door":
-                        return new Door(Door.Orientation.VERTICAL);
+                        return new Door(name,Door.Orientation.VERTICAL);
                     case "exit door":
                         return new LockedDoor(LockedDoor.Orientation.VERTICAL);
                     case "access card":

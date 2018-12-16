@@ -16,11 +16,13 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
     }
 
     private boolean open;
+    private String doorname;
     public static final Topic<Door> DOOR_OPENED = Topic.create("door opened", Door.class);
     public static final Topic<Door> DOOR_CLOSED = Topic.create("door closed", Door.class);
 
-    public Door(Orientation orientation) {
+    public Door(String name, Orientation orientation) {
         super("door");
+        this.doorname = name;
         if (orientation == Orientation.HORIZONTAL){
             this.setAnimation(new Animation("sprites/hdoor.png", 32, 16, 0.1f, Animation.PlayMode.ONCE_REVERSED));
         }
@@ -85,7 +87,6 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
 
     @Override
     public void close() {
-
         if (this.getScene() != null) {
             this.getAnimation().setPlayMode(Animation.PlayMode.ONCE_REVERSED);
             this.getAnimation().play();
