@@ -24,7 +24,9 @@ public class RandomlyMoving<T extends Movable> implements Behaviour<T> {
 
    @Override
     public void setUp(T actor) {
-
+        if(actor==null){
+            return;
+        }
         if (actor.getScene() != null) {
             new Loop<>(
                 new ActionSequence<>(
