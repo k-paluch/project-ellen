@@ -6,7 +6,10 @@ import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.Locker;
 import sk.tuke.kpi.oop.game.Ventilator;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
+import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.behaviours.RunForActor;
+import sk.tuke.kpi.oop.game.characters.Alien;
+import sk.tuke.kpi.oop.game.characters.AlienMother;
 import sk.tuke.kpi.oop.game.characters.Dog;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.CollectorController;
@@ -42,7 +45,7 @@ public class map implements SceneListener {
                     case "ventilator":
                         return new Ventilator();
                     case "locker":
-                        return new Locker();/*
+                        return new Locker();
                     case "alien":
                         switch (type) {
                             case "running":
@@ -63,10 +66,10 @@ public class map implements SceneListener {
                                     )
                                 );
                             default:
-                                return new Alien(new RandomlyMoving());
+                                return new Alien(100,new RandomlyMoving());
                         }
                     case "alien mother":
-                        return new AlienMother(new RandomlyMoving());*/
+                        return new AlienMother(1000);
                     case "ammo":
                         return new Ammo();
                     case "dog":
