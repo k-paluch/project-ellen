@@ -23,7 +23,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
     private Observing<Alien, ?> observing;
     private Behaviour<? super Alien> behaviour;
 
-    public Alien(Behaviour<Alien> behaviour) {
+    public Alien(Behaviour behaviour) {
         this.behaviour = behaviour;
         this.health = new Health(100);
         setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));

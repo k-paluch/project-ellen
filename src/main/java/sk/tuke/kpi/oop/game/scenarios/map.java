@@ -66,10 +66,10 @@ public class map implements SceneListener {
                                     )
                                 );
                             default:
-                                return new Alien(new RandomlyMoving<>());
+                                return new Alien(new RandomlyMoving());
                         }
                     case "alien mother":
-                        return new AlienMother(new RandomlyMoving<>());
+                        return new AlienMother(new RandomlyMoving());
                     case "ammo":
                         return new Ammo();
                     case "dog":

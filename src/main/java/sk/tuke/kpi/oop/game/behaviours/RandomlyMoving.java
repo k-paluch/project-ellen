@@ -11,7 +11,7 @@ import sk.tuke.kpi.oop.game.actions.Move;
 
 import java.util.Random;
 
-public class RandomlyMoving<T extends Movable> implements Behaviour<Movable> {
+public class RandomlyMoving implements Behaviour<Movable> {
 
     private int[] uhol = new int[9];
     private Disposable disposable;
