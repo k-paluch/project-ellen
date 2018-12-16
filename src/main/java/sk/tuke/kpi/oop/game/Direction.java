@@ -45,16 +45,40 @@ public enum Direction {
 
 
     public Direction combine(Direction other){
-        int cX = this.getDx()+other.getDx();
-        int cY = this.getDy()+other.getDy();
+        int cX ;
+        int cY ;
 
-        if ((cX > -2) && (cX < 2) && (cY > -2) && (cY < 2)){
+        if((this.getDy()==other.getDy())&&(this.getDx()==other.getDx())){
+            return other;
+        }
+
+        if((this.getDy()==other.getDy())&&(this.getDx()!=other.getDx())){
+            cY=this.getDy();
+            cX=(this.getDx()+other.getDx())/2;
             for (Direction direction : Direction.values()){
                 if ((direction.getDx() == cX) && (direction.getDy() == cY)){
                     return direction;
                 }
             }
         }
+
+        if((this.getDy()!=other.getDy())&&(this.getDx()==other.getDx())){
+            cX=this.getDx();
+            cY=(this.getDy()+other.getDy())/2;
+            for (Direction direction : Direction.values()){
+                if ((direction.getDx() == cX) && (direction.getDy() == cY)){
+                    return direction;
+                }
+            }
+        }
+
+        /*if ((cX > -2) && (cX < 2) && (cY > -2) && (cY < 2)){
+            for (Direction direction : Direction.values()){
+                if ((direction.getDx() == cX) && (direction.getDy() == cY)){
+                    return direction;
+                }
+            }
+        }*/
 
         return Direction.NONE;
     }
