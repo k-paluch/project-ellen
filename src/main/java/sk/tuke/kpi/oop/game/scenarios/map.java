@@ -8,16 +8,14 @@ import sk.tuke.kpi.oop.game.Ventilator;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
 import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.behaviours.RunForActor;
-import sk.tuke.kpi.oop.game.characters.Alien;
-import sk.tuke.kpi.oop.game.characters.AlienMother;
-import sk.tuke.kpi.oop.game.characters.Dog;
-import sk.tuke.kpi.oop.game.characters.Ripley;
+import sk.tuke.kpi.oop.game.characters.*;
 import sk.tuke.kpi.oop.game.controllers.CollectorController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
 import sk.tuke.kpi.oop.game.controllers.ShooterController;
 import sk.tuke.kpi.oop.game.items.AccessCard;
 import sk.tuke.kpi.oop.game.items.Ammo;
 import sk.tuke.kpi.oop.game.items.Energy;
+import sk.tuke.kpi.oop.game.items.Zapocet;
 import sk.tuke.kpi.oop.game.openables.Door;
 import sk.tuke.kpi.oop.game.openables.LockedDoor;
 
@@ -72,6 +70,10 @@ public class map implements SceneListener {
                         return new AlienMother(1000);
                     case "ammo":
                         return new Ammo();
+                    case"teacher":
+                        return new Teacher(100, new RandomlyMoving());
+                    case"zapocet":
+                        new Zapocet();
                     case "dog":
                                 return new Dog(
                                     new Observing<>(

@@ -2,33 +2,75 @@ package sk.tuke.kpi.oop.game.characters;
 
 import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Actor;
-import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.Wait;
+import sk.tuke.kpi.gamelib.actions.While;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
-import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.messages.Topic;
+import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
-import sk.tuke.kpi.oop.game.items.Zapocet;
 
 public class Teacher  extends AbstractActor implements Movable, Alive, Enemy {
 
     public static final Topic<Teacher> TEACHER_TOPIC = Topic.create("teacher topic", Teacher.class);
-    private Behaviour<Teacher> behaviour;
+    private Behaviour<? super Teacher> behaviour;
     private Health health;
-    private Disposable drainLoop;
+    private boolean dead;
 
     public Teacher(Behaviour<Teacher> behaviour) {
         this.behaviour = behaviour;
         this.health = new Health(100);
         setAnimation(new Animation("sprites/teacher.png", 16, 16, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
+        dead=false;
         this.getAnimation().stop();
     }
+    public Teacher(int healthv,Behaviour<? super Teacher> behaviour){
+        setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
+        dead = false;
+        this.behaviour = behaviour;
+        health = new Health(healthv);
+    }
 
+
+    @Override
+    public void addedToScene(@NotNull Scene scene) {
+        super.addedToScene(scene);
+
+        new While<>(action -> true,
+            new ActionSequence<>(
+                new Invoke<>(this::AliveActor),
+                new Wait<>(1)
+            )).scheduleOn(this);
+        getHealth().onExhaustion(()->{
+            scene.getMessageBus().publish(TEACHER_TOPIC, this);
+            scene.removeActor(this);
+        });
+        if (behaviour!=null){
+            behaviour.setUp(this);
+        }
+    }
+
+    public void AliveActor(){
+        Scene scene = getScene();
+        for(Actor actor : scene.getActors()){
+            if(this.intersects(actor)&&(actor instanceof Alive) &&!(actor instanceof Enemy)){
+                ((Alive) actor).getHealth().drain(20);
+            }
+        }
+    }
+
+    @Override
+    public void removedFromScene(@NotNull Scene scene) {
+        super.removedFromScene(scene);
+    }
+
+    public boolean isDead(){
+        return dead;
+    }
 
     @Override
     public int getSpeed() {
@@ -36,49 +78,19 @@ public class Teacher  extends AbstractActor implements Movable, Alive, Enemy {
     }
 
     @Override
-    public Health getHealth() {
-        return health;
-    }
-
-    public void die(){
-        this.setAnimation(new Animation("sprites/player_die.png", 32, 32, 0.1f, Animation.PlayMode.ONCE));
-        this.getAnimation().resetToFirstFrame();
+    public void startedMoving(Direction direction) {
         this.getAnimation().play();
-    }
-
-    @Override
-    public void addedToScene(@NotNull Scene scene) {
-        super.addedToScene(scene);
-        if (this.behaviour != null) {
-            this.behaviour.setUp(this);
-        }
-
-        this.getHealth().onExhaustion(() -> {
-            scene.removeActor(this);
-        });
-        this.drainLoop = new Loop<>(
-            new ActionSequence<>(
-                new Wait<>(0),
-                new Invoke<>(() ->{
-                    for (Actor aktor : scene.getActors()){
-                        if (aktor instanceof Alive && !(aktor instanceof Enemy) && aktor.intersects(this)){
-                            ((Alive) aktor).getHealth().drain(0);
-                        }
-                    }
-                })
-            )
-        ).scheduleOn(scene);
-    }
-
-    @Override
-    public void removedFromScene(@NotNull Scene scene) {
-        super.removedFromScene(scene);
-        this.drainLoop.dispose();
+        this.getAnimation().setRotation(direction.getAngle());
     }
 
     @Override
     public void stoppedMoving() {
         this.getAnimation().stop();
+    }
+
+    @Override
+    public Health getHealth() {
+        return this.health;
     }
 
 }

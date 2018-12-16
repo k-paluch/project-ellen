@@ -21,12 +21,13 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 
     public Alien(Behaviour<Alien> behaviour) {
         setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
+        this.behaviour=behaviour;
         health = new Health(100);
     }
 
-    public Alien(int healthv,Behaviour<? super Alien> behaviur){
+    public Alien(int healthv,Behaviour<? super Alien> behaviour){
         setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
-        this.behaviour = behaviur;
+        this.behaviour = behaviour;
         health = new Health(healthv);
     }
 
@@ -36,7 +37,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 
         new While<>(action -> true,
             new ActionSequence<>(
-                new Invoke<Actor>(this::AliveActor),
+                new Invoke<>(this::AliveActor),
                 new Wait<>(1)
             )).scheduleOn(this);
         getHealth().onExhaustion(()->

@@ -73,7 +73,7 @@ public class Move<T extends Movable> implements Action<T> {
                     this.getActor().setPosition(this.actor.getPosX(), Ypozicia);
                 }
                 trvanie-=deltaTime;
-                if(trvanie <= 0 && !isDone()){
+                if(trvanie <= 1e-5 && !isDone()){
                     stop();
                 }
         }
