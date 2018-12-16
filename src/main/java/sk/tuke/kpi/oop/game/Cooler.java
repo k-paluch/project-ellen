@@ -36,7 +36,7 @@ public class Cooler extends AbstractActor implements Switchable {
 
     public void turnOn(){
         this.isOn = true;
-        setAnimation(this.onAnimation);
+        setAnimation(this.onAnimation); 
     }
 
     public void turnOff(){
