@@ -8,8 +8,7 @@ public class Gun extends Firearm {
 
     @Override
     protected Bullet createBullet() {
-        Bullet bullet = new Bullet();
-        return bullet;
+        return new Bullet();
     }
 
 
