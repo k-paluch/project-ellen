@@ -18,6 +18,7 @@ import sk.tuke.kpi.oop.game.items.AccessCard;
 import sk.tuke.kpi.oop.game.items.Ammo;
 import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.openables.Door;
+import y.option.AbstractItemEditor;
 
 public class EscapeRoom implements SceneListener {
 
@@ -46,16 +47,16 @@ public class EscapeRoom implements SceneListener {
                     case "alien":
                         switch (type){
                             case "running":
-                                return new Alien(
+                                return new Alien(100,
                                     new Observing<>(
                                         World.ACTOR_REMOVED_TOPIC,
-                                        actor -> actor instanceof Ammo,
-                                        new RunForActor<>()
+                                        actor -> true,
+                                        new RandomlyMoving()
                                     )
                                 );
                             case "waiting1":
                             case "waiting2":
-                                return new Alien(
+                                return new Alien(100,
                                     new Observing<>(
                                         Door.DOOR_OPENED,
                                         Door::isOpen,
