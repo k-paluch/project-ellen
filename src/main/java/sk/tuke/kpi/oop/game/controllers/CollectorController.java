@@ -1,5 +1,6 @@
 package sk.tuke.kpi.oop.game.controllers;
 
+import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
@@ -23,7 +24,7 @@ public class CollectorController implements KeyboardListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void keyPressed(Input.Key key) {
+    public void keyPressed(@NotNull Input.Key key) {
 
         switch (key){
             case ENTER:

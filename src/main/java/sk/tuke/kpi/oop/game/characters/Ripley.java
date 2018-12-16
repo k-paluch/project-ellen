@@ -13,19 +13,21 @@ import sk.tuke.kpi.oop.game.items.Backpack;
 import sk.tuke.kpi.oop.game.items.Collectible;
 import sk.tuke.kpi.oop.game.weapons.Firearm;
 import sk.tuke.kpi.oop.game.weapons.Gun;
+import sk.tuke.kpi.oop.game.weapons.SuperFirearm;
+import sk.tuke.kpi.oop.game.weapons.SuperGun;
 
 public class Ripley extends AbstractActor implements Movable, Keeper<Collectible>, Alive, Armed {
 
     private Backpack backpack;
     private Health health;
     private Firearm gun;
-
+    private SuperFirearm supergun;
     public static final Topic<Ripley> RIPLEY_DIED = Topic.create("ripley died", Ripley.class);
-    public static final Topic<Ripley> RIPLAY_TOPIC = Topic.create("ripley topic", Ripley.class);
 
     public Ripley() {
         super("Ellen");
         this.gun = new Gun(100, 50);
+        this.supergun = new SuperGun(1,1);
         this.health = new Health(100);
         this.backpack = new Backpack("Ripley's backpack", 10);
         setAnimation(new Animation("sprites/player.png", 32, 32, 0.1f, Animation.PlayMode.LOOP_PINGPONG));

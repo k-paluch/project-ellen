@@ -1,15 +1,14 @@
 package sk.tuke.kpi.oop.game.weapons;
 
-public abstract class Firearm {
-
+public abstract class SuperFirearm {
     private int maxAmmo;
     private int ammo;
 
-    public Firearm(int ammo){
+    public SuperFirearm(int ammo){
         this.ammo = ammo;
     }
 
-    public Firearm(int ammo, int maxAmmo) {
+    public SuperFirearm(int ammo, int maxAmmo) {
         this.maxAmmo = maxAmmo;
         this.ammo = ammo;
     }
@@ -19,11 +18,19 @@ public abstract class Firearm {
     }
 
     public void reload(int newAmmo){
-        if(newAmmo<maxAmmo){
-            this.ammo+=newAmmo;
+
+        if(this.ammo==maxAmmo){
+            return;
         }
-        if(newAmmo>=maxAmmo){
-            this.ammo = maxAmmo;
+        int help = this.ammo + newAmmo;
+        if (help>this.maxAmmo){
+            this.ammo = this.maxAmmo;
+        }
+        else if (help < 0){
+            this.ammo = 0;
+        }
+        else{
+            this.ammo = help;
         }
     }
 
@@ -36,5 +43,4 @@ public abstract class Firearm {
         }
         return null;
     }
-
 }

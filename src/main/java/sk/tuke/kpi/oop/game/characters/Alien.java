@@ -9,7 +9,6 @@ import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.actions.While;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 
@@ -37,7 +36,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 
         new While<>(action -> true,
             new ActionSequence<>(
-                new Invoke<>(this::AliveActor),
+                new Invoke<>(this::aliveActor),
                 new Wait<>(1)
             )).scheduleOn(this);
         getHealth().onExhaustion(()->
@@ -47,7 +46,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
         }
     }
 
-    public void AliveActor(){
+    public void aliveActor(){
         Scene scene = getScene();
         for(Actor actor : scene.getActors()){
             if(this.intersects(actor)&&(actor instanceof Alive) &&!(actor instanceof Enemy)){
@@ -57,28 +56,12 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
     }
 
     @Override
-    public void removedFromScene(@NotNull Scene scene) {
-        super.removedFromScene(scene);
-    }
-
-    @Override
     public int getSpeed() {
         return 1;
     }
 
     @Override
-    public void startedMoving(Direction direction) {
-        this.getAnimation().play();
-        this.getAnimation().setRotation(direction.getAngle());
-    }
-
-    @Override
-    public void stoppedMoving() {
-        this.getAnimation().stop();
-    }
-
-    @Override
     public Health getHealth() {
-        return this.health;
+        return health;
     }
 }
