@@ -1,6 +1,5 @@
 package sk.tuke.kpi.oop.game.controllers;
 
-import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
