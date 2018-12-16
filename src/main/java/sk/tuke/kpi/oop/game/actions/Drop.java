@@ -5,13 +5,12 @@ import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
-import sk.tuke.kpi.oop.game.items.Collectible;
 
-public class Drop<T extends Actor> extends AbstractAction<Keeper<Collectible>> {
+public class Drop<A extends Actor> extends AbstractAction<Keeper<A>> {
 
     @NotNull
     @Override
-    public Disposable scheduleOn(@NotNull Keeper<Collectible> actor) {
+    public Disposable scheduleOn(@NotNull Keeper<A> actor) {
         this.setActor(actor);
         return super.scheduleOn(actor);
     }
@@ -19,7 +18,7 @@ public class Drop<T extends Actor> extends AbstractAction<Keeper<Collectible>> {
     @Override
     public void execute(float deltaTime) {
         if ((this.getActor().getContainer() != null) && (this.getActor().getScene() != null) && (this.getActor() != null)){
-            Collectible first = this.getActor().getContainer().peek();
+            A first = this.getActor().getContainer().peek();
             if (first != null) {
                 this.getActor().getContainer().remove(first);
                 int PX = this.getActor().getPosX() + this.getActor().getWidth() / 2;
