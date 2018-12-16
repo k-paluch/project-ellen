@@ -42,19 +42,19 @@ public class Move<T extends Movable> implements Action<T> {
     }
 
     public void stop(){
+        done = true;
         if (this.getActor() != null){
             this.getActor().stoppedMoving();
         }
-        done = true;
     }
 
 
     @Override
     public void execute(float deltaTime) {
-        if ((this.getActor() != null)){
-            /*if (this.isDone()){
-                this.getActor().stoppedMoving();
-            }*/
+            if ((this.getActor() != null)){
+                if (this.isDone()){
+                    this.getActor().stoppedMoving();
+                }
                 if (this.temp) {
                     this.getActor().startedMoving(this.direction);
                     this.temp = false;
@@ -75,7 +75,6 @@ public class Move<T extends Movable> implements Action<T> {
                 double math = Math.floor(Math.abs(this.trvanie -= deltaTime));
                 if (math == 0) {
                     done = true;
-                    stop();
                 }
         }
     }

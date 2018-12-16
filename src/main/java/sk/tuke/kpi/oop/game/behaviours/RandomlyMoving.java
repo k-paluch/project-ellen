@@ -28,10 +28,10 @@ public class RandomlyMoving<T extends Movable> implements Behaviour<T> {
             return;
         }
         if (actor.getScene() != null) {
-            new Loop<T>(
-                new ActionSequence<T>(
-                    new Wait<T>(1),
-                    new Invoke<T>(() -> {
+            new Loop<>(
+                new ActionSequence<>(
+                    new Wait<>(1),
+                    new Invoke<>(() -> {
                         if (this.disposable != null)
                             this.disposable.dispose();
                         this.disposable = new Move<>(Direction.fromAngle(this.uhol[Math.abs(new Random().nextInt(this.uhol.length))]), Float.MAX_VALUE).scheduleOn(actor);

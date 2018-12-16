@@ -9,7 +9,7 @@ public abstract class Firearm {
         this.ammo = ammo;
     }
 
-    public Firearm(int maxAmmo, int ammo) {
+    public Firearm(int ammo, int maxAmmo) {
         this.maxAmmo = maxAmmo;
         this.ammo = ammo;
     }
@@ -34,7 +34,7 @@ public abstract class Firearm {
 
     public Bullet fire(){
         if (this.getAmmo() > 0){
-            this.reload(-1);
+            this.ammo --;
             return this.createBullet();
         }
         return null;
