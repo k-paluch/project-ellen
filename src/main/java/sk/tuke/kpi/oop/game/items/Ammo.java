@@ -23,7 +23,7 @@ public class Ammo extends AbstractActor implements Usable<Armed>{
         if(actor==null){
             return;
         }
-        if(this.getScene()!=null && (actor !=null)&(actor.getFirearm().getAmmo()<500)){
+        if(this.getScene() != null){
             actor.getFirearm().reload(50);
             this.getScene().removeActor(this);
         }

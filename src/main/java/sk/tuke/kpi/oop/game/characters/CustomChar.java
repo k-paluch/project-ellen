@@ -13,17 +13,21 @@ import sk.tuke.kpi.oop.game.items.Backpack;
 import sk.tuke.kpi.oop.game.items.Collectible;
 import sk.tuke.kpi.oop.game.weapons.Firearm;
 import sk.tuke.kpi.oop.game.weapons.Gun;
+import sk.tuke.kpi.oop.game.weapons.SuperFirearm;
+import sk.tuke.kpi.oop.game.weapons.SuperGun;
 
-public class Ripley extends AbstractActor implements Movable, Keeper<Collectible>, Alive, Armed {
+public class CustomChar extends AbstractActor implements Movable, Keeper<Collectible>, Alive, Armed {
 
     private Backpack backpack;
     private Health health;
     private Firearm gun;
-    public static final Topic<Ripley> RIPLEY_DIED = Topic.create("ripley died", Ripley.class);
+    private SuperFirearm SuperGun;
+    public static final Topic<CustomChar> CustomChar_DIED = Topic.create("Your char died", CustomChar.class);
 
-    public Ripley() {
+    public CustomChar() {
         super("Ellen");
         this.gun = new Gun(100, 50);
+        this.SuperGun = new SuperGun(1,1);
         this.health = new Health(100);
         this.backpack = new Backpack("Ripley's backpack", 10);
         setAnimation(new Animation("sprites/player.png", 32, 32, 0.1f, Animation.PlayMode.LOOP_PINGPONG));
@@ -45,7 +49,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper<Collectible
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
         this.getHealth().onExhaustion(() -> {
-            scene.getMessageBus().publish(RIPLEY_DIED, this);
+            scene.getMessageBus().publish(CustomChar_DIED, this);
             this.die();
         });
     }

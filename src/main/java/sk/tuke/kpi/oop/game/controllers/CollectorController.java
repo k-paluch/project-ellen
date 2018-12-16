@@ -1,6 +1,7 @@
 package sk.tuke.kpi.oop.game.controllers;
 
 import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Input;
 import sk.tuke.kpi.gamelib.KeyboardListener;
 import sk.tuke.kpi.oop.game.Keeper;
@@ -34,10 +35,11 @@ public class CollectorController implements KeyboardListener {
                 new Shift().scheduleOn(this.actor);
                 break;
             case U:
-                //List<Actor> collectorItems = actor.getScene().getActors();
-                    if (actor.intersects(actor) && actor instanceof Usable) {
-                        new Use<>((Usable<?>) actor).scheduleOnIntersectingWith(actor);
-                    }
+                    Usable<?> usable = this.findFirstUsableActor();
+                    if(usable==null)
+                        break;
+                    else
+                        new Use<>(usable).scheduleOnIntersectingWith(this.actor);
                 break;
             case B:
                 if (this.actor.getContainer().getSize() > 0){
@@ -51,6 +53,16 @@ public class CollectorController implements KeyboardListener {
                 return;
         }
     }
-
-
+    Usable<?> findFirstUsableActor(){
+        if (this.actor.getScene() == null) return null;
+        Class<Usable> findingClass = Usable.class;
+        for (Actor aktor : this.actor.getScene().getActors()){
+            if (findingClass.isInstance(aktor) && aktor.intersects(this.actor)){
+                return findingClass.cast(aktor);
+            }
+            else
+                return null;
+        }
+        return null;
+    }
 }

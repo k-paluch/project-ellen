@@ -71,7 +71,13 @@ public class map implements SceneListener {
                     case "ammo":
                         return new Ammo();
                     case"teacher":
-                        return new Teacher(100, new RandomlyMoving());
+                        return new Teacher(100,
+                            new Observing<>(
+                                Door.DOOR_OPENED,
+                                Door::isOpen,
+                                new RunForActor<>()
+                            )
+                        );
                     case"zapocet":
                         new Zapocet();
                     case "dog":
