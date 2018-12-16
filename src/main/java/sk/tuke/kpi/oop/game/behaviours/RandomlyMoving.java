@@ -11,7 +11,7 @@ import sk.tuke.kpi.oop.game.actions.Move;
 
 import java.util.Random;
 
-public class RandomlyMoving<T extends Movable> implements Behaviour<T> {
+public class RandomlyMoving<T extends Movable> implements Behaviour<Movable> {
 
     private int[] uhol = new int[9];
     private Disposable disposable;
@@ -23,7 +23,7 @@ public class RandomlyMoving<T extends Movable> implements Behaviour<T> {
     }
 
    @Override
-    public void setUp(T actor) {
+    public void setUp(Movable actor) {
         if(actor==null){
             return;
         }
