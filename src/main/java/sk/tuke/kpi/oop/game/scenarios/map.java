@@ -47,7 +47,7 @@ public class map implements SceneListener {
                     case "alien":
                         switch (type) {
                             case "running":
-                                return new Alien(
+                                return new Alien(100,
                                     new Observing<>(
                                         World.ACTOR_REMOVED_TOPIC,
                                         actor -> actor instanceof Ammo,
@@ -56,7 +56,7 @@ public class map implements SceneListener {
                                 );
                             case "waiting1":
                             case "waiting2":
-                                return new Alien(
+                                return new Alien(100,
                                     new Observing<>(
                                         Door.DOOR_OPENED,
                                         Door::isOpen,
