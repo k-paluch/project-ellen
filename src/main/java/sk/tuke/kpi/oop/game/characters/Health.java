@@ -65,6 +65,9 @@ public class Health {
     }
 
     public void exhaust() {
+        if(this.life == 0){
+            return;
+        }
         this.life = 0;
         this.applyObservers();
     }
