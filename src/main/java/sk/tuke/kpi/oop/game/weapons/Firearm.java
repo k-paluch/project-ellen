@@ -9,7 +9,7 @@ public abstract class Firearm {
         this.ammo = ammo;
     }
 
-    public Firearm(int ammo, int maxAmmo) {
+    public Firearm(int maxAmmo, int ammo) {
         this.maxAmmo = maxAmmo;
         this.ammo = ammo;
     }
