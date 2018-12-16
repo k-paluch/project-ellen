@@ -21,13 +21,13 @@ public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
          if ((this.getActor() != null) &&  (this.getActor().getScene() != null) && (this.getActor().getContainer() != null)){
              for (Actor a : this.getActor().getScene().getActors()){
                  if (this.vzatelne.isInstance(a) && a.intersects(this.getActor())){
-                     try {
+                     /*try {*/
                          this.getActor().getContainer().add(this.vzatelne.cast(a));
                          this.getActor().getScene().removeActor(a);
-                     }
+                     /*}
                      catch (IllegalStateException e){
                          this.getActor().getScene().getOverlay().drawText(e.getMessage(), 0, 50).showFor(2);
-                     }
+                     }*/
                  }
              }
          }
