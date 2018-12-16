@@ -1,17 +1,17 @@
 package sk.tuke.kpi.oop.game.actions;
 
 import org.jetbrains.annotations.NotNull;
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Disposable;
+import sk.tuke.kpi.gamelib.actions.Action;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.characters.Armed;
 import sk.tuke.kpi.oop.game.weapons.Bullet;
 
-public class Fire<T extends Actor & Armed> extends AbstractAction<T> {
+public class Fire<A extends Armed> extends AbstractAction<A> implements Action<A> {
     @NotNull
     @Override
-    public Disposable scheduleOn(@NotNull T actor) {
+    public Disposable scheduleOn(@NotNull A actor) {
         if (actor.getScene() != null) {
             this.setActor(actor);
             return super.scheduleOn(actor);
