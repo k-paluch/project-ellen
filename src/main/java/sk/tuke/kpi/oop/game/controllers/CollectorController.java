@@ -23,7 +23,7 @@ public class CollectorController implements KeyboardListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void keyPressed(@NotNull Input.Key key) {
+    public void keyPressed(Input.Key key) {
         switch (key){
             case ENTER:
                 new Take<>(Collectible.class).scheduleOn(this.actor);
