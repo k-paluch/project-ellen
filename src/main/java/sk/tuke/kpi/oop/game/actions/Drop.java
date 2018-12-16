@@ -17,6 +17,10 @@ public class Drop<A extends Actor> extends AbstractAction<Keeper<A>> {
 
     @Override
     public void execute(float deltaTime) {
+        if(this.getActor()==null){
+            this.setDone(true);
+            return;
+        }
         if ((this.getActor().getContainer() != null) && (this.getActor().getScene() != null) && (this.getActor() != null)){
             A first = this.getActor().getContainer().peek();
             if (first != null) {

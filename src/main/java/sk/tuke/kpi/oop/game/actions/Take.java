@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Disposable;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
 
@@ -18,20 +19,21 @@ public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
 
     @Override
     public void execute(float deltaTime) {
-         if ((this.getActor() != null) &&  (this.getActor().getScene() != null) && (this.getActor().getContainer() != null)){
-             for (Actor a : this.getActor().getScene().getActors()){
-                 if (actor.intersects(actor) && vzatelne.isInstance(actor) && actor.getContainer().getCapacity() != actor.getContainer().getSize()){
-                     /*try {*/
-                         this.getActor().getContainer().add(this.vzatelne.cast(a));
-                         this.getActor().getScene().removeActor(a);
-                     /*}
-                     catch (IllegalStateException e){
-                         this.getActor().getScene().getOverlay().drawText(e.getMessage(), 0, 50).showFor(2);
-                     }*/
-                 }
-             }
-         }
-         this.setDone(true);
+        Keeper<T> ripley = getActor();
+        if(ripley != null) {
+            Scene scene = ripley.getScene();
+            try {
+                for (Actor item : scene.getActors()) {
+                    if (ripley.intersects(item) && vzatelne.isInstance(item) && actor.getContainer().getCapacity() != actor.getContainer().getSize()) {
+                        actor.getContainer().add(vzatelne.cast(item));
+                        scene.removeActor(item);
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("Backpack is full");
+            }
+        }
+        setDone(true);
     }
 
     @Nullable

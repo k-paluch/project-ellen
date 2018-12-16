@@ -19,6 +19,9 @@ public abstract class Firearm {
     }
 
     public void reload(int newAmmo){
+        if(this.ammo==maxAmmo){
+            return;
+        }
         this.ammo += newAmmo;
 
         if (this.ammo < 0){
