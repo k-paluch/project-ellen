@@ -16,7 +16,7 @@ public class RandomlyMoving<T extends Movable> implements Behaviour<T> {
     private int[] uhol = new int[9];
     private Disposable disposable;
 
-    public RandomlyMoving() {
+    public RandomlyMoving(T Movable) {
         for (int i = 0, a = 0; a < 360; i++, a += 45){
             this.uhol[i] = a;
         }
