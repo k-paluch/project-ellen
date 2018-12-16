@@ -11,12 +11,11 @@ public class Move<T extends Movable> implements Action<T> {
     private T actor;
     private Direction direction;
     private float trvanie;
-    private boolean temp;
+    private boolean temp=true;
 
     public Move(Direction direction, float trvanie) {
         this.direction = direction;
         this.trvanie = trvanie;
-        this.temp = true;
     }
 
     @Nullable

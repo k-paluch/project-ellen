@@ -13,7 +13,7 @@ public abstract class SuperFirearm {
         this.ammo = ammo;
     }
 
-    public int getAmmo(){
+    public int getSuperAmmo(){
         return this.ammo;
     }
 
@@ -34,12 +34,12 @@ public abstract class SuperFirearm {
         }
     }
 
-    protected abstract Fireable createBullet();
+    protected abstract Fireable createSuperBullet();
 
     public Fireable fire(){
-        if (this.getAmmo() > 0){
+        if (this.getSuperAmmo() > 0){
             this.ammo --;
-            return this.createBullet();
+            return this.createSuperBullet();
         }
         return null;
     }

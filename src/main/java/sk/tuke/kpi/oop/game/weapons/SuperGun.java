@@ -6,7 +6,7 @@ public class SuperGun extends SuperFirearm {
     }
 
     @Override
-    protected Fireable createBullet() {
+    protected Fireable createSuperBullet() {
         return null;
     }
 }
