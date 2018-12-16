@@ -3,6 +3,7 @@ package sk.tuke.kpi.oop.game.actions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.Actor;
+import sk.tuke.kpi.gamelib.ActorContainer;
 import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
@@ -18,14 +19,15 @@ public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
     }
 
     @Override
-    public void execute(float deltaTime) {
+    public void execute(float deltaTime){
         Keeper<T> ripley = getActor();
         if(ripley != null) {
             Scene scene = ripley.getScene();
+            ActorContainer<T> backpack = ripley.getContainer();
             try {
                 for (Actor item : scene.getActors()) {
-                    if (ripley.intersects(item) && vzatelne.isInstance(item) && actor.getContainer().getCapacity() != actor.getContainer().getSize()) {
-                        actor.getContainer().add(vzatelne.cast(item));
+                    if (ripley.intersects(item) && vzatelne.isInstance(item) && backpack.getCapacity() != backpack.getSize()) {
+                        backpack.add(vzatelne.cast(item));
                         scene.removeActor(item);
                     }
                 }

@@ -73,13 +73,9 @@ public class Move<T extends Movable> implements Action<T> {
                     this.getActor().setPosition(this.actor.getPosX(), Ypozicia);
                 }
                 trvanie-=deltaTime;
-                if(trvanie <= 1e-5 && !done){
+                if(trvanie <= 0 && !isDone()){
                     stop();
                 }
-                /*double math = Math.floor(Math.abs(this.trvanie -= deltaTime));
-                if (math == 0) {
-                    done = true;
-                }*/
         }
     }
 }

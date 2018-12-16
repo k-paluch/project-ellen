@@ -50,21 +50,10 @@ public class CollectorController implements KeyboardListener {
                             this.actor.getContainer().remove(nahladnutie);
                     }
                 }
+                break;
             default:
                 return;
         }
     }
 
-    private Usable<?> findFirstUsableActor(){
-        if (this.actor.getScene() == null) return null;
-
-        Class<Usable> findingClass = Usable.class;
-
-        for (Actor a : this.actor.getScene().getActors()){
-            if (findingClass.isInstance(a) && a.intersects(this.actor)){
-                return findingClass.cast(a);
-            }
-        }
-        return null;
-    }
 }

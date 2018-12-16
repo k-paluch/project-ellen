@@ -19,17 +19,19 @@ public abstract class Firearm {
     }
 
     public void reload(int newAmmo){
+
         if(this.ammo==maxAmmo){
             return;
         }
-        this.ammo += newAmmo;
-
-        if (this.ammo < 0){
+        int help = this.ammo + newAmmo;
+        if (help>this.maxAmmo){
+            this.ammo = this.maxAmmo;
+        }
+        else if (help < 0){
             this.ammo = 0;
         }
-
-        if(this.ammo>this.maxAmmo){
-            this.ammo = maxAmmo;
+        else{
+            this.ammo = help;
         }
     }
 
