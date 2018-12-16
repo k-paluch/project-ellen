@@ -30,9 +30,7 @@ public class Backpack implements ActorContainer<Collectible> {
     @NotNull
     @Override
     public List<Collectible> getContent() {
-        List<Collectible> sub = new ArrayList<>();
-        sub = getContent();
-        return sub;
+        return this.content.subList(0, (getSize())+1);
     }
 
     @Override
