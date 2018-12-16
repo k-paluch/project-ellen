@@ -24,5 +24,4 @@ public class Zapocet extends AbstractActor implements Collectible, Usable<Locked
             door.getScene().removeActor(this);
         }
     }
-
 }

@@ -13,16 +13,14 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
-import sk.tuke.kpi.oop.game.behaviours.Observing;
 import sk.tuke.kpi.oop.game.items.Zapocet;
 
 public class Teacher  extends AbstractActor implements Movable, Alive, Enemy {
 
-    public static final Topic<Teacher> TEACHER_TOPIC = Topic.create("teacher died", Teacher.class);
+    public static final Topic<Teacher> TEACHER_TOPIC = Topic.create("teacher topic", Teacher.class);
     private Behaviour<Teacher> behaviour;
     private Health health;
     private Disposable drainLoop;
-    private Behaviour<Teacher> observing;
 
     public Teacher(Behaviour<Teacher> behaviour) {
         this.behaviour = behaviour;
@@ -31,13 +29,6 @@ public class Teacher  extends AbstractActor implements Movable, Alive, Enemy {
         this.getAnimation().stop();
     }
 
-    public Teacher(Observing<Teacher ,?> observing) {
-
-        this.observing = observing;
-        this.health = new Health(100);
-        setAnimation(new Animation("sprites/teacher.png", 16, 16, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
-        this.getAnimation().stop();
-    }
 
     @Override
     public int getSpeed() {
@@ -58,10 +49,9 @@ public class Teacher  extends AbstractActor implements Movable, Alive, Enemy {
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
-        if (this.observing != null)
-            this.observing.setUp(this);
-        else if (this.behaviour != null)
+        if (this.behaviour != null) {
             this.behaviour.setUp(this);
+        }
 
         this.getHealth().onExhaustion(() -> {
             scene.removeActor(this);

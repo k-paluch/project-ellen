@@ -12,7 +12,6 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.behaviours.Behaviour;
-import sk.tuke.kpi.oop.game.behaviours.Observing;
 
 public class Dog extends AbstractActor implements Movable, Alive,Ally{
 
@@ -28,13 +27,6 @@ public class Dog extends AbstractActor implements Movable, Alive,Ally{
         this.getAnimation().stop();
     }
 
-    public Dog(Observing<Dog ,?> observing) {
-
-        this.observing = observing;
-        this.health = new Health(100);
-        setAnimation(new Animation("sprites/dogo.png", 16, 16, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
-        this.getAnimation().stop();
-    }
 
     @Override
     public int getSpeed() {
@@ -49,9 +41,7 @@ public class Dog extends AbstractActor implements Movable, Alive,Ally{
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
-        if (this.observing != null)
-            this.observing.setUp(this);
-        else if (this.behaviour != null)
+        if (this.behaviour != null)
             this.behaviour.setUp(this);
 
         this.getHealth().onExhaustion(() -> {

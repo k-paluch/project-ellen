@@ -19,11 +19,11 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 
 
     private Health health;
-    private Disposable disposable;
+    private Disposable drainLoop;
     private Observing<Alien, ?> observing;
     private Behaviour<? super Alien> behaviour;
 
-    public Alien(Behaviour behaviour) {
+    public Alien(Behaviour<Alien> behaviour) {
         this.behaviour = behaviour;
         this.health = new Health(100);
         setAnimation(new Animation("sprites/alien.png", 32, 32, 0.1F, Animation.PlayMode.LOOP_PINGPONG));
@@ -49,7 +49,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
         this.getHealth().onExhaustion(() -> {
             scene.removeActor(this);
         });
-        this.disposable = new Loop<>(
+        this.drainLoop = new Loop<>(
             new ActionSequence<>(
                 new Wait<>(0),
                 new Invoke<>(() ->{
@@ -66,7 +66,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
     @Override
     public void removedFromScene(@NotNull Scene scene) {
         super.removedFromScene(scene);
-        this.disposable.dispose();
+        this.drainLoop.dispose();
     }
 
     @Override

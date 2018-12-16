@@ -45,27 +45,27 @@ public enum Direction {
 
 
     public Direction combine(Direction other){
-        int cX = this.getDx()+other.getDx();
-        int cY = this.getDy()+other.getDy();
+        int newX = this.getDx()+other.getDx();
+        int newY = this.getDy()+other.getDy();
 
-        if (cX > 1) {
-            cX = 1;
+        if (newX > 1) {
+            newX = 1;
         }
 
-        if (cX < -1) {
-            cX = -1;
+        if (newX < -1) {
+            newX = -1;
         }
 
-        if (cY > 1) {
-            cY = 1;
+        if (newY > 1) {
+            newY = 1;
         }
 
-        if (cY < -1) {
-            cY = -1;
+        if (newY < -1) {
+            newY = -1;
         }
 
             for (Direction direction : Direction.values()){
-                if ((direction.getDx() == cX) && (direction.getDy() == cY)){
+                if ((direction.getDx() == newX) && (direction.getDy() == newY)){
                     return direction;
                 }
         }
