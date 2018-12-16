@@ -11,6 +11,8 @@ import sk.tuke.kpi.oop.game.actions.Use;
 import sk.tuke.kpi.oop.game.items.Collectible;
 import sk.tuke.kpi.oop.game.items.Usable;
 
+import java.util.List;
+
 public class CollectorController implements KeyboardListener {
 
     private Keeper<Collectible> actor;
@@ -28,20 +30,26 @@ public class CollectorController implements KeyboardListener {
                 new Take<>(Collectible.class).scheduleOn(this.actor);
                 break;
             case BACKSPACE:
-                new Drop<>().scheduleOn(this.actor);
+                new Drop<Collectible>().scheduleOn(actor);
                 break;
             case S:
                 new Shift().scheduleOn(this.actor);
                 break;
             case U:
-                Collectible nahlad = this.actor.getContainer().peek();
+                /*Collectible nahlad = this.actor.getContainer().peek();
                 Usable<?> usable = this.findFirstUsableActor();
                 if (usable == null)
                     break;
                 else
                     if(nahlad!= null) {
                         new Use<>((Usable)(nahlad)).scheduleOnIntersectingWith(this.actor);
+                    }*/
+                List<Actor> collectorItems = actor.getScene().getActors();
+                for (Actor actor : collectorItems) {
+                    if (actor.intersects(actor) && actor instanceof Usable) {
+                        new Use<>((Usable<?>) actor).scheduleOnIntersectingWith(actor);
                     }
+                }
                 break;
             case B:
                 if (this.actor.getContainer().getSize() > 0){
