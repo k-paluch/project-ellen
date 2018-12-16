@@ -48,16 +48,26 @@ public enum Direction {
         int cX = this.getDx()+other.getDx();
         int cY = this.getDy()+other.getDy();
 
-        if((this.getDy()==other.getDy())&&(this.getDx()==other.getDx())){
-            return other;
+        if (cX > 1) {
+            cX = 1;
         }
 
-        if ((cX > -2) && (cX < 2) && (cY > -2) && (cY < 2)){
+        if (cX < -1) {
+            cX = -1;
+        }
+
+        if (cY > 1) {
+            cY = 1;
+        }
+
+        if (cY < -1) {
+            cY = -1;
+        }
+
             for (Direction direction : Direction.values()){
                 if ((direction.getDx() == cX) && (direction.getDy() == cY)){
                     return direction;
                 }
-            }
         }
 
         return Direction.NONE;
