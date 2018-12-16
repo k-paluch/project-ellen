@@ -29,7 +29,6 @@ public class Use<T extends Actor> extends AbstractAction<T> {
         Scene scene = pracujuciActor.getScene();
         if (scene == null) return null;
         Class<T> pouzivanyActor = usable.getUsingActorClass();
-
         for (Actor actor : scene) {
             if (pracujuciActor.intersects(actor) && pouzivanyActor.isInstance(actor)) {
                 return this.scheduleOn(pouzivanyActor.cast(actor));

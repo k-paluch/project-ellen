@@ -35,9 +35,7 @@ public class CollectorController implements KeyboardListener {
                 break;
             case U:
                     Usable<?> usable = this.findFirstUsableActor();
-                    if(usable==null)
-                        break;
-                    else
+                    if(usable!=null)
                         new Use<>(usable).scheduleOnIntersectingWith(this.actor);
                 break;
             case B:
@@ -52,6 +50,7 @@ public class CollectorController implements KeyboardListener {
                 return;
         }
     }
+
     Usable<?> findFirstUsableActor(){
         if (this.actor.getScene() == null) return null;
         Class<Usable> findingClass = Usable.class;
@@ -59,8 +58,6 @@ public class CollectorController implements KeyboardListener {
             if (findingClass.isInstance(aktor) && aktor.intersects(this.actor)){
                 return findingClass.cast(aktor);
             }
-            else
-                return null;
         }
         return null;
     }

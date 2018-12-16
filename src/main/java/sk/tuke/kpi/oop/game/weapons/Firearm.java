@@ -7,6 +7,7 @@ public abstract class Firearm {
 
     public Firearm(int ammo){
         this.ammo = ammo;
+        this.maxAmmo = ammo;
     }
 
     public Firearm(int ammo, int maxAmmo) {

@@ -51,7 +51,6 @@ public class Move<T extends Movable> implements Action<T> {
     @Override
     public void execute(float deltaTime) {
             if ((this.getActor() != null)){
-
                 if (this.temp) {
                     this.getActor().startedMoving(this.direction);
                     this.temp = false;
@@ -69,13 +68,9 @@ public class Move<T extends Movable> implements Action<T> {
                     this.actor.collidedWithWall();
                     this.getActor().setPosition(this.actor.getPosX(), Ypozicia);
                 }
-                trvanie-=deltaTime;
-                if(trvanie <= 1e-5 && !isDone()){
-                    done=true;
-                }
-                if (this.isDone()){
-                    this.getActor().stoppedMoving();
-                    stop();
+                this.trvanie-=deltaTime;
+                if(trvanie <=0){
+                    this.stop();
                 }
         }
     }
