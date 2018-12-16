@@ -28,7 +28,7 @@ public class CollectorController implements KeyboardListener {
 
         switch (key){
             case ENTER:
-                new Take<>(Collectible.class).scheduleOn(actor);
+                new Take<>(Collectible.class).scheduleOn(this.actor);
                 break;
             case BACKSPACE:
                 new Drop<Collectible>().scheduleOn(actor);

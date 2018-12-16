@@ -28,8 +28,6 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
              this.setAnimation(new Animation("sprites/vdoor.png", 16, 32, 0.1f, Animation.PlayMode.ONCE_REVERSED));
         }
         this.open = false;
-        this.getAnimation().stop();
-        this.getAnimation().resetToFirstFrame();
     }
 
     @Override
