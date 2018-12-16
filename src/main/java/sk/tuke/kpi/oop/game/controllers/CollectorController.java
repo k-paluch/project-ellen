@@ -36,14 +36,6 @@ public class CollectorController implements KeyboardListener {
                 new Shift().scheduleOn(this.actor);
                 break;
             case U:
-                /*Collectible nahlad = this.actor.getContainer().peek();
-                Usable<?> usable = this.findFirstUsableActor();
-                if (usable == null)
-                    break;
-                else
-                    if(nahlad!= null) {
-                        new Use<>((Usable)(nahlad)).scheduleOnIntersectingWith(this.actor);
-                    }*/
                 List<Actor> collectorItems = actor.getScene().getActors();
                 for (Actor actor : collectorItems) {
                     if (actor.intersects(actor) && actor instanceof Usable) {

@@ -20,7 +20,7 @@ public class Take<T extends Actor> extends AbstractAction<Keeper<T>> {
     public void execute(float deltaTime) {
          if ((this.getActor() != null) &&  (this.getActor().getScene() != null) && (this.getActor().getContainer() != null)){
              for (Actor a : this.getActor().getScene().getActors()){
-                 if (this.vzatelne.isInstance(a) && a.intersects(this.getActor())){
+                 if (actor.intersects(actor) && vzatelne.isInstance(actor) && actor.getContainer().getCapacity() != actor.getContainer().getSize()){
                      /*try {*/
                          this.getActor().getContainer().add(this.vzatelne.cast(a));
                          this.getActor().getScene().removeActor(a);
