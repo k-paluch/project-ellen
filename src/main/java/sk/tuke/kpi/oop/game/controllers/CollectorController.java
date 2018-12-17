@@ -39,12 +39,7 @@ public class CollectorController implements KeyboardListener {
                         new Use<>(usable).scheduleOnIntersectingWith(this.actor);
                 break;
             case B:
-                if (this.actor.getContainer().getSize() > 0){
-                    Collectible nahladnutie = this.actor.getContainer().peek();
-                    if ((nahladnutie instanceof Usable)&& (new Use<>((Usable)(nahladnutie)).scheduleOnIntersectingWith(this.actor) != null)){
-                            this.actor.getContainer().remove(nahladnutie);
-                    }
-                }
+                helpingFuncion();
                 break;
             default:
                 return;
@@ -60,5 +55,14 @@ public class CollectorController implements KeyboardListener {
             }
         }
         return null;
+    }
+
+    void helpingFuncion(){
+        if (this.actor.getContainer().getSize() > 0){
+            Collectible nahladnutie = this.actor.getContainer().peek();
+            if ((nahladnutie instanceof Usable)&& (new Use<>((Usable)(nahladnutie)).scheduleOnIntersectingWith(this.actor) != null)){
+                this.actor.getContainer().remove(nahladnutie);
+            }
+        }
     }
 }

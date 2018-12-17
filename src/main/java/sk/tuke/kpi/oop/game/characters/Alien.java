@@ -36,7 +36,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
         new While<>(action -> true,
             new ActionSequence<>(
                 new Invoke<>(this::aliveActor),
-                new Wait<>(1)
+                new Wait<>(0)
             )).scheduleOn(this);
         getHealth().onExhaustion(()->
             scene.removeActor(this));
