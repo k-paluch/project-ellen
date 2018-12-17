@@ -21,7 +21,7 @@ public class Bullet extends AbstractActor implements Fireable, Movable {
         new Loop<>(
             new Invoke<>(() -> {
                 for (Actor actor : scene.getActors()) {
-                    if ((this.intersects(actor)) /*&& (actor instanceof Enemy)*/ && (actor instanceof Alive)) {
+                    if ((this.intersects(actor)) /*&& (actor instanceof Enemy)*/ && (actor instanceof Alien)) {
                         ((Alive) actor).getHealth().drain(20);
                         this.collidedWithWall();
                     }
