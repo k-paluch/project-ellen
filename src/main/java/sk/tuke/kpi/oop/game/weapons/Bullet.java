@@ -9,7 +9,6 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
-import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.Alive;
 
 public class Bullet extends AbstractActor implements Fireable, Movable {
@@ -22,7 +21,7 @@ public class Bullet extends AbstractActor implements Fireable, Movable {
         new Loop<>(
             new Invoke<>(() -> {
                 for (Actor actor : scene.getActors()) {
-                    if ((this.intersects(actor)) /*&& (actor instanceof Enemy)*/ && (actor instanceof Alien)) {
+                    if ((this.intersects(actor)) /*&& (actor instanceof Enemy)*/ && (actor instanceof Actor)) {
                         ((Alive) actor).getHealth().drain(20);
                         this.collidedWithWall();
                     }
